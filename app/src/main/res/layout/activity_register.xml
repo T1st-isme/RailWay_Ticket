@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -40,10 +39,11 @@
                 android:textAlignment="center"
                 android:textColor="@color/purple"
                 android:textSize="36sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
 
             <EditText
-                android:id="@+id/username"
+                android:id="@+id/edUsername"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
@@ -53,47 +53,51 @@
                 android:hint="Username"
                 android:padding="8dp"
                 android:textColor="@color/black"
-                android:textColorHighlight="@color/cardview_dark_background" />
+                android:textColorHighlight="@color/cardview_dark_background"
+                tools:ignore="Autofill,HardcodedText,RtlHardcoded,TextFields" />
 
             <EditText
-                android:id="@+id/Email"
+                android:id="@+id/edEmail"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/custom_edittext"
-                android:drawableLeft="@drawable/baseline_person2_24"
+                android:drawableLeft="@drawable/baseline_email_24"
                 android:drawablePadding="8dp"
                 android:hint="Email"
                 android:padding="8dp"
                 android:textColor="@color/black"
-                android:textColorHighlight="@color/cardview_dark_background" />
+                android:textColorHighlight="@color/cardview_dark_background"
+                tools:ignore="Autofill,HardcodedText,RtlHardcoded,TextFields" />
 
             <EditText
-                android:id="@+id/password"
+                android:id="@+id/edPassword"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/custom_edittext"
-                android:drawableLeft="@drawable/baseline_lock_24"
+                android:drawableLeft="@drawable/baseline_vpn_key_24"
                 android:drawablePadding="8dp"
                 android:hint="Password"
                 android:inputType="textPassword"
                 android:padding="8dp"
                 android:textColor="@color/black"
-                android:textColorHighlight="@color/cardview_dark_background" />
+                android:textColorHighlight="@color/cardview_dark_background"
+                tools:ignore="Autofill,HardcodedText,RtlHardcoded" />
 
             <EditText
-                android:id="@+id/ConfirmPassword"
+                android:id="@+id/edConfirmPassword"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/custom_edittext"
-                android:drawableLeft="@drawable/baseline_person2_24"
+                android:drawableLeft="@drawable/baseline_password_24"
                 android:drawablePadding="8dp"
                 android:hint="Confirm password"
                 android:padding="8dp"
                 android:textColor="@color/black"
-                android:textColorHighlight="@color/cardview_dark_background" />
+                android:textColorHighlight="@color/cardview_dark_background"
+                tools:ignore="Autofill,HardcodedText,RtlHardcoded,TextFields" />
 
 
             <Button
@@ -104,7 +108,8 @@
                 android:backgroundTint="@color/purple"
                 android:text="Submit"
                 android:textSize="18sp"
-                app:cornerRadius="20dp" />
+                app:cornerRadius="20dp"
+                tools:ignore="HardcodedText" />
 
         </LinearLayout>
 

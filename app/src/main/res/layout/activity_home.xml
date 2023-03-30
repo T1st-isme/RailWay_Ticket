@@ -28,9 +28,9 @@
             android:text="Mua vé tàu"
             android:textColor="#fff"
             android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
     </LinearLayout>
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
