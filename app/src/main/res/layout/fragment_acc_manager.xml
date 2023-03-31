@@ -6,82 +6,114 @@
         android:layout_height="match_parent"
         android:background="#FFFFFF"
         tools:context=".fragment.AccManagerFragment">
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/purple"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textMenu"
-            android:layout_width="wrap_content"
+            android:id="@+id/title_head_tv2"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:gravity="center"
             android:text="Menu"
-            android:textSize="24dp"
+            android:textColor="#fff"
+            android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.045"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
 
-        <Button
-            android:id="@+id/Account"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="20dp"
-            android:textStyle="bold"
-            android:backgroundTint="#FFFFFF"
-            android:hint="Đăng nhập                                                    >"
-            android:paddingEnd="12dp"
-            android:drawableLeft="@drawable/baseline_person_24"
-            app:layout_constraintTop_toBottomOf="@id/textMenu"
-            tools:ignore="RtlSymmetry" />
+    <Button
+        android:id="@+id/Account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:backgroundTint="#FFFFFF"
+        android:drawableLeft="@drawable/baseline_person_24"
+        android:hint="Đăng nhập                                                    >"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+        tools:ignore="HardcodedText" />
 
-        <Button
-            android:id="@+id/btnquydinh"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="-10dp"
-            android:textStyle="bold"
-            android:backgroundTint="#FFFFFF"
-            android:drawableLeft="@drawable/baseline"
-            android:hint="Các quy định                                                 >"
-            android:paddingEnd="12dp"
-            android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/Account" />
+    <Button
+        android:id="@+id/btnHuongdan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFFFFF"
+        android:drawableLeft="@drawable/cushuongdan"
+        android:hint="Hướng dẫn                                                     >"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnquydinh"
+        tools:ignore="HardcodedText" />
 
-        <Button
-            android:id="@+id/btnHuongdan"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:textStyle="bold"
-            android:layout_marginTop="-10dp"
-            android:backgroundTint="#FFFFFF"
-            android:drawableLeft="@drawable/cushuongdan"
-            android:hint="Hướng dẫn                                                     >"
-            app:layout_constraintTop_toBottomOf="@id/btnquydinh"
-            tools:layout_editor_absoluteX="0dp" />
+    <Button
+        android:id="@+id/btnquydinh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFFFFF"
+        android:drawableLeft="@drawable/baseline"
+        android:hint="Các quy định                                                 >"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Account"
+        tools:ignore="HardcodedText" />
 
-        <Button
-            android:id="@+id/btnLienhe"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="-10dp"
-            android:textStyle="bold"
-            android:backgroundTint="#FFFFFF"
-            android:drawableLeft="@drawable/lienhe"
-            android:hint="Liên hệ                                                           >"
-            app:layout_constraintTop_toBottomOf="@id/btnHuongdan"
-            tools:layout_editor_absoluteX="0dp" />
+    <Button
+        android:id="@+id/btnNgonngu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFFFFF"
+        android:drawableLeft="@drawable/language"
+        android:hint="Ngôn ngữ                                                       >"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnLienhe"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btnLienhe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFFFFF"
+        android:drawableLeft="@drawable/lienhe"
+        android:hint="Liên hệ                                                           >"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnHuongdan"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btDarkMode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFFFFF"
+        android:drawableLeft="@drawable/baseline_dark_mode_24"
+        android:hint="Chế độ tối                                                      >"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnNgonngu"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="HardcodedText" />
 
 
-        <Button
-            android:id="@+id/btnNgonngu"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:textStyle="bold"
-            android:layout_marginTop="-10dp"
-            android:backgroundTint="#FFFFFF"
-            android:drawableLeft="@drawable/language"
-            android:hint="Ngôn ngữ                                                       >"
-            app:layout_constraintTop_toBottomOf="@id/btnLienhe"
-            tools:layout_editor_absoluteX="0dp" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

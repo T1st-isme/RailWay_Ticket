@@ -1,5 +1,6 @@
 package com.example.railwayticket;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,14 +24,15 @@ public class HomeActivity extends AppCompatActivity  {
         mnBottom = findViewById(R.id.bottomNavigationView);
         //load lên fragment
         mnBottom.setOnItemSelectedListener(getListener());
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, new HomeFragment()).commit();
     }
 
+    @SuppressLint("NonConstantResourceId")
     @NonNull
     private NavigationBarView.OnItemSelectedListener getListener() {
         return item -> {
             switch (item.getItemId()) {
                 case R.id.mnMuaVe:
-
                     loadFragment(new HomeFragment());
                     break;
                 case R.id.mnDonMuaVe:
@@ -50,8 +52,6 @@ public class HomeActivity extends AppCompatActivity  {
         startActivity(intent);
         };
     }*/
-
-
     //Hàm load Fragment
     void loadFragment(Fragment fragment) {
         FragmentManager fmManager = getSupportFragmentManager();

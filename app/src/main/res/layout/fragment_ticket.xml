@@ -70,10 +70,10 @@
         android:text="999.000đ"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.954"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.912"
+        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.05"
         tools:ignore="HardcodedText" />
 
     <TextView
@@ -111,5 +111,17 @@
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
         tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/idTicket"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AC123"
+        app:layout_constraintBottom_toTopOf="@+id/Gia"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.588" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
