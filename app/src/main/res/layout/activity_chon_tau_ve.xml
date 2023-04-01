@@ -18,13 +18,13 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="Chọn tàu tàu"
+            android:text="Chọn tàu về"
             android:textSize="20sp"
             android:textColor="#fff"
             android:id="@+id/tvChontaudi"
             android:gravity="center"
             android:paddingTop="10sp"
-            >
+            tools:ignore="HardcodedText">
         </TextView>
     </LinearLayout>
 
@@ -50,6 +50,7 @@
         android:layout_height="wrap_content"
         android:text="Tiếp tục"
         android:backgroundTint="@color/purple"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        tools:ignore="HardcodedText" />
 
 </LinearLayout>
