@@ -26,6 +26,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".MainActivity"
@@ -43,6 +44,10 @@
         <activity
             android:name=".ui.ChonTauVeActivity"
             android:exported="false" />
+        <activity android:name=".ui.SeatActivity"
+            android:exported="true">
+
+        </activity>
     </application>
 
 </manifest>

@@ -31,33 +31,33 @@
             tools:ignore="HardcodedText" />
     </LinearLayout>
 
-    <Button
+    <TextView
         android:id="@+id/Account"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:backgroundTint="#FFFFFF"
-        android:drawableLeft="@drawable/baseline_person_24"
         android:hint="Đăng nhập                                                    >"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText,RtlHardcoded"
+        app:drawableLeftCompat="@drawable/baseline_person_24" />
 
     <Button
         android:id="@+id/btnHuongdan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="#FFFFFF"
-        android:drawableLeft="@drawable/cushuongdan"
         android:hint="Hướng dẫn                                                     >"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnquydinh"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText,RtlHardcoded"
+        app:drawableLeftCompat="@drawable/cushuongdan" />
 
     <Button
         android:id="@+id/btnquydinh"
@@ -71,7 +71,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/Account"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText,RtlHardcoded" />
 
     <Button
         android:id="@+id/btnNgonngu"
@@ -84,7 +84,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnLienhe"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText,RtlHardcoded" />
 
     <Button
         android:id="@+id/btnLienhe"
@@ -97,7 +97,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnHuongdan"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText,RtlHardcoded" />
 
     <Button
         android:id="@+id/btDarkMode"
@@ -113,7 +113,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnNgonngu"
         app:layout_constraintVertical_bias="0.0"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText,RtlHardcoded" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

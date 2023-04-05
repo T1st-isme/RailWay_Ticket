@@ -283,6 +283,7 @@
         android:layout_gravity="center"
         android:backgroundTint="@color/purple"
         android:text="Tìm chuyến tàu"
+        app:cornerRadius="20dp"
         tools:ignore="HardcodedText" />
 
 </LinearLayout>

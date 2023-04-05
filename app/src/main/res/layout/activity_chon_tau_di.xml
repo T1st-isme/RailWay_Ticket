@@ -21,7 +21,8 @@
         android:textColor="#fff"
         android:id="@+id/tvChontaudi"
         android:gravity="center"
-        android:paddingTop="10sp">
+        android:paddingTop="10sp"
+        tools:ignore="HardcodedText">
     </TextView>
 
 
@@ -50,6 +51,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:backgroundTint="@color/purple"
-        android:text="Tiếp tục" />
+        android:text="Tiếp tục"
+        app:cornerRadius="20dp"
+        tools:ignore="HardcodedText" />
 
 </LinearLayout>

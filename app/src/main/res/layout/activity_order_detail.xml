@@ -17,7 +17,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.015" />
+        app:layout_constraintVertical_bias="0.015"
+        tools:ignore="HardcodedText" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/frticket"
@@ -38,6 +39,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.178"
+        tools:ignore="HardcodedText"
         tools:layout_editor_absoluteX="0dp" />
 
     <androidx.fragment.app.FragmentContainerView
@@ -61,36 +63,37 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.522"
+        tools:ignore="HardcodedText"
         tools:layout_editor_absoluteX="0dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.597"
-        tools:layout_editor_absoluteX="16dp"
         tools:ignore="UseCompoundDrawables"
-        android:gravity="center">
+        tools:layout_editor_absoluteX="16dp">
 
         <TextView
             android:id="@+id/tvpay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Chọn phương thức thanh toán"
+            android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintTop_toTopOf="@+id/linearLayout"
-            tools:ignore="HardcodedText"
-            android:textColor="@color/black"/>
+            tools:ignore="HardcodedText" />
 
         <ImageView
-            android:layout_gravity="center"
             android:id="@+id/ivpay"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/baseline_arrow_forward_24"
+            android:layout_gravity="center"
             android:layout_marginStart="20dp"
+            android:src="@drawable/baseline_arrow_forward_24"
             tools:ignore="ContentDescription" />
     </LinearLayout>
 
@@ -105,7 +108,8 @@
         app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.892" />
+        app:layout_constraintVertical_bias="0.892"
+        tools:ignore="HardcodedText" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -117,19 +121,22 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/textView7"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.89" />
+        app:layout_constraintVertical_bias="0.89"
+        tools:ignore="HardcodedText" />
 
     <Button
         android:id="@+id/btPay"
         android:layout_width="380dp"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/purple"
         android:text="Thanh toán"
         android:textSize="20sp"
+        app:cornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976"
-        android:backgroundTint="@color/purple"/>
+        tools:ignore="HardcodedText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

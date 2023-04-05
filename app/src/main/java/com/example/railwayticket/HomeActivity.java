@@ -1,6 +1,7 @@
 package com.example.railwayticket;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,7 @@ public class HomeActivity extends AppCompatActivity  {
         //load lên fragment
         mnBottom.setOnItemSelectedListener(getListener());
         getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, new HomeFragment()).commit();
+
     }
 
     @SuppressLint("NonConstantResourceId")

@@ -2,7 +2,6 @@ package com.example.railwayticket.ui;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -16,14 +15,15 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.railwayticket.OrderDetailActivity;
 import com.example.railwayticket.R;
 import com.example.railwayticket.fragment.ChoConFragment;
-import com.example.railwayticket.fragment.GioDIFragment;
 import com.example.railwayticket.fragment.GioDenFragment;
+import com.example.railwayticket.fragment.GioDiFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class ChonTauVeActivity extends AppCompatActivity {
     BottomNavigationView mnBottom;
     Button btToThanhtoan;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +37,8 @@ public class ChonTauVeActivity extends AppCompatActivity {
             Intent i = new Intent(this, OrderDetailActivity.class);
             startActivity(i);
         });
+        getSupportFragmentManager().beginTransaction().add(R.id.main_fragment, new ChoConFragment()).commit();
+
     }
 
 
@@ -49,28 +51,26 @@ public class ChonTauVeActivity extends AppCompatActivity {
         return true;
     }
 
+    @SuppressLint("NonConstantResourceId")
     @NonNull
     private NavigationBarView.OnItemSelectedListener getListener() {
-        return new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        return item -> {
 
-                switch (item.getItemId()) {
-                    case R.id.mnchocon:
-                        loadFragment(new ChoConFragment());
-                        break;
-                    case R.id.mnthoigiandi:
-                        loadFragment(new GioDIFragment());
-                        break;
-                    case R.id.mnthoigianden:
-                        loadFragment(new GioDenFragment());
-                        break;
-                   /* case R.id.mnthoigianchay:
-                        loadFragment(new ThoiGianChayFragment());
-                        break;*/
-                }
-                return true;
+            switch (item.getItemId()) {
+                case R.id.mnchocon:
+                    loadFragment(new ChoConFragment());
+                    break;
+                case R.id.mnthoigiandi:
+                    loadFragment(new GioDiFragment());
+                    break;
+                case R.id.mnthoigianden:
+                    loadFragment(new GioDenFragment());
+                    break;
+               /* case R.id.mnthoigianchay:
+                    loadFragment(new ThoiGianChayFragment());
+                    break;*/
             }
+            return true;
         };
     }
 
