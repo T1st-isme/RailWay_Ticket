@@ -16,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.railwayticket.DBHelper;
 import com.example.railwayticket.HomeActivity;
 import com.example.railwayticket.R;
-import com.example.railwayticket.Sessions.SessionManager;
 import com.example.railwayticket.model.User;
 
 public class LoginActivity extends AppCompatActivity {
@@ -24,9 +23,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView reg;
     EditText edUsername, edPassword;
     DBHelper DB;
-    SessionManager session;
     SharedPreferences sp;
-    int userId;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -36,7 +33,6 @@ public class LoginActivity extends AppCompatActivity {
 
         anhxa();
 
-        session = new SessionManager(getApplicationContext());
         sp = getSharedPreferences(Utils.SHARE_PREFERENCES_APP, Context.MODE_PRIVATE);
         DB = new DBHelper(this);
 
@@ -61,16 +57,14 @@ public class LoginActivity extends AppCompatActivity {
         String name = edUsername.getText().toString().trim();
         String password = edPassword.getText().toString().trim();
         User user = DB.checkUserPass(name, password);
-        userId = DB.checkUserId(name, password);
         if (TextUtils.isEmpty(name) || TextUtils.isEmpty(password)) {
             Toast.makeText(this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
         } else {
             if (user != null) {
                 Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                sp = getSharedPreferences("MyApp", MODE_PRIVATE);
+                sp.edit().putString("username", name).apply();
                 Intent i = new Intent(this, HomeActivity.class);
-                session.saveSession(userId);
-                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                i.putExtra("name", user);
                 startActivity(i);
             } else {
                 Toast.makeText(this, "Tài khoản hoặc mật khẩu không đúng!", Toast.LENGTH_SHORT).show();

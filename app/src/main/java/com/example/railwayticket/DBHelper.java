@@ -82,17 +82,6 @@ public class DBHelper extends SQLiteOpenHelper {
         return user;
     }
 
-    public int checkUserId(String username, String password){
-        SQLiteDatabase MyDB = this.getWritableDatabase();
-        Cursor getID = MyDB.rawQuery("select "+Utils.COL_USER_ID+" from " + Utils.TABLE_USER
-                + " where username = ? and password = ? ", new String[]{username, password});
-        if (getID == null && getID.moveToFirst()){
-            return getID.getInt(0);
-        }
-        else {
-            return 0;
-        }
-    }
 
     //FUNC DELETE
 //    public static boolean delete(Context context, int id) {

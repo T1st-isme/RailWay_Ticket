@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#FFFFFF"
-        tools:context=".fragment.AccManagerFragment">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".fragment.AccManagerFragment">
+
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
@@ -31,20 +32,25 @@
             tools:ignore="HardcodedText" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/Account"
+
+    <LinearLayout
+        android:id="@+id/layoutLog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:backgroundTint="#FFFFFF"
-        android:hint="Đăng nhập                                                    >"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-        tools:ignore="HardcodedText,RtlHardcoded"
-        app:drawableLeftCompat="@drawable/baseline_person_24" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+        <Button
+            android:id="@+id/Account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFFFFF"
+            android:hint="Đăng nhập                                                    >"
+            android:textStyle="bold"
+            app:drawableLeftCompat="@drawable/baseline_person_24"
+            tools:ignore="HardcodedText,RtlHardcoded"
+            tools:layout_editor_absoluteY="110dp" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/btnHuongdan"
@@ -53,11 +59,11 @@
         android:backgroundTint="#FFFFFF"
         android:hint="Hướng dẫn                                                     >"
         android:textStyle="bold"
+        app:drawableLeftCompat="@drawable/cushuongdan"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnquydinh"
-        tools:ignore="HardcodedText,RtlHardcoded"
-        app:drawableLeftCompat="@drawable/cushuongdan" />
+        tools:ignore="HardcodedText,RtlHardcoded" />
 
     <Button
         android:id="@+id/btnquydinh"
@@ -70,7 +76,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/Account"
+        app:layout_constraintTop_toBottomOf="@id/layoutLog"
         tools:ignore="HardcodedText,RtlHardcoded" />
 
     <Button

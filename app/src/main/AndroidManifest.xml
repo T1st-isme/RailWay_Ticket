@@ -12,11 +12,14 @@
         android:theme="@style/Theme.RailWayTicket"
         tools:targetApi="31">
         <activity
+            android:name=".ui.AccInfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".PaymentMethodActivity"
             android:exported="false" />
         <activity
             android:name=".OrderDetailActivity"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".HomeActivity"
             android:exported="true"
@@ -26,7 +29,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".MainActivity"
@@ -40,14 +42,13 @@
             android:label="Login" />
         <activity
             android:name=".ui.ChonTauDiActivity"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".ui.ChonTauVeActivity"
             android:exported="false" />
-        <activity android:name=".ui.SeatActivity"
-            android:exported="true">
-
-        </activity>
+        <activity
+            android:name=".ui.SeatActivity"
+            android:exported="true"/>
     </application>
 
 </manifest>
