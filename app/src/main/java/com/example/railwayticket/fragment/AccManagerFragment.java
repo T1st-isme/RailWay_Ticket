@@ -41,7 +41,6 @@ public class AccManagerFragment extends Fragment {
                 startActivity(i2);
             }
         });
-
         return v;
     }
 }

@@ -197,7 +197,7 @@
                     android:id="@+id/rbkhuhoi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="60dp"
+                    android:layout_marginEnd="65dp"
                     android:gravity="center"
                     android:text="Khứ hồi"
                     app:layout_constraintBottom_toBottomOf="parent"

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <EditText
+        android:id="@+id/edTckID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nhập mã vé"
+        tools:ignore="Autofill,HardcodedText,TextFields"
+        android:textSize="20sp"/>
+    <EditText
+        android:id="@+id/edTimego"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nhập thời gian đến"
+        android:inputType="datetime"
+        android:textSize="20sp"
+        tools:ignore="Autofill,HardcodedText,TextFields" />
+    <EditText
+        android:id="@+id/edTimeend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nhập thời gian đi"
+        android:inputType="datetime"
+        android:textSize="20sp"
+        tools:ignore="Autofill,HardcodedText,TextFields" />
+    <EditText
+        android:id="@+id/edNoiden"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nhập nơi đến"
+        android:textSize="20sp"
+        tools:ignore="Autofill,HardcodedText,TextFields" />
+    <EditText
+        android:id="@+id/edNoidi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nhập nơi đi"
+        android:textSize="20sp"
+        tools:ignore="Autofill,HardcodedText,TextFields" />
+    <EditText
+        android:id="@+id/edPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nhập giá"
+        android:textSize="20sp"
+        tools:ignore="Autofill,HardcodedText,TextFields" />
+
+</LinearLayout>

@@ -15,7 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.railwayticket.DBHelper;
 import com.example.railwayticket.HomeActivity;
+import com.example.railwayticket.OrderDetailActivity;
 import com.example.railwayticket.R;
+import com.example.railwayticket.Utils.Utils;
 import com.example.railwayticket.model.User;
 
 public class LoginActivity extends AppCompatActivity {
@@ -54,17 +56,21 @@ public class LoginActivity extends AppCompatActivity {
 
     private void Login() {
         DBHelper DB = new DBHelper(this);
+
         String name = edUsername.getText().toString().trim();
         String password = edPassword.getText().toString().trim();
         User user = DB.checkUserPass(name, password);
         if (TextUtils.isEmpty(name) || TextUtils.isEmpty(password)) {
             Toast.makeText(this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+        } else if (name.equals("admin") && password.equals("admin")) {
+            Intent intent = new Intent(this, OrderDetailActivity.class);
+            startActivity(intent);
         } else {
             if (user != null) {
                 Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                 sp = getSharedPreferences("MyApp", MODE_PRIVATE);
                 sp.edit().putString("username", name).apply();
-                Intent i = new Intent(this, HomeActivity.class);
+                Intent i = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivity(i);
             } else {
                 Toast.makeText(this, "Tài khoản hoặc mật khẩu không đúng!", Toast.LENGTH_SHORT).show();

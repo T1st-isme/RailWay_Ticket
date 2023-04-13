@@ -8,16 +8,17 @@ public class User implements Serializable {
     public String avatar;
     public String name;
     private String userName;
-    private String password;
+    public String password;
     private String email;
     private String phoneNumber;
 
     public User() {
     }
 
-    public User(int id, String name, String avatar) {
+    public User(int id, String name,String password , String avatar) {
         this.id = id;
         this.name = name;
+        this.password = password;
         this.avatar = avatar;
     }
 

@@ -8,36 +8,23 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
-import com.example.railwayticket.OrderDetailActivity;
 import com.example.railwayticket.R;
-import com.example.railwayticket.fragment.ChoConFragment;
-import com.example.railwayticket.fragment.GioDenFragment;
-import com.example.railwayticket.fragment.GioDiFragment;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 
 public class ChonTauVeActivity extends AppCompatActivity {
-    BottomNavigationView mnBottom;
-    Button btToThanhtoan;
+    Button btChonGhe;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chon_tau_ve);
-        mnBottom = findViewById(R.id.navMenu);
-        btToThanhtoan = findViewById(R.id.ToThanhToan);
+        btChonGhe = findViewById(R.id.btnChonGhe);
         //button de bam
-        mnBottom.setOnItemSelectedListener(getListener());
-        btToThanhtoan.setOnClickListener(v -> {
-            Intent i = new Intent(this, OrderDetailActivity.class);
+        btChonGhe.setOnClickListener(v -> {
+            Intent i = new Intent(this, SeatActivity.class);
             startActivity(i);
         });
-        getSupportFragmentManager().beginTransaction().add(R.id.main_fragment, new ChoConFragment()).commit();
 
     }
 
@@ -51,37 +38,6 @@ public class ChonTauVeActivity extends AppCompatActivity {
         return true;
     }
 
-    @SuppressLint("NonConstantResourceId")
-    @NonNull
-    private NavigationBarView.OnItemSelectedListener getListener() {
-        return item -> {
-
-            switch (item.getItemId()) {
-                case R.id.mnchocon:
-                    loadFragment(new ChoConFragment());
-                    break;
-                case R.id.mnthoigiandi:
-                    loadFragment(new GioDiFragment());
-                    break;
-                case R.id.mnthoigianden:
-                    loadFragment(new GioDenFragment());
-                    break;
-               /* case R.id.mnthoigianchay:
-                    loadFragment(new ThoiGianChayFragment());
-                    break;*/
-            }
-            return true;
-        };
-    }
-
-    //ham de load fragment
-    void loadFragment(Fragment fmNew) {
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction fmTran = fm.beginTransaction();
-        fmTran.replace(R.id.main_fragment, fmNew);
-        fmTran.addToBackStack(null);
-        fmTran.commit();
-    }
 }
 
 

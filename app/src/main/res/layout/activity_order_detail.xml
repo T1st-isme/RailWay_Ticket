@@ -38,7 +38,7 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.178"
+        app:layout_constraintVertical_bias="0.205"
         tools:ignore="HardcodedText"
         tools:layout_editor_absoluteX="0dp" />
 
@@ -62,7 +62,6 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.522"
         tools:ignore="HardcodedText"
         tools:layout_editor_absoluteX="0dp" />
 

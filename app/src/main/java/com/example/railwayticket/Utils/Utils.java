@@ -1,4 +1,4 @@
-package com.example.railwayticket.ui;
+package com.example.railwayticket.Utils;
 
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -17,10 +17,22 @@ public class Utils {
     public static final String DB_NAME = "traino.db";
     public static final int DB_VERSION = 1 ;
     public static final String TABLE_USER = "user" ;
+    public static final String TABLE_TRAIN = "train" ;
+    public static final String TABLE_TICKET = "ticket" ;
     public static final String COL_USER_ID = "user_id" ;
     public static final String COL_USER_NAME = "username" ;
     public static final String COL_USER_PASSWORD = "password" ;
-    private static final String COL_USER_AVATAR = "avatar";
+    public static final String COL_TRAIN_ID = "train_id";
+
+    public static final String COL_TICK_ID = "id";
+    public static final String COL_TICKET_ID = "ticket_id";
+    public static final String COL_TRAIN_TIMEGO = "train_time_go";
+    public static final String COL_TRAIN_TIMEEND = "train_time_end";
+    public static final String COL_TRAIN_STATEGO = "train_state_go";
+    public static final String COL_TRAIN_STATEEND = "train_state_end";
+    public static final String COL_TICKET_PRICE = "price";
+
+    public static final String COL_USER_AVATAR = "avatar";
 
 
     public static Bitmap convertToBitmapFromAssets(Context context, String img) {

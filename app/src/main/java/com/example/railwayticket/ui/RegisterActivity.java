@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.railwayticket.DBHelper;
 import com.example.railwayticket.R;
+import com.example.railwayticket.Utils.Utils;
 import com.example.railwayticket.model.User;
 import com.google.gson.Gson;
 
@@ -86,7 +87,7 @@ public class RegisterActivity extends AppCompatActivity {
         if (temp == null) {
             Toast.makeText(this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
 
-            if (DB.insertData(user)) {
+            if (DB.insertDataReg(user)) {
                 Toast.makeText(this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                 startActivity(intent);
