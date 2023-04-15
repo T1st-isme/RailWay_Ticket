@@ -15,6 +15,7 @@
             android:name=".ui.crudTickActivity"
             android:exported="true">
 
+
         </activity>
         <activity
             android:name=".ui.crudPasActivity"

@@ -95,7 +95,7 @@ public class RegisterActivity extends AppCompatActivity {
                 Toast.makeText(this, "Đăng ký không thành công", Toast.LENGTH_SHORT).show();
             }
         } else {
-            Toast.makeText(this, "TK đã tồn tại", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Tài khoản đã tồn tại", Toast.LENGTH_SHORT).show();
         }
 //        if (name.equals("") || password.equals("") || cpassword.equals("") || email.equals("")) {
         //            Toast.makeText(this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();

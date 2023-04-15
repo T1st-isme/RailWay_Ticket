@@ -36,4 +36,5 @@
         android:layout_marginBottom="20dp"
         android:layout_marginEnd="20dp"
         tools:ignore="HardcodedText"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,8 +1,11 @@
 package com.example.railwayticket;
 
+import static com.example.railwayticket.Utils.Utils.DB_NAME;
+import static com.example.railwayticket.Utils.Utils.DB_VERSION;
 import static com.example.railwayticket.Utils.Utils.TABLE_TICKET;
 import static com.example.railwayticket.Utils.Utils.TABLE_USER;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -16,40 +19,91 @@ import com.example.railwayticket.Utils.Utils;
 import com.example.railwayticket.model.User;
 import com.example.railwayticket.model.ticket;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
-
+String DB_PATH;
 
     private final Context context;
 
+    @SuppressLint("SdCardPath")
     public DBHelper(@Nullable Context context) {
-        super(context, Utils.DB_NAME, null, Utils.DB_VERSION);
+        super(context, DB_NAME, null, DB_VERSION);
         this.context = context;
+        assert context != null;
+        DB_PATH = "/data/data/" + context.getPackageName() + "/databases/";
+        try{
+            checkDB();
+        } catch (Exception e) {}
+        try {
+            OpenDatabase();
+        }catch (Exception e){}
+    }
+
+
+    public void checkDB() {
+        try {
+            String path = DB_PATH + DB_NAME;
+            SQLiteDatabase.openDatabase(path, null, 0);
+        } catch (Exception e) {
+        }
+        this.getReadableDatabase();
+        copyDatabase();
+    }
+
+    public void copyDatabase() {
+        //Open ur local db as the input stream
+        try {
+            InputStream myInput = context.getAssets().open(DB_NAME);
+            //Path to just created emty db
+            String outFileName = DB_PATH + DB_NAME;
+            //Open the emty db as the output stream
+            OutputStream myOutput = Files.newOutputStream(Paths.get(outFileName));
+            //transfer bytes from the inputfile to the outputfile
+            byte[] bytes = new byte[1024];
+            int length;
+            while ((length = myInput.read(bytes)) > 0) {
+                myOutput.write(bytes, 0, length);
+            }
+            //close the stream
+            myInput.close();
+            myOutput.flush();
+            myOutput.close();
+        } catch (IOException e) {}
+    }
+
+    public void OpenDatabase() {
+        String path = DB_PATH + DB_NAME;
+        SQLiteDatabase.openDatabase(path, null,0);
     }
 
     @Override
     public void onCreate(SQLiteDatabase MyDB) {
-        MyDB.execSQL("CREATE TABLE " + TABLE_USER + " ( " +
-                Utils.COL_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , " +
-                Utils.COL_USER_NAME + " TEXT, " +
-                Utils.COL_USER_PASSWORD + " TEXT, " +
-                Utils.COL_USER_AVATAR + " TEXT ) ");
-        MyDB.execSQL("CREATE TABLE " + TABLE_TICKET + " ( " +
-                Utils.COL_TICK_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , " +
-                Utils.COL_TICKET_ID + "  TEXT, " +
-                Utils.COL_TRAIN_TIMEGO + " DATETIME, " +
-                Utils.COL_TRAIN_TIMEEND + " DATETIME, " +
-                Utils.COL_TRAIN_STATEGO + "  TEXT, " +
-                Utils.COL_TRAIN_STATEEND + "  TEXT, " +
-                Utils.COL_TICKET_PRICE + " FLOAT ) ");
+//        MyDB.execSQL("CREATE TABLE " + TABLE_USER + " ( " +
+//                Utils.COL_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , " +
+//                Utils.COL_USER_NAME + " TEXT, " +
+//                Utils.COL_USER_PASSWORD + " TEXT, " +
+//                Utils.COL_USER_AVATAR + " TEXT ) ");
+//        MyDB.execSQL("CREATE TABLE " + TABLE_TICKET + " ( " +
+//                Utils.COL_TICK_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , " +
+//                Utils.COL_TICKET_ID + "  TEXT, " +
+//                Utils.COL_TRAIN_TIMEGO + " DATETIME, " +
+//                Utils.COL_TRAIN_TIMEEND + " DATETIME, " +
+//                Utils.COL_TRAIN_STATEGO + "  TEXT, " +
+//                Utils.COL_TRAIN_STATEEND + "  TEXT, " +
+//                Utils.COL_TICKET_PRICE + " FLOAT ) ");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase MyDB, int i, int i1) {
-        MyDB.execSQL("drop Table if exists " + TABLE_USER);
-        MyDB.execSQL("drop Table if exists " + TABLE_TICKET);
-        onCreate(MyDB);
+//        MyDB.execSQL("drop Table if exists " + TABLE_USER);
+//        MyDB.execSQL("drop Table if exists " + TABLE_TICKET);
+//        onCreate(MyDB);
     }
 
     public static long insertDataAd(Context context, User user) {
@@ -118,13 +172,17 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase sqlite = db.getReadableDatabase();
         Cursor cursor = sqlite.rawQuery("select * from " + Utils.TABLE_USER, null);
         cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-            int id = cursor.getInt(0);
-            String name = cursor.getString(1);
-            String pass = cursor.getString(2);
-            String avatar = cursor.getString(3);
-            lstUsers.add(new User(id, name,pass, avatar));
-            cursor.moveToNext();
+        if (cursor.getCount() == 0) {
+            Toast.makeText(context, "Không có dữ liệu", Toast.LENGTH_LONG).show();
+        } else {
+            while (!cursor.isAfterLast()) {
+                int id = cursor.getInt(0);
+                String name = cursor.getString(1);
+                String pass = cursor.getString(2);
+                String avatar = cursor.getString(3);
+                lstUsers.add(new User(id, name, pass, avatar));
+                cursor.moveToNext();
+            }
         }
         cursor.close();
         sqlite.close();
@@ -181,23 +239,22 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(Utils.COL_TRAIN_STATEEND, ticket.getStateEnd());
         values.put(Utils.COL_TICKET_PRICE, ticket.getPrice());
         long result = MyDB.insert(TABLE_TICKET, null, values);
-        if (result == -1){
+        if (result == -1) {
             Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
-        }
-        else {
+        } else {
             Toast.makeText(context, "Add successfully", Toast.LENGTH_SHORT).show();
         }
         return result;
     }
 
-    public static boolean deleteTicket(Context context ,int id) {
+    public static boolean deleteTicket(Context context, int id) {
         DBHelper db = new DBHelper(context);
         SQLiteDatabase sqlite = db.getWritableDatabase();
         long result = sqlite.delete(TABLE_TICKET, Utils.COL_TICK_ID + " =? ", new String[]{String.valueOf(id)});
         return (result > 0);
     }
 
-    public static int updateTicket( Context context ,ticket ticket) {
+    public static int updateTicket(Context context, ticket ticket) {
         DBHelper db = new DBHelper(context);
         SQLiteDatabase sqlite = db.getWritableDatabase();
         ContentValues values = new ContentValues();

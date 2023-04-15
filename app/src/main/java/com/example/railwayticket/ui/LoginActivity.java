@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.railwayticket.DBHelper;
 import com.example.railwayticket.HomeActivity;
-import com.example.railwayticket.OrderDetailActivity;
 import com.example.railwayticket.R;
 import com.example.railwayticket.Utils.Utils;
 import com.example.railwayticket.model.User;
@@ -63,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(name) || TextUtils.isEmpty(password)) {
             Toast.makeText(this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
         } else if (name.equals("admin") && password.equals("admin")) {
-            Intent intent = new Intent(this, OrderDetailActivity.class);
+            Intent intent = new Intent(this, AdminActivity.class);
             startActivity(intent);
         } else {
             if (user != null) {

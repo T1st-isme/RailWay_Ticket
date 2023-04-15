@@ -63,7 +63,7 @@ public class trainTicketAdapter extends RecyclerView.Adapter<trainTicketAdapter.
 
         public TrainTicketViewHolder(@NonNull View itemView) {
             super(itemView);
-            trainid = itemView.findViewById(R.id.tvName);
+            trainid = itemView.findViewById(R.id.tvTicketID);
             timego = itemView.findViewById(R.id.tvTimeGo);
             timeend = itemView.findViewById(R.id.tvTimeEnd);
             statego = itemView.findViewById(R.id.tvStateGo);

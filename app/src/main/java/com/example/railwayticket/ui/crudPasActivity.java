@@ -143,7 +143,6 @@ public class crudPasActivity extends AppCompatActivity implements UserAdapter.Us
                     Toast.LENGTH_LONG).show();
         }
     }
-
     @Override
     public void onItemEditClicked(User user, int position) {
         updateUserDialog(user);
