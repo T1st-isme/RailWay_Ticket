@@ -9,6 +9,7 @@ import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ import com.example.railwayticket.Utils.Utils;
 import com.example.railwayticket.model.User;
 import com.example.railwayticket.model.ticket;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -27,9 +29,10 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
-String DB_PATH;
+    String DB_PATH;
 
     private final Context context;
+    static SQLiteDatabase sqlite;
 
     @SuppressLint("SdCardPath")
     public DBHelper(@Nullable Context context) {
@@ -37,28 +40,26 @@ String DB_PATH;
         this.context = context;
         assert context != null;
         DB_PATH = "/data/data/" + context.getPackageName() + "/databases/";
-        try{
-            checkDB();
-        } catch (Exception e) {}
-        try {
-            OpenDatabase();
-        }catch (Exception e){}
     }
 
 
-    public void checkDB() {
-        try {
-            String path = DB_PATH + DB_NAME;
-            SQLiteDatabase.openDatabase(path, null, 0);
-        } catch (Exception e) {
-        }
-        this.getReadableDatabase();
-        copyDatabase();
+    public void createDB() throws IOException {
+        //check if the database exists
+        boolean databaseExist = checkDataBase();
+
+        if (!databaseExist) {
+            this.getWritableDatabase();
+            copyDatabase();
+        }// end if else dbExist
+    } // end createDataBase().
+
+    public boolean checkDataBase() {
+        File databaseFile = new File(DB_PATH + DB_NAME);
+        return databaseFile.exists();
     }
 
-    public void copyDatabase() {
+    public void copyDatabase()  throws IOException{
         //Open ur local db as the input stream
-        try {
             InputStream myInput = context.getAssets().open(DB_NAME);
             //Path to just created emty db
             String outFileName = DB_PATH + DB_NAME;
@@ -74,12 +75,12 @@ String DB_PATH;
             myInput.close();
             myOutput.flush();
             myOutput.close();
-        } catch (IOException e) {}
     }
 
-    public void OpenDatabase() {
-        String path = DB_PATH + DB_NAME;
-        SQLiteDatabase.openDatabase(path, null,0);
+    public void OpenDatabase() throws SQLException {
+        //Open the database
+        String myPath = DB_PATH + DB_NAME;
+        sqlite = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
     }
 
     @Override
