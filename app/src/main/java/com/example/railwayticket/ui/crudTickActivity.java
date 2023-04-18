@@ -34,10 +34,14 @@ public class crudTickActivity extends AppCompatActivity implements trainTicketAd
         rcvTrain = findViewById(R.id.rcvTick);
         flb = findViewById(R.id.fbAdd);
         DBHelper db = new DBHelper(this);
-        try {
-            db.checkDB();
-        } catch (Exception e) {
-        }
+//        try {
+//            db.checkDB();
+//        } catch (Exception e) {
+//        }
+//        try {
+//            db.openDB();
+//        } catch (Exception e) {
+//        }
         flb.setOnClickListener(v -> addDialog());
         lstTrain = DBHelper.getAllTicket(this);
         adapter = new trainTicketAdapter(lstTrain);
@@ -151,8 +155,7 @@ public class crudTickActivity extends AppCompatActivity implements trainTicketAd
 
     @Override
     public void onItemDeleteClicked(ticket ticket, int position) {
-        DBHelper db = new DBHelper(this);
-        db.openDB();
+
         boolean result = DBHelper.deleteTicket(this, ticket.id);
         if (result) {
             Toast.makeText(this,
