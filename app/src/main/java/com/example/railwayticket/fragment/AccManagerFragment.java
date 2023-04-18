@@ -8,10 +8,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.railwayticket.HomeActivity;
 import com.example.railwayticket.R;
 import com.example.railwayticket.ui.AccInfoActivity;
 import com.example.railwayticket.ui.LoginActivity;
@@ -19,7 +21,10 @@ import com.example.railwayticket.ui.LoginActivity;
 
 public class AccManagerFragment extends Fragment {
     TextView Account;
+    Button btLogout;
     private String username = "";
+    SharedPreferences sp;
+    SharedPreferences.Editor editor;
 
     //    private final Gson gson = new Gson();
     @SuppressLint({"MissingInflatedId", "SetTextI18n"})
@@ -29,8 +34,8 @@ public class AccManagerFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_acc_manager, container, false);
         Account = v.findViewById(R.id.Account);
-        SharedPreferences prefs = requireActivity().getSharedPreferences("MyApp", Context.MODE_PRIVATE);
-        username = prefs.getString("username", null);
+        sp = requireActivity().getSharedPreferences("MyApp", Context.MODE_PRIVATE);
+        username = sp.getString("username", null);
         Account.setText(username);
         Account.setOnClickListener(view -> {
             if (username == null) {
@@ -41,6 +46,21 @@ public class AccManagerFragment extends Fragment {
                 startActivity(i2);
             }
         });
+
+        btLogout = v.findViewById(R.id.btnLogout);
+        sp =  requireActivity().getSharedPreferences("MyApp", Context.MODE_PRIVATE);
+        editor = sp.edit();
+
+        btLogout.setOnClickListener(view -> {
+           logout();
+        });
         return v;
+    }
+
+    private void logout() {
+        editor.clear();
+        editor.apply();
+        startActivity(new Intent(getActivity(), HomeActivity.class));
+        getActivity().finish();
     }
 }

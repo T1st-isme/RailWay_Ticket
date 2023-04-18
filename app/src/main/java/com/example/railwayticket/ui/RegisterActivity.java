@@ -2,7 +2,6 @@ package com.example.railwayticket.ui;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,15 +11,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.railwayticket.DBHelper;
 import com.example.railwayticket.R;
-import com.example.railwayticket.Utils.Utils;
 import com.example.railwayticket.model.User;
-import com.google.gson.Gson;
 
 
 public class RegisterActivity extends AppCompatActivity {
-    private SharedPreferences.Editor editor;
-    SharedPreferences sharedPref;
-    private final Gson gson = new Gson();
+
     Button btnRegister;
     EditText edUsername, edPassword, edCPassword, edEmail;
     DBHelper DB;
@@ -34,8 +29,6 @@ public class RegisterActivity extends AppCompatActivity {
         anhxa();
 
         DB = new DBHelper(this);
-        sharedPref = getSharedPreferences(Utils.SHARE_PREFERENCES_APP, MODE_PRIVATE);
-        editor = sharedPref.edit();
 
         btnRegister.setOnClickListener(view -> Register());
     }

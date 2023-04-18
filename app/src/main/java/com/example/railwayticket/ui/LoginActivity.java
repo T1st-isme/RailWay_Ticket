@@ -16,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.railwayticket.DBHelper;
 import com.example.railwayticket.HomeActivity;
 import com.example.railwayticket.R;
-import com.example.railwayticket.Utils.Utils;
 import com.example.railwayticket.model.User;
 
 public class LoginActivity extends AppCompatActivity {
@@ -25,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText edUsername, edPassword;
     DBHelper DB;
     SharedPreferences sp;
+    private SharedPreferences.Editor editor;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -34,7 +34,13 @@ public class LoginActivity extends AppCompatActivity {
 
         anhxa();
 
-        sp = getSharedPreferences(Utils.SHARE_PREFERENCES_APP, Context.MODE_PRIVATE);
+        sp = getSharedPreferences("MyApp", Context.MODE_PRIVATE);
+        editor = sp.edit();
+        boolean login = sp.getBoolean("IsLoggedin", false);
+        if  (login) {
+            startActivity(new Intent(this, HomeActivity.class));
+            finish();
+        }
         DB = new DBHelper(this);
 
         btLog.setOnClickListener(view -> Login());
@@ -68,7 +74,10 @@ public class LoginActivity extends AppCompatActivity {
             if (user != null) {
                 Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                 sp = getSharedPreferences("MyApp", MODE_PRIVATE);
-                sp.edit().putString("username", name).apply();
+                editor.putString("username", name);
+                editor.putString("password", password);
+                editor.putBoolean("IsLoggedin", true);
+                editor.apply();
                 Intent i = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivity(i);
             } else {

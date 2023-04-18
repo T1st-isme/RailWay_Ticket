@@ -38,7 +38,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+        app:layout_constraintVertical_bias="0.271"
+        tools:layout_editor_absoluteX="0dp">
 
         <Button
             android:id="@+id/Account"
@@ -61,6 +63,7 @@
         android:textStyle="bold"
         app:drawableLeftCompat="@drawable/cushuongdan"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnquydinh"
         tools:ignore="HardcodedText,RtlHardcoded" />
@@ -75,6 +78,7 @@
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layoutLog"
         tools:ignore="HardcodedText,RtlHardcoded" />
@@ -88,6 +92,7 @@
         android:hint="Ngôn ngữ                                                       >"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnLienhe"
         tools:ignore="HardcodedText,RtlHardcoded" />
@@ -101,6 +106,7 @@
         android:hint="Liên hệ                                                           >"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnHuongdan"
         tools:ignore="HardcodedText,RtlHardcoded" />
@@ -119,6 +125,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnNgonngu"
         app:layout_constraintVertical_bias="0.0"
+        tools:ignore="HardcodedText,RtlHardcoded" />
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFFFFF"
+        android:drawableLeft="@drawable/baseline_logout_24"
+        android:hint="Log out                                                          >"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnNgonngu"
+        app:layout_constraintVertical_bias="0"
         tools:ignore="HardcodedText,RtlHardcoded" />
 
 
