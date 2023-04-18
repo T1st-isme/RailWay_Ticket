@@ -84,7 +84,7 @@ public class crudTickActivity extends AppCompatActivity implements trainTicketAd
                 long id = DB.insertTicket(tck);
                 if (id > 0) {
                     Toast.makeText(this,
-                            "Thêm người dùng thành công",
+                            "Thêm vé thành công",
                             Toast.LENGTH_LONG).show();
                     resetData();
                     dialog.dismiss();
