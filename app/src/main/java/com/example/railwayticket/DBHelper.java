@@ -44,18 +44,18 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void checkDB() {
 
-//        if (!path.isEmpty()){
-//            this.getReadableDatabase();
-//            return;
+////        if (!path.isEmpty()){
+////            this.getReadableDatabase();
+////            return;
+////        }
+//
+//        try {
+//            String path = DB_PATH + DB_NAME;
+//            SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.OPEN_READONLY);
+//        } catch (Exception e) {
 //        }
-
-        try {
-            String path = DB_PATH + DB_NAME;
-            SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.OPEN_READONLY);
-        } catch (Exception e) {
-        }
-        this.getReadableDatabase();
-        copyDatabase();
+//        this.getReadableDatabase();
+//        copyDatabase();
     }
 
     public void copyDatabase() {
