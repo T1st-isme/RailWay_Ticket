@@ -16,8 +16,6 @@ import com.example.railwayticket.Utils.Utils;
 import com.example.railwayticket.model.User;
 import com.google.gson.Gson;
 
-import java.io.IOException;
-
 
 public class RegisterActivity extends AppCompatActivity {
     private SharedPreferences.Editor editor;
@@ -80,13 +78,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void Register() {
         DBHelper DB = new DBHelper(this);
-        try {
-            DB.createDB();
-            DB.OpenDatabase();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
         User user = new User();
         user.setName(edUsername.getText().toString().trim());
         user.setPassword(edPassword.getText().toString().trim());
@@ -106,12 +97,9 @@ public class RegisterActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Tài khoản đã tồn tại", Toast.LENGTH_SHORT).show();
         }
-        DB.close();
-    }
-}
 //        if (name.equals("") || password.equals("") || cpassword.equals("") || email.equals("")) {
-//            Toast.makeText(this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-//        } else {
+        //            Toast.makeText(this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+        //        } else {
 //            if (password.equals(cpassword)) {
 //                Boolean checkUser = DB.checkUsername(name);
 //                if (!checkUser) {
@@ -128,6 +116,8 @@ public class RegisterActivity extends AppCompatActivity {
 //                Toast.makeText(this, "Mật khẩu không khớp!", Toast.LENGTH_SHORT).show();
 //            }
 
+    }
+}
 
 //        String username = edUsername.getText().toString().trim();
 //        String password = edPassword.getText().toString().trim();

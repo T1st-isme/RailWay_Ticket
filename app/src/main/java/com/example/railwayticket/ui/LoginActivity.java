@@ -55,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void Login() {
         DBHelper DB = new DBHelper(this);
+
         String name = edUsername.getText().toString().trim();
         String password = edPassword.getText().toString().trim();
         User user = DB.checkUserPass(name, password);

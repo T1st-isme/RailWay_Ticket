@@ -9,6 +9,7 @@ import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ import com.example.railwayticket.Utils.Utils;
 import com.example.railwayticket.model.User;
 import com.example.railwayticket.model.ticket;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -30,8 +32,7 @@ public class DBHelper extends SQLiteOpenHelper {
     String DB_PATH;
 
     private final Context context;
-
-    private SQLiteDatabase sqlite;
+    static SQLiteDatabase sqlite;
 
     @SuppressLint("SdCardPath")
     public DBHelper(@Nullable Context context) {
@@ -42,23 +43,22 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
-    public void checkDB() {
-        String path = DB_PATH + DB_NAME;
-        if (!path.isEmpty()){
-            this.getReadableDatabase();
-            return;
-        }
+    public void createDB() throws IOException {
+        //check if the database exists
+        boolean databaseExist = checkDataBase();
 
-//        try {
-//
-//            SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.OPEN_READONLY);
-//        } catch (Exception e) {
-//        }
-//        this.getReadableDatabase();
-//        copyDatabase();
+        if (!databaseExist) {
+            this.getWritableDatabase();
+            copyDatabase();
+        }// end if else dbExist
+    } // end createDataBase().
+
+    public boolean checkDataBase() {
+        File databaseFile = new File(DB_PATH + DB_NAME);
+        return databaseFile.exists();
     }
 
-    public void copyDatabase() throws IOException {
+    public void copyDatabase()  throws IOException{
         //Open ur local db as the input stream
             InputStream myInput = context.getAssets().open(DB_NAME);
             //Path to just created emty db
@@ -77,18 +77,10 @@ public class DBHelper extends SQLiteOpenHelper {
             myOutput.close();
     }
 
-    public void openDB() {
-        String path = DB_PATH + DB_NAME;
-        if (sqlite != null && sqlite.isOpen()) {
-            return;
-        }
-        SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.OPEN_READWRITE);
-    }
-
-    public void closeDB() {
-        if (sqlite != null) {
-            sqlite.close();
-        }
+    public void OpenDatabase() throws SQLException {
+        //Open the database
+        String myPath = DB_PATH + DB_NAME;
+        sqlite = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
     }
 
     @Override
@@ -113,9 +105,6 @@ public class DBHelper extends SQLiteOpenHelper {
 //        MyDB.execSQL("drop Table if exists " + TABLE_USER);
 //        MyDB.execSQL("drop Table if exists " + TABLE_TICKET);
 //        onCreate(MyDB);
-        try {
-            copyDatabase();
-        } catch (IOException e) {}
     }
 
     public static long insertDataAd(Context context, User user) {
@@ -197,7 +186,7 @@ public class DBHelper extends SQLiteOpenHelper {
             }
         }
         cursor.close();
-        db.closeDB();
+        sqlite.close();
         return lstUsers;
     }
 
@@ -221,7 +210,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public static ArrayList<ticket> getAllTicket(Context context) {
         ArrayList<ticket> lstTicket = new ArrayList<>();
         DBHelper db = new DBHelper(context);
-        db.openDB();
         SQLiteDatabase sqlite = db.getReadableDatabase();
         Cursor cursor = sqlite.rawQuery("select * from " + Utils.TABLE_TICKET, null);
         cursor.moveToFirst();
@@ -237,8 +225,9 @@ public class DBHelper extends SQLiteOpenHelper {
             cursor.moveToNext();
         }
         cursor.close();
-        db.closeDB();
+        sqlite.close();
         return lstTicket;
+
     }
 
     public long insertTicket(ticket ticket) {

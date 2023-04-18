@@ -18,7 +18,6 @@ import com.example.railwayticket.adapter.UserAdapter;
 import com.example.railwayticket.model.User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class crudPasActivity extends AppCompatActivity implements UserAdapter.UserCallback {
@@ -46,14 +45,6 @@ public class crudPasActivity extends AppCompatActivity implements UserAdapter.Us
 
     @SuppressLint("MissingInflatedId")
     private void addUserDialog() {
-        DBHelper DB = new DBHelper(this);
-        try {
-            DB.createDB();
-            DB.OpenDatabase();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        DB.OpenDatabase();
         //khởi tạo dialog thêm người dùng
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         alertDialog.setTitle("Thêm mới");
@@ -89,13 +80,10 @@ public class crudPasActivity extends AppCompatActivity implements UserAdapter.Us
                 ("Hủy", (dialog, which) -> dialog.dismiss());
         alertDialog.create();
         alertDialog.show();
-        DB.close();
     }
 
     @SuppressLint("MissingInflatedId")
     private void updateUserDialog(User user) {
-        DBHelper DB = new DBHelper(this);
-        DB.OpenDatabase();
         //khởi tạo dialog cập nhật người dùng
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         alertDialog.setTitle("Cập nhật");
@@ -131,7 +119,7 @@ public class crudPasActivity extends AppCompatActivity implements UserAdapter.Us
                 ("Hủy", (dialog, which) -> dialog.dismiss());
         alertDialog.create();
         alertDialog.show();
-        DB.close();
+
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -159,4 +147,6 @@ public class crudPasActivity extends AppCompatActivity implements UserAdapter.Us
     public void onItemEditClicked(User user, int position) {
         updateUserDialog(user);
     }
+
+
 }

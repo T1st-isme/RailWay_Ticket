@@ -67,7 +67,7 @@ public class crudTickActivity extends AppCompatActivity implements trainTicketAd
             String giodi = edTimeend.getText().toString();
             String noiden = edNoiden.getText().toString();
             String noidi = edNoidi.getText().toString();
-            String gia = edGia.getText().toString() + ".000đ";
+            String gia = edGia.getText().toString();
             if (ticketID.isEmpty() || giodi.isEmpty()|| gioden.isEmpty() || noidi.isEmpty()
                     || noiden.isEmpty() || gia.isEmpty()) {
                 Toast.makeText(this,
