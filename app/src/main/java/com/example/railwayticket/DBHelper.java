@@ -27,9 +27,11 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
-String DB_PATH;
+    String DB_PATH;
 
     private final Context context;
+
+    private SQLiteDatabase sqlite;
 
     @SuppressLint("SdCardPath")
     public DBHelper(@Nullable Context context) {
@@ -37,28 +39,27 @@ String DB_PATH;
         this.context = context;
         assert context != null;
         DB_PATH = "/data/data/" + context.getPackageName() + "/databases/";
-        try{
-            checkDB();
-        } catch (Exception e) {}
-        try {
-            OpenDatabase();
-        }catch (Exception e){}
     }
 
 
     public void checkDB() {
-        try {
-            String path = DB_PATH + DB_NAME;
-            SQLiteDatabase.openDatabase(path, null, 0);
-        } catch (Exception e) {
+        String path = DB_PATH + DB_NAME;
+        if (!path.isEmpty()){
+            this.getReadableDatabase();
+            return;
         }
-        this.getReadableDatabase();
-        copyDatabase();
+
+//        try {
+//
+//            SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.OPEN_READONLY);
+//        } catch (Exception e) {
+//        }
+//        this.getReadableDatabase();
+//        copyDatabase();
     }
 
-    public void copyDatabase() {
+    public void copyDatabase() throws IOException {
         //Open ur local db as the input stream
-        try {
             InputStream myInput = context.getAssets().open(DB_NAME);
             //Path to just created emty db
             String outFileName = DB_PATH + DB_NAME;
@@ -74,12 +75,20 @@ String DB_PATH;
             myInput.close();
             myOutput.flush();
             myOutput.close();
-        } catch (IOException e) {}
     }
 
-    public void OpenDatabase() {
+    public void openDB() {
         String path = DB_PATH + DB_NAME;
-        SQLiteDatabase.openDatabase(path, null,0);
+        if (sqlite != null && sqlite.isOpen()) {
+            return;
+        }
+        SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.OPEN_READWRITE);
+    }
+
+    public void closeDB() {
+        if (sqlite != null) {
+            sqlite.close();
+        }
     }
 
     @Override
@@ -104,6 +113,9 @@ String DB_PATH;
 //        MyDB.execSQL("drop Table if exists " + TABLE_USER);
 //        MyDB.execSQL("drop Table if exists " + TABLE_TICKET);
 //        onCreate(MyDB);
+        try {
+            copyDatabase();
+        } catch (IOException e) {}
     }
 
     public static long insertDataAd(Context context, User user) {
@@ -185,7 +197,7 @@ String DB_PATH;
             }
         }
         cursor.close();
-        sqlite.close();
+        db.closeDB();
         return lstUsers;
     }
 
@@ -209,6 +221,7 @@ String DB_PATH;
     public static ArrayList<ticket> getAllTicket(Context context) {
         ArrayList<ticket> lstTicket = new ArrayList<>();
         DBHelper db = new DBHelper(context);
+        db.openDB();
         SQLiteDatabase sqlite = db.getReadableDatabase();
         Cursor cursor = sqlite.rawQuery("select * from " + Utils.TABLE_TICKET, null);
         cursor.moveToFirst();
@@ -224,9 +237,8 @@ String DB_PATH;
             cursor.moveToNext();
         }
         cursor.close();
-        sqlite.close();
+        db.closeDB();
         return lstTicket;
-
     }
 
     public long insertTicket(ticket ticket) {

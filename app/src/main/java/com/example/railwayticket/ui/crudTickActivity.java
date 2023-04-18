@@ -33,18 +33,19 @@ public class crudTickActivity extends AppCompatActivity implements trainTicketAd
         setContentView(R.layout.activity_crud_tick);
         rcvTrain = findViewById(R.id.rcvTick);
         flb = findViewById(R.id.fbAdd);
-
-
+        DBHelper db = new DBHelper(this);
+        try {
+            db.checkDB();
+        } catch (Exception e) {
+        }
         flb.setOnClickListener(v -> addDialog());
         lstTrain = DBHelper.getAllTicket(this);
         adapter = new trainTicketAdapter(lstTrain);
         adapter.setTrainCallback(this);
-
         LinearLayoutManager lm = new LinearLayoutManager(this);
         rcvTrain.setLayoutManager(lm);
         rcvTrain.setAdapter(adapter);
-
-
+        db.closeDB();
     }
 
     @SuppressLint("MissingInflatedId")
@@ -68,7 +69,7 @@ public class crudTickActivity extends AppCompatActivity implements trainTicketAd
             String noiden = edNoiden.getText().toString();
             String noidi = edNoidi.getText().toString();
             String gia = edGia.getText().toString();
-            if (ticketID.isEmpty() || giodi.isEmpty()|| gioden.isEmpty() || noidi.isEmpty()
+            if (ticketID.isEmpty() || giodi.isEmpty() || gioden.isEmpty() || noidi.isEmpty()
                     || noiden.isEmpty() || gia.isEmpty()) {
                 Toast.makeText(this,
                         "Nhập dữ liệu không hợp lệ",
@@ -122,7 +123,7 @@ public class crudTickActivity extends AppCompatActivity implements trainTicketAd
             ticket.setStateEnd(edNoiden.getText().toString().trim());
             ticket.setPrice(edGia.getText().toString().trim());
 
-            if (ticket.TicketId.isEmpty() || ticket.timego.isEmpty()|| ticket.timeend.isEmpty()
+            if (ticket.TicketId.isEmpty() || ticket.timego.isEmpty() || ticket.timeend.isEmpty()
                     || ticket.stateGo.isEmpty() || ticket.stateEnd.isEmpty() || ticket.price.isEmpty()) {
                 Toast.makeText(this, "Nhập dữ liệu không hợp lệ", Toast.LENGTH_LONG).show();
             } else {
@@ -150,6 +151,8 @@ public class crudTickActivity extends AppCompatActivity implements trainTicketAd
 
     @Override
     public void onItemDeleteClicked(ticket ticket, int position) {
+        DBHelper db = new DBHelper(this);
+        db.openDB();
         boolean result = DBHelper.deleteTicket(this, ticket.id);
         if (result) {
             Toast.makeText(this,
