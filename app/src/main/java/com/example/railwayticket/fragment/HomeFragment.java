@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -15,12 +14,12 @@ import androidx.fragment.app.Fragment;
 import com.example.railwayticket.R;
 import com.example.railwayticket.ui.ChonTauDiActivity;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class HomeFragment extends Fragment {
     TextView tvdateGO, tvdateEnd, tvplaceGO, tvplaceEnd;
     Button btSearchC;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -35,31 +34,29 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         return v;
     }
+    Calendar cal = Calendar.getInstance();
+    final int ngay = cal.get(Calendar.DATE);
+    final int thang = cal.get(Calendar.MONTH);
+    final int nam = cal.get(Calendar.YEAR);
+
 
     private void DateEndPicker() {
-        Calendar cal = Calendar.getInstance();
-        int ngay = cal.get(Calendar.DATE);
-        int thang = cal.get(Calendar.MONTH);
-        int nam = cal.get(Calendar.YEAR);
+
         DatePickerDialog dialog = new DatePickerDialog(getContext(), (datePicker, i, i1, i2) -> {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            tvdateEnd.setText(dateFormat.format(cal.getTime()));
-        }, nam, thang,ngay);
+            i1= i1+1;
+            String date = i2 + "/" + i1 + "/" + i;
+            tvdateEnd.setText(date);
+        }, nam, thang, ngay);
         dialog.show();
     }
 
     private void DateGoPicker() {
-        Calendar cal = Calendar.getInstance();
-        int ngay = cal.get(Calendar.DATE);
-        int thang = cal.get(Calendar.MONTH);
-        int nam = cal.get(Calendar.YEAR);
-        DatePickerDialog dialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                tvdateGO.setText(dateFormat.format(cal.getTime()));
-            }
-        }, nam, thang,ngay);
+
+        DatePickerDialog dialog = new DatePickerDialog(getContext(), (datePicker, i, i1, i2) -> {
+            i1= i1+1;
+            String date = i2 + "/" + i1 + "/" + i;
+            tvdateGO.setText(date);
+        }, nam, thang, ngay);
         dialog.show();
     }
 
