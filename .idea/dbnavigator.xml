@@ -12,8 +12,8 @@
     <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="7c376a87-9261-49f6-9f64-c670b3e9c856">
-      <console name="Connection" type="STANDARD" schema="main" session="Main" />
+    <connection id="399b6ebf-8d89-4117-91c0-8c63296fde06">
+      <console name="Connection" type="STANDARD" schema="" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
@@ -32,6 +32,14 @@
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />
   </component>
+  <component name="DBNavigator.Project.MethodExecutionManager">
+    <method-browser />
+    <execution-history>
+      <group-entries value="true" />
+      <execution-inputs />
+    </execution-history>
+    <argument-values-cache />
+  </component>
   <component name="DBNavigator.Project.ObjectQuickFilterManager">
     <last-used-operator value="EQUAL" />
     <filters />
@@ -41,7 +49,7 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="7c376a87-9261-49f6-9f64-c670b3e9c856" active="true" signed="true">
+      <connection id="399b6ebf-8d89-4117-91c0-8c63296fde06" active="true" signed="true">
         <database>
           <name value="Connection" />
           <description value="" />
@@ -56,14 +64,14 @@
           <port value="" />
           <database value="" />
           <files>
-            <file path="D:\AndroidStudioProjects\RailWayTicket\Database\Login.db" schema="main" />
+            <file path="D:\traino.db" schema="main" />
           </files>
           <type value="NONE" />
           <user value="" />
           <deprecated-pwd value="" />
         </database>
         <properties>
-          <auto-commit value="true" />
+          <auto-commit value="false" />
         </properties>
         <ssh-settings>
           <active value="false" />

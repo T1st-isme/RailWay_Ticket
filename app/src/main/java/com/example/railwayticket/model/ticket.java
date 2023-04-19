@@ -9,11 +9,12 @@ public class ticket {
 
     public String stateGo;
     public String stateEnd;
+    public int state_id;
     public String price;
 
 
-
-    public  ticket(){}
+    public ticket() {
+    }
 
     public ticket(int id, String ticketId, String timego, String timeend, String stateGo, String stateEnd, String price) {
         this.id = id;
@@ -25,6 +26,17 @@ public class ticket {
         this.price = price;
     }
 
+    public ticket(int id, String ticketId, String timego, String timeend, int state_Id, String price) {
+        this.id = id;
+        TicketId = ticketId;
+        this.timego = timego;
+        this.timeend = timeend;
+//        this.stateGo = stateGo;
+//        this.stateEnd = stateEnd;
+        this.state_id = state_Id;
+        this.price = price;
+    }
+
     public int getId() {
         return id;
     }
@@ -32,6 +44,7 @@ public class ticket {
     public void setId(int id) {
         this.id = id;
     }
+
     public String getTimego() {
         return timego;
     }

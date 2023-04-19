@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import com.example.railwayticket.Utils.Utils;
 import com.example.railwayticket.model.User;
 import com.example.railwayticket.model.ticket;
+import com.example.railwayticket.model.ticketGO;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -39,6 +40,23 @@ public class DBHelper extends SQLiteOpenHelper {
         this.context = context;
         assert context != null;
         DB_PATH = "/data/data/" + context.getPackageName() + "/databases/";
+    }
+
+    public static ArrayList<ticketGO> getAll(Context context) {
+        ArrayList<ticketGO> lstDepartment= new ArrayList<>();
+        DBHelper db = new DBHelper(context);
+        SQLiteDatabase sqlite = db.getReadableDatabase();
+        Cursor cs= sqlite.rawQuery("Select * from state ",null);
+        cs.moveToFirst();
+        while (!cs.isAfterLast()) {
+            int id= cs.getInt(0);
+            String name= cs.getString(1);
+            lstDepartment.add(new ticketGO(id,name));
+            cs.moveToNext();
+        }
+        cs.close();
+        db.close();
+        return lstDepartment;
     }
 
 
@@ -230,10 +248,11 @@ public class DBHelper extends SQLiteOpenHelper {
             String tckId = cursor.getString(1);
             String timego = cursor.getString(2);
             String timeend = cursor.getString(3);
-            String statego = cursor.getString(4);
-            String stateend = cursor.getString(5);
-            String price = cursor.getString(6);
-            lstTicket.add(new ticket(id, tckId, timego, timeend, statego, stateend, price));
+//            String statego = cursor.getString(4);
+//            String stateend = cursor.getString(5);
+            int stateID = cursor.getInt(4);
+            String price = cursor.getString(5);
+            lstTicket.add(new ticket(id, tckId, timego, timeend, stateID, price ));
             cursor.moveToNext();
         }
         cursor.close();
@@ -247,8 +266,8 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(Utils.COL_TICKET_ID, ticket.getTicketId());
         values.put(Utils.COL_TRAIN_TIMEGO, ticket.getTimego());
         values.put(Utils.COL_TRAIN_TIMEEND, ticket.getTimeend());
-        values.put(Utils.COL_TRAIN_STATEGO, ticket.getStateGo());
-        values.put(Utils.COL_TRAIN_STATEEND, ticket.getStateEnd());
+//        values.put(Utils.COL_TRAIN_STATEGO, ticket.getStateGo());
+//        values.put(Utils.COL_TRAIN_STATEEND, ticket.getStateEnd());
         values.put(Utils.COL_TICKET_PRICE, ticket.getPrice());
         long result = MyDB.insert(TABLE_TICKET, null, values);
         if (result == -1) {
@@ -278,4 +297,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(Utils.COL_TICKET_PRICE, ticket.getPrice());
         return sqlite.update(TABLE_TICKET, values, Utils.COL_TICK_ID + " =? ", new String[]{String.valueOf(ticket.id)});
     }
+
+
+
 }
