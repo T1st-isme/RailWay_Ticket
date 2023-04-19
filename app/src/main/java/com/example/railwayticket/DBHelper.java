@@ -43,38 +43,40 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     public void checkDB() {
-        String path = DB_PATH + DB_NAME;
-        if (!path.isEmpty()){
-            this.getReadableDatabase();
-            return;
-        }
 
-//        try {
-//
-//            SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.OPEN_READONLY);
-//        } catch (Exception e) {
+//        if (!path.isEmpty()){
+//            this.getReadableDatabase();
+//            return;
 //        }
-//        this.getReadableDatabase();
-//        copyDatabase();
+
+        try {
+            String path = DB_PATH + DB_NAME;
+            SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.OPEN_READONLY);
+        } catch (Exception e) {
+        }
+        this.getReadableDatabase();
+        copyDatabase();
     }
 
-    public void copyDatabase() throws IOException {
-        //Open ur local db as the input stream
-        InputStream myInput = context.getAssets().open(DB_NAME);
-        //Path to just created emty db
-        String outFileName = DB_PATH + DB_NAME;
-        //Open the emty db as the output stream
-        OutputStream myOutput = Files.newOutputStream(Paths.get(outFileName));
-        //transfer bytes from the inputfile to the outputfile
-        byte[] bytes = new byte[1024];
-        int length;
-        while ((length = myInput.read(bytes)) > 0) {
-            myOutput.write(bytes, 0, length);
-        }
-        //close the stream
-        myInput.close();
-        myOutput.flush();
-        myOutput.close();
+    public void copyDatabase() {
+        try {
+            //Open ur local db as the input stream
+            InputStream myInput = context.getAssets().open(DB_NAME);
+            //Path to just created emty db
+            String outFileName = DB_PATH + DB_NAME;
+            //Open the emty db as the output stream
+            OutputStream myOutput = Files.newOutputStream(Paths.get(outFileName));
+            //transfer bytes from the inputfile to the outputfile
+            byte[] bytes = new byte[1024];
+            int length;
+            while ((length = myInput.read(bytes)) > 0) {
+                myOutput.write(bytes, 0, length);
+            }
+            //close the stream
+            myInput.close();
+            myOutput.flush();
+            myOutput.close();
+        } catch (IOException e) {}
     }
 
     public void openDB() {
@@ -113,9 +115,7 @@ public class DBHelper extends SQLiteOpenHelper {
 //        MyDB.execSQL("drop Table if exists " + TABLE_USER);
 //        MyDB.execSQL("drop Table if exists " + TABLE_TICKET);
 //        onCreate(MyDB);
-        try {
-            copyDatabase();
-        } catch (IOException e) {}
+        copyDatabase();
     }
 
     public static long insertDataAd(Context context, User user) {

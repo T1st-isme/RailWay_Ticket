@@ -1,7 +1,6 @@
 package com.example.railwayticket;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,10 +22,19 @@ public class HomeActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         mnBottom = findViewById(R.id.bottomNavigationView);
+        DBHelper db = new DBHelper(this);
+        try {
+            db.checkDB();
+        } catch (Exception e) {
+        }
+        try {
+            db.openDB();
+        } catch (Exception e) {
+        }
         //load lên fragment
         mnBottom.setOnItemSelectedListener(getListener());
         getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, new HomeFragment()).commit();
-
+        db.closeDB();
     }
 
     @SuppressLint("NonConstantResourceId")

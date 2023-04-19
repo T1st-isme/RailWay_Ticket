@@ -9,10 +9,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class Utils {
-    public static final String SHARE_PREFERENCES_APP = "share_preferences_app";
-    public static final String KEY_USER = "Key_user";
-    public static final String KEY_USER_PROFILE = "Key_user_profile";
-
     //db
     public static final String DB_NAME = "traino.db";
     public static final int DB_VERSION = 1 ;

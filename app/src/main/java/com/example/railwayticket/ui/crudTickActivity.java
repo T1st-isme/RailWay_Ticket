@@ -33,15 +33,7 @@ public class crudTickActivity extends AppCompatActivity implements trainTicketAd
         setContentView(R.layout.activity_crud_tick);
         rcvTrain = findViewById(R.id.rcvTick);
         flb = findViewById(R.id.fbAdd);
-        DBHelper db = new DBHelper(this);
-        try {
-            db.checkDB();
-        } catch (Exception e) {
-        }
-        try {
-            db.openDB();
-        } catch (Exception e) {
-        }
+
         flb.setOnClickListener(v -> addDialog());
         lstTrain = DBHelper.getAllTicket(this);
         adapter = new trainTicketAdapter(lstTrain);
@@ -49,7 +41,6 @@ public class crudTickActivity extends AppCompatActivity implements trainTicketAd
         LinearLayoutManager lm = new LinearLayoutManager(this);
         rcvTrain.setLayoutManager(lm);
         rcvTrain.setAdapter(adapter);
-        db.closeDB();
     }
 
     @SuppressLint("MissingInflatedId")

@@ -37,6 +37,10 @@ public class AccManagerFragment extends Fragment {
         sp = requireActivity().getSharedPreferences("MyApp", Context.MODE_PRIVATE);
         username = sp.getString("username", null);
         Account.setText(username);
+
+
+
+
         Account.setOnClickListener(view -> {
             if (username == null) {
                 Intent i = new Intent(getActivity(), LoginActivity.class);
@@ -48,12 +52,16 @@ public class AccManagerFragment extends Fragment {
         });
 
         btLogout = v.findViewById(R.id.btnLogout);
-        sp =  requireActivity().getSharedPreferences("MyApp", Context.MODE_PRIVATE);
+        sp = requireActivity().getSharedPreferences("MyApp", Context.MODE_PRIVATE);
         editor = sp.edit();
-
-        btLogout.setOnClickListener(view -> {
-           logout();
-        });
+        if (username == null){
+            btLogout.setVisibility(View.GONE);
+        } else {
+            btLogout.setVisibility(View.VISIBLE);
+            btLogout.setOnClickListener(view -> {
+                logout();
+            });
+        }
         return v;
     }
 
