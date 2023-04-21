@@ -20,6 +20,7 @@ import com.example.railwayticket.model.User;
 import com.example.railwayticket.model.ticket;
 import com.example.railwayticket.model.ticketGO;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -44,19 +45,18 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     public void checkDB() {
-
-//        if (!path.isEmpty()){
-//            this.getReadableDatabase();
-//            return;
-//        }
-
-        try {
-            String path = DB_PATH + DB_NAME;
-            SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.OPEN_READONLY);
-        } catch (Exception e) {
-        }
-        this.getReadableDatabase();
-        copyDatabase();
+        //check if the database exists
+        boolean databaseExist = checkDataBase();
+        if (databaseExist) {
+            // Do Nothing.
+        } else {
+            this.getWritableDatabase();
+            copyDatabase();
+        }// end if else dbExist
+    }
+    public boolean checkDataBase(){
+        File databaseFile = new File(DB_PATH + DB_NAME);
+        return databaseFile.exists();
     }
 
     public void copyDatabase() {
@@ -280,16 +280,17 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
-    public static ArrayList<ticketGO> getAllTicketGO(Context context, String x) {
+    public static ArrayList<ticketGO> getAllTicketGO(Context context, String x, String y) {
         ArrayList<ticketGO> lstTicket = new ArrayList<>();
         DBHelper db = new DBHelper(context); db.openDB();
         SQLiteDatabase sqlite = db.getReadableDatabase();
-        Cursor cursor = sqlite.rawQuery("select stateName from state where stateName =?", new String[]{String.valueOf(x)});
+        Cursor cursor = sqlite.rawQuery("select stateGO, stateEnd from state where stateGO =? and stateEnd =? ", new String[]{String.valueOf(x), String.valueOf(y)});
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
 //            int id = cursor.getInt(0);
-            String state = cursor.getString(0);
-            lstTicket.add(new ticketGO(state));
+            String stateG = cursor.getString(0);
+            String stateE = cursor.getString(1);
+            lstTicket.add(new ticketGO(stateG, stateE));
             cursor.moveToNext();
         }
         cursor.close();

@@ -50,7 +50,8 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(getContext(), "Vui lòng chọn ngày về", Toast.LENGTH_LONG).show();
             } else {
                 Intent intent = new Intent(getContext(), ChonTauDiActivity.class);
-                intent.putExtra("state", txtGO);
+                intent.putExtra("stateG", txtGO);
+                intent.putExtra("stateE", txtEnd);
                 startActivity(intent);
             }
         });

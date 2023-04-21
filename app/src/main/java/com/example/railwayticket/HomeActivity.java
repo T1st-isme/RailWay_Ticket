@@ -27,10 +27,7 @@ public class HomeActivity extends AppCompatActivity  {
             db.checkDB();
         } catch (Exception e) {
         }
-        try {
-            db.openDB();
-        } catch (Exception e) {
-        }
+        db.openDB();
         //load lên fragment
         mnBottom.setOnItemSelectedListener(getListener());
         getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, new HomeFragment()).commit();

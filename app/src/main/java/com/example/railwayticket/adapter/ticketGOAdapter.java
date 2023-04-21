@@ -44,8 +44,8 @@ public class ticketGOAdapter extends RecyclerView.Adapter<ticketGOAdapter.ticket
         ticketGO item = lstTicket.get(position);
         holder.trainid.setText(String.valueOf(item.getId()));
         holder.timego.setText(item.getDate());
-        holder.statego.setText(String.valueOf(item.getStateName()));
-//        holder.stateend.setText(item.getStateEnd());
+        holder.statego.setText(String.valueOf(item.getStateGO()));
+        holder.stateend.setText(String.valueOf(item.getStateEnd()));
         holder.price.setText(String.valueOf(item.getPrice()));
     }
 
@@ -58,10 +58,10 @@ public class ticketGOAdapter extends RecyclerView.Adapter<ticketGOAdapter.ticket
         TextView trainid, timego, timeend, statego, stateend, price;
         public ticketGOViewHolder(@NonNull View itemView) {
             super(itemView);
-            trainid = itemView.findViewById(R.id.tvTicketID);
+            trainid = itemView.findViewById(R.id.tvTrainID);
             timego = itemView.findViewById(R.id.tvTimeGo);
             statego = itemView.findViewById(R.id.tvStateGo);
-//            stateend = itemView.findViewById(R.id.tvStateEnd);
+            stateend = itemView.findViewById(R.id.tvStateEnd);
             price = itemView.findViewById(R.id.tvPrice);
         }
     }

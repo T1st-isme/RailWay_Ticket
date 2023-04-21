@@ -1,31 +1,9 @@
 package com.example.railwayticket.model;
 
 public class ticketGO {
-    public ticketGO(int id, String date, String stateName, int price) {
-        this.id = id;
-        this.date = date;
-        this.stateName = stateName;
-        this.price = price;
-    }
-
-    public ticketGO(String date, String stateName, int price) {
-        this.date = date;
-        this.stateName = stateName;
-        this.price = price;
-    }
-
-    public ticketGO(String state) {
-        this.stateName = state;
-    }
-
     public ticketGO() {
-
     }
 
-    public ticketGO(int id, String state) {
-        this.id = id;
-        this.stateName = state;
-    }
 
     public int getId() {
         return id;
@@ -43,13 +21,6 @@ public class ticketGO {
         this.date = date;
     }
 
-    public String getStateName() {
-        return stateName;
-    }
-
-    public void setStateName(String stateName) {
-        this.stateName = stateName;
-    }
 
     public int getPrice() {
         return price;
@@ -61,11 +32,31 @@ public class ticketGO {
 
     int id;
     String date;
-    public String stateName;
+
+    public ticketGO(String stateGO, String stateEnd) {
+        this.stateGO = stateGO;
+        this.stateEnd = stateEnd;
+    }
+
+    public String getStateGO() {
+        return stateGO;
+    }
+
+    public void setStateGO(String stateGO) {
+        this.stateGO = stateGO;
+    }
+
+    public String getStateEnd() {
+        return stateEnd;
+    }
+
+    public void setStateEnd(String stateEnd) {
+        this.stateEnd = stateEnd;
+    }
+
+    public String stateGO;
+    public String stateEnd;
     int price;
-
-
-
 
 
 }

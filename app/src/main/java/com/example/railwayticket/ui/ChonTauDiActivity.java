@@ -32,9 +32,11 @@ public class ChonTauDiActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chon_tau_di);
         btnnext = findViewById(R.id.btnext);
         rcvTicket = findViewById(R.id.rcvTaudi);
-        String x =  getIntent().getStringExtra("state");
+        String x =  getIntent().getStringExtra("stateG");
+        String y =  getIntent().getStringExtra("stateE");
         System.out.println(x);
-        lstTicket = DBHelper.getAllTicketGO(this, x);
+        System.out.println(y);
+        lstTicket = DBHelper.getAllTicketGO(this, x, y);
         adapter = new ticketGOAdapter(lstTicket);
         LinearLayoutManager lm = new LinearLayoutManager(this);
         rcvTicket.setLayoutManager(lm);
