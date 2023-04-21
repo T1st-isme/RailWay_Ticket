@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import com.example.railwayticket.Utils.Utils;
 import com.example.railwayticket.model.User;
 import com.example.railwayticket.model.ticket;
+import com.example.railwayticket.model.ticketGO;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -76,7 +77,8 @@ public class DBHelper extends SQLiteOpenHelper {
             myInput.close();
             myOutput.flush();
             myOutput.close();
-        } catch (IOException e) {}
+        } catch (IOException e) {
+        }
     }
 
     public void openDB() {
@@ -230,11 +232,8 @@ public class DBHelper extends SQLiteOpenHelper {
             String tckId = cursor.getString(1);
             String timego = cursor.getString(2);
             String timeend = cursor.getString(3);
-//            String statego = cursor.getString(4);
-//            String stateend = cursor.getString(5);
-            int stateID = cursor.getInt(4);
-            String price = cursor.getString(5);
-            lstTicket.add(new ticket(id, tckId, timego, timeend, stateID, price ));
+            String price = cursor.getString(4);
+            lstTicket.add(new ticket(id, tckId, timego, timeend, price));
             cursor.moveToNext();
         }
         cursor.close();
@@ -281,24 +280,21 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
-    public ArrayList<String> getAllTicketGO(Context context) {
-        ArrayList<String> lstTicket = new ArrayList<>();
-        DBHelper db = new DBHelper(context);
+    public static ArrayList<ticketGO> getAllTicketGO(Context context, String x) {
+        ArrayList<ticketGO> lstTicket = new ArrayList<>();
+        DBHelper db = new DBHelper(context); db.openDB();
         SQLiteDatabase sqlite = db.getReadableDatabase();
-        Cursor cursor = sqlite.rawQuery("select * from state ", null);
+        Cursor cursor = sqlite.rawQuery("select stateName from state where stateName =?", new String[]{String.valueOf(x)});
         cursor.moveToFirst();
-        if (cursor.getCount() == 0) {
-            Toast.makeText(context, "Không có dữ liệu", Toast.LENGTH_LONG).show();
-        } else {
-            while (!cursor.isAfterLast()) {
-                int id = cursor.getInt(0);
-                String state = cursor.getString(1);
-                lstTicket.add(state);
-                cursor.moveToNext();
-            }
+        while (!cursor.isAfterLast()) {
+//            int id = cursor.getInt(0);
+            String state = cursor.getString(0);
+            lstTicket.add(new ticketGO(state));
+            cursor.moveToNext();
         }
         cursor.close();
         db.closeDB();
         return lstTicket;
     }
+
 }

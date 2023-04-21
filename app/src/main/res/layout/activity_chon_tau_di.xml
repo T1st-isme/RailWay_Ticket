@@ -4,35 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.ChonTauDiActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".ui.ChonTauDiActivity">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/purple"
-    android:gravity="center"
-    android:orientation="vertical">
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="Chọn tàu đi"
-        android:textSize="20sp"
-        android:textColor="#fff"
-        android:id="@+id/tvChontaudi"
+        android:layout_height="wrap_content"
+        android:background="@color/purple"
         android:gravity="center"
-        android:paddingTop="10sp"
-        tools:ignore="HardcodedText">
-    </TextView>
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvChontaudi"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:paddingTop="10sp"
+            android:text="Chọn tàu đi"
+            android:textColor="#fff"
+            android:textSize="20sp"
+            tools:ignore="HardcodedText"/>
 
 
-</LinearLayout>
+    </LinearLayout>
 
-    <FrameLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvTaudi"
         android:layout_width="match_parent"
         android:layout_height="590dp"
-        android:id="@+id/main_fragment"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent">
+    </androidx.recyclerview.widget.RecyclerView>
 
     <Button
         android:id="@+id/btnext"

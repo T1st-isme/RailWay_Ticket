@@ -44,8 +44,8 @@ public class trainTicketAdapter extends RecyclerView.Adapter<trainTicketAdapter.
         holder.trainid.setText(item.getTrainID());
         holder.timego.setText(item.getTimego());
         holder.timeend.setText(item.getTimeend());
-        holder.statego.setText(item.getStateGo());
-        holder.stateend.setText(item.getStateEnd());
+//        holder.statego.setText(item.getStateGo());
+//        holder.stateend.setText(item.getStateEnd());
         holder.price.setText(item.getPrice());
         holder.delete.setOnClickListener(v -> tickCallback.onItemDeleteClicked(item, position));
         holder.update.setOnClickListener(v -> tickCallback.onItemEditClicked(item, position));

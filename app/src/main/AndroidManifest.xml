@@ -61,9 +61,6 @@
             android:name=".ui.ChonTauDiActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.ChonTauVeActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.SeatActivity"
             android:exported="true" />
     </application>

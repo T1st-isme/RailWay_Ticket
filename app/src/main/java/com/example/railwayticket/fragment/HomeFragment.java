@@ -1,7 +1,10 @@
 package com.example.railwayticket.fragment;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,19 +61,38 @@ public class HomeFragment extends Fragment {
     }
 
     private void spinnerEnd() {
-        DBHelper db = new DBHelper(getContext());
-        ticketEnd = db.getAllTicketGO(getContext());
+        ticketEnd = getAllTicketGO(getContext());
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getActivity(), R.layout.my_spinner, ticketEnd);
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         snEND.setAdapter(adapter);
     }
 
     private void spinnerGO() {
-        DBHelper db = new DBHelper(getContext());
-        ticketGo = db.getAllTicketGO(getContext());
+        ticketGo = getAllTicketGO(getContext());
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getActivity(), R.layout.my_spinner, ticketGo);
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         snGO.setAdapter(adapter);
+    }
+
+    public ArrayList<String> getAllTicketGO(Context context) {
+        ArrayList<String> lstTicket = new ArrayList<>();
+        DBHelper db = new DBHelper(context);
+        SQLiteDatabase sqlite = db.getReadableDatabase();
+        Cursor cursor = sqlite.rawQuery("select * from state ", null);
+        cursor.moveToFirst();
+        if (cursor.getCount() == 0) {
+            Toast.makeText(context, "Không có dữ liệu", Toast.LENGTH_LONG).show();
+        } else {
+            while (!cursor.isAfterLast()) {
+                int id = cursor.getInt(0);
+                String state = cursor.getString(1);
+                lstTicket.add(state);
+                cursor.moveToNext();
+            }
+        }
+        cursor.close();
+        db.closeDB();
+        return lstTicket;
     }
 
 

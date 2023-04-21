@@ -26,15 +26,13 @@ public class ticket {
         this.price = price;
     }
 
-    public ticket(int id, String ticketId, String timego, String timeend, int state_Id, String price) {
+    public ticket(int id, String tckId, String timego, String timeend, String price) {
         this.id = id;
-        TicketId = ticketId;
+        this.TicketId = tckId;
         this.timego = timego;
         this.timeend = timeend;
-//        this.stateGo = stateGo;
-//        this.stateEnd = stateEnd;
-        this.state_id = state_Id;
         this.price = price;
+
     }
 
     public int getId() {

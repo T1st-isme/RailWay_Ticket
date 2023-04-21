@@ -47,6 +47,7 @@
         android:id="@+id/edPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="number"
         android:hint="Nhập giá"
         android:textSize="20sp"
         tools:ignore="Autofill,HardcodedText,TextFields" />
