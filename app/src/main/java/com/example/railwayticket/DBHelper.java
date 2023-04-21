@@ -18,7 +18,6 @@ import androidx.annotation.Nullable;
 import com.example.railwayticket.Utils.Utils;
 import com.example.railwayticket.model.User;
 import com.example.railwayticket.model.ticket;
-import com.example.railwayticket.model.ticketGO;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -40,23 +39,6 @@ public class DBHelper extends SQLiteOpenHelper {
         this.context = context;
         assert context != null;
         DB_PATH = "/data/data/" + context.getPackageName() + "/databases/";
-    }
-
-    public static ArrayList<ticketGO> getAll(Context context) {
-        ArrayList<ticketGO> lstDepartment= new ArrayList<>();
-        DBHelper db = new DBHelper(context);
-        SQLiteDatabase sqlite = db.getReadableDatabase();
-        Cursor cs= sqlite.rawQuery("Select * from state ",null);
-        cs.moveToFirst();
-        while (!cs.isAfterLast()) {
-            int id= cs.getInt(0);
-            String name= cs.getString(1);
-            lstDepartment.add(new ticketGO(id,name));
-            cs.moveToNext();
-        }
-        cs.close();
-        db.close();
-        return lstDepartment;
     }
 
 
@@ -299,5 +281,24 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
-
+    public ArrayList<String> getAllTicketGO(Context context) {
+        ArrayList<String> lstTicket = new ArrayList<>();
+        DBHelper db = new DBHelper(context);
+        SQLiteDatabase sqlite = db.getReadableDatabase();
+        Cursor cursor = sqlite.rawQuery("select * from state ", null);
+        cursor.moveToFirst();
+        if (cursor.getCount() == 0) {
+            Toast.makeText(context, "Không có dữ liệu", Toast.LENGTH_LONG).show();
+        } else {
+            while (!cursor.isAfterLast()) {
+                int id = cursor.getInt(0);
+                String state = cursor.getString(1);
+                lstTicket.add(state);
+                cursor.moveToNext();
+            }
+        }
+        cursor.close();
+        db.closeDB();
+        return lstTicket;
+    }
 }

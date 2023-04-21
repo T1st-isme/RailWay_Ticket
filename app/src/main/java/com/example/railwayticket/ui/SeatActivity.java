@@ -1,18 +1,21 @@
 package com.example.railwayticket.ui;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.railwayticket.OrderDetailActivity;
 import com.example.railwayticket.R;
 
 import java.util.ArrayList;
@@ -22,7 +25,7 @@ public class SeatActivity extends AppCompatActivity implements View.OnClickListe
     ViewGroup layout;
 
     String seats =
-                      "___/"
+            "___/"
                     + "U_A/"
                     + "R_A/"
                     + "U_U/"
@@ -114,7 +117,7 @@ public class SeatActivity extends AppCompatActivity implements View.OnClickListe
                     + "R_A/"
                     + "R_A/"
                     + "___/";
-
+    Button btContinue;
 
     List<TextView> seatViewList = new ArrayList<>();
     int seatSize = 100;
@@ -130,6 +133,8 @@ public class SeatActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.seat_layout);
+        btContinue = findViewById(R.id.btTiep);
+        btContinue.setOnClickListener(v -> continu());
 
         layout = findViewById(R.id.layoutSeat);
 
@@ -217,6 +222,12 @@ public class SeatActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     }
+
+    private void continu() {
+        Intent i = new Intent(this, OrderDetailActivity.class);
+        startActivity(i);
+    }
+
 
     @Override
     public void onClick(View view) {
