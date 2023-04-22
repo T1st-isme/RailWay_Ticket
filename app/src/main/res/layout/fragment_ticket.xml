@@ -8,6 +8,7 @@
     tools:context=".fragment.TicketFragment">
 
     <TextView
+        android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Chỗ"
@@ -71,7 +72,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.912"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:layout_constraintStart_toEndOf="@+id/lState"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.05"
         tools:ignore="HardcodedText" />
@@ -90,27 +91,84 @@
         tools:ignore="HardcodedText" />
 
     <TextView
+        android:id="@+id/tvDayGo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="4dp"
+        android:text="Ngày đi"
+        app:layout_constraintBottom_toTopOf="@+id/lState"
+        app:layout_constraintEnd_toStartOf="@+id/textView12"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/trainID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="4dp"
+        android:text="TrainID"
+        app:layout_constraintBottom_toTopOf="@+id/lState"
+        app:layout_constraintEnd_toStartOf="@+id/tvDayGo" />
+
+    <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Đi SE1 22:00 28/3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.403"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="10dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
+        android:text="Đi "
+        app:layout_constraintBottom_toTopOf="@+id/lState"
+        app:layout_constraintEnd_toStartOf="@+id/trainID"
+        app:layout_constraintHorizontal_bias="0.928"
+        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
         tools:ignore="HardcodedText,MissingConstraints" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="SG - HN"
-        app:layout_constraintEnd_toEndOf="@+id/textView4"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        tools:ignore="HardcodedText" />
+        android:text="Giờ đi"
+        app:layout_constraintBottom_toTopOf="@+id/lState"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="274dp" />
+
+
+    <LinearLayout
+        android:id="@+id/lState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="120dp"
+        tools:layout_editor_absoluteY="31dp">
+
+        <TextView
+            android:id="@+id/stateGO"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="5dp"
+            android:text="Sài Gòn"
+            tools:ignore="HardcodedText" />
+
+        <View
+            android:layout_width="80dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:background="#757575" />
+
+        <TextView
+            android:id="@+id/stateEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="5dp"
+            android:text="Hà Nội"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/idTicket"
@@ -119,9 +177,8 @@
         android:text="AC123"
         app:layout_constraintBottom_toTopOf="@+id/Gia"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintHorizontal_bias="0.905"
         app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.588" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

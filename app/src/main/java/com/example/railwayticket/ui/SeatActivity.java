@@ -223,11 +223,8 @@ public class SeatActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void continu() {
-        Intent i = new Intent(this, OrderDetailActivity.class);
-        startActivity(i);
-    }
 
+    Intent i;
 
     @Override
     public void onClick(View view) {
@@ -238,12 +235,22 @@ public class SeatActivity extends AppCompatActivity implements View.OnClickListe
             } else {
                 selectedIds = selectedIds + view.getId() + ",";
                 view.setBackgroundResource(R.drawable.ic_seats_selected);
+                String x =  getIntent().getStringExtra("NoiDi");
+                String y =  getIntent().getStringExtra("NoiDen");
+                i = new Intent(this, OrderDetailActivity.class);
+                i.putExtra("ghe", String.valueOf(view.getId()));
+                i.putExtra("DiemDi", String.valueOf(x));
+                i.putExtra("DiemDen", String.valueOf(y));
             }
         } else if ((int) view.getTag() == STATUS_BOOKED) {
             Toast.makeText(this, "Seat " + view.getId() + " is Booked", Toast.LENGTH_SHORT).show();
         } else if ((int) view.getTag() == STATUS_RESERVED) {
             Toast.makeText(this, "Seat " + view.getId() + " is Reserved", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void continu() {
+        startActivity(i);
     }
 }
 

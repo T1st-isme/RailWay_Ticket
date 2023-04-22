@@ -25,6 +25,7 @@ public class ChonTauDiActivity extends AppCompatActivity {
     RecyclerView rcvTicket;
     ArrayList<ticketGO> lstTicket;
     ticketGOAdapter adapter;
+    Intent i;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,17 +37,20 @@ public class ChonTauDiActivity extends AppCompatActivity {
         String y =  getIntent().getStringExtra("stateE");
         System.out.println(x);
         System.out.println(y);
+
         lstTicket = DBHelper.getAllTicketGO(this, x, y);
         adapter = new ticketGOAdapter(lstTicket);
         LinearLayoutManager lm = new LinearLayoutManager(this);
         rcvTicket.setLayoutManager(lm);
         rcvTicket.setAdapter(adapter);
+        i = new Intent(ChonTauDiActivity.this, SeatActivity.class);
+        i.putExtra("NoiDi", x);
+        i.putExtra("NoiDen", y);
 
 
         //button de bam
         btnnext.setOnClickListener(v -> {
                     //tao duong dan toi Activity moi
-                    Intent i = new Intent(ChonTauDiActivity.this, SeatActivity.class);
                     startActivity(i);
                 }
         );
