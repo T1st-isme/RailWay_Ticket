@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,17 +19,13 @@ public class ticketGOAdapter extends RecyclerView.Adapter<ticketGOAdapter.ticket
 
     Context context;
     ArrayList<ticketGO> lstTicket;
-    ticketGOAdapter tickCallback;
+    tickCallback tickCallback;
 
-    public ticketGOAdapter(ArrayList<ticketGO> lstTicket) {
+    public ticketGOAdapter(ArrayList<ticketGO> lstTicket, tickCallback tickCallback) {
         this.lstTicket = lstTicket;
-    }
-
-
-
-    public void settickGOCallback(ticketGOAdapter tickCallback) {
         this.tickCallback = tickCallback;
     }
+
 
     @NonNull
     @Override
@@ -42,11 +39,16 @@ public class ticketGOAdapter extends RecyclerView.Adapter<ticketGOAdapter.ticket
     @Override
     public void onBindViewHolder(@NonNull ticketGOViewHolder holder, int position) {
         ticketGO item = lstTicket.get(position);
-        holder.trainid.setText(String.valueOf(item.getId()));
-        holder.timego.setText(item.getDate());
+        holder.trainid.setText(String.valueOf(item.getTickID()));
+//        holder.timego.setText(item.getTimeGO());
+//        holder.timego.setText(item.getTimeEnd());
+        holder.dateGo.setText(item.getDateGo());
+        holder.dateEnd.setText(item.getDateEnd());
         holder.statego.setText(String.valueOf(item.getStateGO()));
         holder.stateend.setText(String.valueOf(item.getStateEnd()));
         holder.price.setText(String.valueOf(item.getPrice()));
+        holder.itemView.setOnClickListener(v -> tickCallback.onItemClick(item.getTickID(), item.getPrice()));
+
     }
 
     @Override
@@ -54,15 +56,25 @@ public class ticketGOAdapter extends RecyclerView.Adapter<ticketGOAdapter.ticket
         return lstTicket.size();
     }
 
-    public class ticketGOViewHolder extends RecyclerView.ViewHolder {
-        TextView trainid, timego, timeend, statego, stateend, price;
+    public static class ticketGOViewHolder extends RecyclerView.ViewHolder {
+        TextView trainid, timego, timeend, statego, stateend,dateGo, dateEnd, price;
+        EditText edphone,edname, edcmnd;
         public ticketGOViewHolder(@NonNull View itemView) {
             super(itemView);
             trainid = itemView.findViewById(R.id.tvTrainID);
-            timego = itemView.findViewById(R.id.tvTimeGo);
+            dateGo = itemView.findViewById(R.id.tvDayGo);
+            dateEnd = itemView.findViewById(R.id.tvDayEnd);
+            timego = itemView.findViewById(R.id.tvtimeGo);
+            timeend = itemView.findViewById(R.id.tvtimeEnd);
             statego = itemView.findViewById(R.id.tvStateGo);
             stateend = itemView.findViewById(R.id.tvStateEnd);
             price = itemView.findViewById(R.id.tvPrice);
+            edphone = itemView.findViewById(R.id.edPhone);
+            edname = itemView.findViewById(R.id.edNameOrder);
+            edcmnd = itemView.findViewById(R.id.edCCCD);
         }
+    }
+    public interface tickCallback{
+        void onItemClick(String id, String price);
     }
 }

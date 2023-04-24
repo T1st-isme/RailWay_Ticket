@@ -1,9 +1,13 @@
 package com.example.railwayticket;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,22 +17,41 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class OrderDetailActivity extends AppCompatActivity {
 
-    TextView tvpayMethod, Ghe, trainID, ngayDi, timeGo, stateGo, stateEnd;
+    TextView tvpayMethod, Ghe, trainID, ngayDi, timeGo, stateGo, stateEnd, price;
+    EditText edname, edcmnd, edphone;
     Button btPay;
     ImageView ivPayMethod;
-    @SuppressLint("MissingInflatedId")
+    private
+    int id = 0;
+    SharedPreferences sp;
+    SharedPreferences.Editor editor;
+    String x ="ghe";
+    String y ="DiemDi";
+    String z ="DiemDen";
+    String trainId = "tickID";
+    String dGo = "NgayDi";
+    String p  = "gia";
+
+    @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_detail);
         anhxa();
-        String x = getIntent().getStringExtra("ghe");
-        String y =  getIntent().getStringExtra("DiemDi");
-        String z =  getIntent().getStringExtra("DiemDen");
-        Ghe.setText(x);
-        stateGo.setText(y);
-        stateEnd.setText(z);
-        System.out.println(x + y + z);
+        String ghe = getIntent().getStringExtra(x);
+        String di = getIntent().getStringExtra(y);
+        String den = getIntent().getStringExtra(z);
+        String gia = getIntent().getStringExtra(p);
+        String dateGo = getIntent().getStringExtra(dGo);
+        String trainid = getIntent().getStringExtra(trainId);
+//        ticketGO t = new ticketGO(x, y, z);
+        Ghe.setText(ghe);
+        stateGo.setText(di);
+        stateEnd.setText(den);
+        price.setText(gia);
+        trainID.setText(trainid);
+        ngayDi.setText(dateGo);
+        System.out.println(ghe + di + den + gia);
         tvpayMethod = findViewById(R.id.tvpay);
         ivPayMethod = findViewById(R.id.ivpay);
         ivPayMethod.setOnClickListener(view -> {
@@ -39,10 +62,9 @@ public class OrderDetailActivity extends AppCompatActivity {
             Intent intent = new Intent(OrderDetailActivity.this, PaymentMethodActivity.class);
             startActivity(intent);
         });
-        btPay.setOnClickListener(view -> {
-            XacnhanThanhtoan();
-        });
+        btPay.setOnClickListener(view -> XacnhanThanhtoan());
     }
+
 
     public void anhxa() {
         btPay = findViewById(R.id.btPay);
@@ -52,6 +74,10 @@ public class OrderDetailActivity extends AppCompatActivity {
         timeGo = findViewById(R.id.tvGioDi);
         stateGo = findViewById(R.id.tvNoiDi);
         stateEnd = findViewById(R.id.tvNoiDen);
+        edname = findViewById(R.id.edNameOrder);
+        edphone = findViewById(R.id.edPhone);
+        edcmnd = findViewById(R.id.edCCCD);
+        price = findViewById(R.id.Gia);
     }
 
     private void XacnhanThanhtoan() {
@@ -59,13 +85,37 @@ public class OrderDetailActivity extends AppCompatActivity {
         alert.setTitle("Xác nhận");
         alert.setMessage("Xác nhận thanh toán");
         alert.setPositiveButton("Có", (dialogInterface, i) -> {
+            String x = edname.getText().toString().trim();
+            String y = edphone.getText().toString().trim();
+            String z = edcmnd.getText().toString().trim();
+            sp = getSharedPreferences("MyApp", Context.MODE_PRIVATE);
+            id = Integer.parseInt(sp.getString("id",null));
             Toast.makeText(OrderDetailActivity.this, "Thanh toán thành công", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, HomeActivity.class);
+            insertOrderTicket(id);
+            updateUserInfo(x,y,z,id);
+            System.out.println(x+y+z);
             startActivity(intent);
             finish();
         });
         alert.setNegativeButton("Không", (dialogInterface, i) -> {
         });
         alert.show();
+    }
+
+    public void insertOrderTicket(int id) {
+        DBHelper db = new DBHelper(this);
+        SQLiteDatabase MyDB = db.getWritableDatabase();
+        MyDB.execSQL("INSERT INTO orderTick (user_id, tickID) " +
+                "VALUES((SELECT user_id FROM user WHERE user_id = ?)," +
+                " (SELECT tickID FROM ticketGO WHERE tickID = ?))", new Object[]{id, "1"});
+    }
+
+    public void updateUserInfo(String name, String phone, String cmnd, int id){
+        DBHelper db = new DBHelper(this);
+        SQLiteDatabase MyDB = db.getWritableDatabase();
+        MyDB.execSQL("UPDATE user " +
+                "SET name =?, phone =?, cmnd =?" +
+                "WHERE user_id = ?", new Object[]{name, phone, cmnd, id});
     }
 }

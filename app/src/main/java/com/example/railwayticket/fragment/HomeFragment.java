@@ -30,6 +30,7 @@ public class HomeFragment extends Fragment {
     Button btSearchC;
     ArrayList<String> ticketEnd;
     ArrayList<String> ticketGo;
+    Intent i;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,6 +43,9 @@ public class HomeFragment extends Fragment {
         btSearchC.setOnClickListener(view -> {
             String txtGO = snGO.getSelectedItem().toString();
             String txtEnd = snEND.getSelectedItem().toString();
+            String txtDateGo = tvdateGO.getText().toString();
+            String txtDateEnd = tvdateEnd.getText().toString();
+            System.out.println(txtDateGo);
             if (txtGO.equals(txtEnd)) {
                 Toast.makeText(getContext(), "Nơi đi và nơi đến không được trùng!", Toast.LENGTH_SHORT).show();
             } else if (tvdateGO.getText().toString().equals("Ngày đi")) {
@@ -49,10 +53,12 @@ public class HomeFragment extends Fragment {
             } else if (tvdateEnd.getText().toString().equals("Ngày về")) {
                 Toast.makeText(getContext(), "Vui lòng chọn ngày về", Toast.LENGTH_LONG).show();
             } else {
-                Intent intent = new Intent(getContext(), ChonTauDiActivity.class);
-                intent.putExtra("stateG", txtGO);
-                intent.putExtra("stateE", txtEnd);
-                startActivity(intent);
+                i = new Intent(getContext(), ChonTauDiActivity.class);
+                i.putExtra("stateG", txtGO);
+                i.putExtra("stateE", txtEnd);
+                i.putExtra("dateGo", txtDateGo);
+                i.putExtra("dateEnd", txtDateEnd);
+                startActivity(i);
             }
         });
         spinnerGO();
@@ -62,24 +68,24 @@ public class HomeFragment extends Fragment {
     }
 
     private void spinnerEnd() {
-        ticketEnd = getAllTicketGO(getContext());
+        ticketEnd = getAllState(getContext());
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getActivity(), R.layout.my_spinner, ticketEnd);
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         snEND.setAdapter(adapter);
     }
 
     private void spinnerGO() {
-        ticketGo = getAllTicketGO(getContext());
+        ticketGo = getAllState(getContext());
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getActivity(), R.layout.my_spinner, ticketGo);
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         snGO.setAdapter(adapter);
     }
 
-    public ArrayList<String> getAllTicketGO(Context context) {
+    public ArrayList<String> getAllState(Context context) {
         ArrayList<String> lstTicket = new ArrayList<>();
         DBHelper db = new DBHelper(context);
         SQLiteDatabase sqlite = db.getReadableDatabase();
-        Cursor cursor = sqlite.rawQuery("select * from state ", null);
+        Cursor cursor = sqlite.rawQuery("select * from state group by stateGO", null);
         cursor.moveToFirst();
         if (cursor.getCount() == 0) {
             Toast.makeText(context, "Không có dữ liệu", Toast.LENGTH_LONG).show();
@@ -95,7 +101,6 @@ public class HomeFragment extends Fragment {
         db.closeDB();
         return lstTicket;
     }
-
 
     Calendar cal = Calendar.getInstance();
     final int ngay = cal.get(Calendar.DATE);
@@ -116,7 +121,7 @@ public class HomeFragment extends Fragment {
     private void DateGoPicker() {
         DatePickerDialog dialog = new DatePickerDialog(getContext(), (datePicker, i, i1, i2) -> {
             i1 = i1 + 1;
-            String date = i2 + "/" + i1 + "/" + i;
+            String date = i2 + "/" +i1 + "/" + i;
             tvdateGO.setText(date);
         }, nam, thang, ngay);
         dialog.show();

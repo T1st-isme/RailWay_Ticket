@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,44 +18,50 @@ import com.example.railwayticket.model.ticketGO;
 
 import java.util.ArrayList;
 
-public class ChonTauDiActivity extends AppCompatActivity {
+public class ChonTauDiActivity extends AppCompatActivity implements ticketGOAdapter.tickCallback {
     Button btnnext;
-    TextView test1;
     RecyclerView rcvTicket;
     ArrayList<ticketGO> lstTicket;
     ticketGOAdapter adapter;
     Intent i;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chon_tau_di);
-        btnnext = findViewById(R.id.btnext);
         rcvTicket = findViewById(R.id.rcvTaudi);
         String x =  getIntent().getStringExtra("stateG");
         String y =  getIntent().getStringExtra("stateE");
-        System.out.println(x);
-        System.out.println(y);
-
-        lstTicket = DBHelper.getAllTicketGO(this, x, y);
-        adapter = new ticketGOAdapter(lstTicket);
+        String z = getIntent().getStringExtra("dateGo");
+        ticketGO t = new ticketGO("0",x,y,z,"", "");
+        lstTicket = DBHelper.getAllTicketGO(this, t);
+        adapter = new ticketGOAdapter(lstTicket,this);
         LinearLayoutManager lm = new LinearLayoutManager(this);
         rcvTicket.setLayoutManager(lm);
         rcvTicket.setAdapter(adapter);
-        i = new Intent(ChonTauDiActivity.this, SeatActivity.class);
+
+//        //button de bam
+//        btnnext.setOnClickListener(v -> {
+//                    //tao duong dan toi Activity moi
+//                    startActivity(i);
+//                }
+//        );
+    }
+    @Override
+    public void onItemClick(String id, String gia) {
+        String x =  getIntent().getStringExtra("stateG");
+        String y =  getIntent().getStringExtra("stateE");
+        String z = getIntent().getStringExtra("dateGo");
+        i =  new Intent(ChonTauDiActivity.this, SeatActivity.class);
+        i.putExtra("tickID", id);
         i.putExtra("NoiDi", x);
         i.putExtra("NoiDen", y);
-
-
-        //button de bam
-        btnnext.setOnClickListener(v -> {
-                    //tao duong dan toi Activity moi
-                    startActivity(i);
-                }
-        );
-
+        i.putExtra("NgayDi", z);
+        i.putExtra("gia", String.valueOf(gia));
+        System.out.println(gia);
+        startActivity(i);
     }
-
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -66,6 +71,7 @@ public class ChonTauDiActivity extends AppCompatActivity {
         }
         return true;
     }
+
 
 }
 

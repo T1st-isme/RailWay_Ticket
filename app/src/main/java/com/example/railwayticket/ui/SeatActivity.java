@@ -237,10 +237,17 @@ public class SeatActivity extends AppCompatActivity implements View.OnClickListe
                 view.setBackgroundResource(R.drawable.ic_seats_selected);
                 String x =  getIntent().getStringExtra("NoiDi");
                 String y =  getIntent().getStringExtra("NoiDen");
+                String p = getIntent().getStringExtra("gia");
+                String id = getIntent().getStringExtra("tickID");
+                String dGO = getIntent().getStringExtra("NgayDi");
                 i = new Intent(this, OrderDetailActivity.class);
                 i.putExtra("ghe", String.valueOf(view.getId()));
                 i.putExtra("DiemDi", String.valueOf(x));
                 i.putExtra("DiemDen", String.valueOf(y));
+                i.putExtra("gia", String.valueOf(p));
+                i.putExtra("tickID", String.valueOf(id));
+                i.putExtra("NgayDi", String.valueOf(dGO));
+                System.out.println(p);
             }
         } else if ((int) view.getTag() == STATUS_BOOKED) {
             Toast.makeText(this, "Seat " + view.getId() + " is Booked", Toast.LENGTH_SHORT).show();

@@ -61,7 +61,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void Login() {
         DBHelper DB = new DBHelper(this);
-
         String name = edUsername.getText().toString().trim();
         String password = edPassword.getText().toString().trim();
         User user = DB.checkUserPass(name, password);
@@ -73,7 +72,10 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             if (user != null) {
                 Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                DBHelper.getAllUsers(this);
+                int id = user.getId();
                 sp = getSharedPreferences("MyApp", MODE_PRIVATE);
+                editor.putString("id", String.valueOf(id));
                 editor.putString("username", name);
                 editor.putString("password", password);
                 editor.putBoolean("IsLoggedin", true);

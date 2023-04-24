@@ -54,7 +54,8 @@ public class DBHelper extends SQLiteOpenHelper {
             copyDatabase();
         }// end if else dbExist
     }
-    public boolean checkDataBase(){
+
+    public boolean checkDataBase() {
         File databaseFile = new File(DB_PATH + DB_NAME);
         return databaseFile.exists();
     }
@@ -280,17 +281,27 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
-    public static ArrayList<ticketGO> getAllTicketGO(Context context, String x, String y) {
+    public static ArrayList<ticketGO> getAllTicketGO(Context context, ticketGO ticket) {
         ArrayList<ticketGO> lstTicket = new ArrayList<>();
-        DBHelper db = new DBHelper(context); db.openDB();
+        DBHelper db = new DBHelper(context);
+        db.openDB();
         SQLiteDatabase sqlite = db.getReadableDatabase();
-        Cursor cursor = sqlite.rawQuery("select stateGO, stateEnd from state where stateGO =? and stateEnd =? ", new String[]{String.valueOf(x), String.valueOf(y)});
+        Cursor cursor = sqlite.rawQuery("select tickID, stateGO, stateEnd , dateGO, dateEnd, price " +
+                        "from state, ticketGO " +
+                        "where stateGO =? and stateEnd =? and dateGO =? order by tickID"
+                            , new String[]{String.valueOf(ticket.getStateGO()),
+                                            String.valueOf(ticket.getStateEnd()),
+                                            String.valueOf(ticket.getDateGo())});
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
 //            int id = cursor.getInt(0);
-            String stateG = cursor.getString(0);
-            String stateE = cursor.getString(1);
-            lstTicket.add(new ticketGO(stateG, stateE));
+            String id = cursor.getString(0);
+            String stateG = cursor.getString(1);
+            String stateE = cursor.getString(2);
+            String dateGo = cursor.getString(3);
+            String dateEnd = cursor.getString(4);
+            String price = cursor.getString(5);
+            lstTicket.add(new ticketGO(id,stateG, stateE, dateGo, dateEnd, price));
             cursor.moveToNext();
         }
         cursor.close();

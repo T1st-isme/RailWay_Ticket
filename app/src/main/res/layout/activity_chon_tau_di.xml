@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center"
-            android:paddingTop="10sp"
+            android:textStyle="bold"
             android:text="Chọn tàu đi"
             android:textColor="#fff"
             android:textSize="20sp"
@@ -35,14 +35,6 @@
         app:layout_constraintLeft_toLeftOf="parent">
     </androidx.recyclerview.widget.RecyclerView>
 
-    <Button
-        android:id="@+id/btnext"
-        android:layout_width="370dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:backgroundTint="@color/purple"
-        android:text="Tiếp tục"
-        app:cornerRadius="20dp"
-        tools:ignore="HardcodedText" />
+
 
 </LinearLayout>
