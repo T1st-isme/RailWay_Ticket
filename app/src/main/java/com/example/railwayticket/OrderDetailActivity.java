@@ -17,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class OrderDetailActivity extends AppCompatActivity {
 
-    TextView tvpayMethod, Ghe, trainID, ngayDi, timeGo, stateGo, stateEnd, price;
+    TextView tvpayMethod, Ghe, trainID, ngayDi, timeGo, stateGo, stateEnd, price, tongtien;
     EditText edname, edcmnd, edphone;
     Button btPay;
     ImageView ivPayMethod;
@@ -51,6 +51,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         price.setText(gia);
         trainID.setText(trainid);
         ngayDi.setText(dateGo);
+        tongtien.setText(gia);
         System.out.println(ghe + di + den + gia);
         tvpayMethod = findViewById(R.id.tvpay);
         ivPayMethod = findViewById(R.id.ivpay);
@@ -78,6 +79,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         edphone = findViewById(R.id.edPhone);
         edcmnd = findViewById(R.id.edCCCD);
         price = findViewById(R.id.Gia);
+        tongtien = findViewById(R.id.TongTien);
     }
 
     private void XacnhanThanhtoan() {
@@ -92,8 +94,8 @@ public class OrderDetailActivity extends AppCompatActivity {
             id = Integer.parseInt(sp.getString("id",null));
             Toast.makeText(OrderDetailActivity.this, "Thanh toán thành công", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, HomeActivity.class);
-            insertOrderTicket(id);
-            updateUserInfo(x,y,z,id);
+            insertOrderTicket(id, trainID.getText().toString());
+            InsertUserInfo(id,x,y,z);
             System.out.println(x+y+z);
             startActivity(intent);
             finish();
@@ -103,19 +105,17 @@ public class OrderDetailActivity extends AppCompatActivity {
         alert.show();
     }
 
-    public void insertOrderTicket(int id) {
+    public void insertOrderTicket(int id, String tickId) {
         DBHelper db = new DBHelper(this);
         SQLiteDatabase MyDB = db.getWritableDatabase();
         MyDB.execSQL("INSERT INTO orderTick (user_id, tickID) " +
                 "VALUES((SELECT user_id FROM user WHERE user_id = ?)," +
-                " (SELECT tickID FROM ticketGO WHERE tickID = ?))", new Object[]{id, "1"});
+                " (SELECT tickID FROM ticketGO WHERE tickID = ?))", new Object[]{id, tickId});
     }
-
-    public void updateUserInfo(String name, String phone, String cmnd, int id){
+    public void InsertUserInfo(int id,String name, String phone, String cmnd){
         DBHelper db = new DBHelper(this);
         SQLiteDatabase MyDB = db.getWritableDatabase();
-        MyDB.execSQL("UPDATE user " +
-                "SET name =?, phone =?, cmnd =?" +
-                "WHERE user_id = ?", new Object[]{name, phone, cmnd, id});
+        MyDB.execSQL("INSERT INTO customer (user_id, name, phone, cmnd)" +
+                    "VALUES ((SELECT user_id FROM user WHERE user_id = ?),?,?,?)", new Object[]{id,name, phone, cmnd});
     }
 }
