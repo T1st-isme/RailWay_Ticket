@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/haveDta"
     tools:context=".fragment.TicketManageFragment"
     android:orientation="vertical">
 
@@ -32,10 +33,26 @@
             tools:ignore="HardcodedText" />
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/lvallTicket"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvMticket"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/NoDta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+        <TextView
+            android:layout_marginTop="100dp"
+            android:id="@+id/NoData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Không có vé"
+            android:textSize="25sp"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
 
 
 </LinearLayout>

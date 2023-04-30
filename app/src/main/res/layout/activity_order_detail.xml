@@ -367,6 +367,7 @@
         tools:ignore="HardcodedText" />
 
     <TextView
+        android:id="@+id/TongTien"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="990.000đ"

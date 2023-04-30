@@ -1,36 +1,82 @@
 package com.example.railwayticket.fragment;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.railwayticket.DBHelper;
 import com.example.railwayticket.R;
+import com.example.railwayticket.adapter.ticketMAdapter;
+import com.example.railwayticket.model.User;
+import com.example.railwayticket.model.ticketGO;
+import com.example.railwayticket.ui.DetailTicketActivity;
 
 import java.util.ArrayList;
 
-public class TicketManageFragment extends Fragment {
-    ListView lvTicket;
-    ArrayList<String> arr;
-    ArrayAdapter adapter;
+public class TicketManageFragment extends Fragment implements ticketMAdapter.tickMCallback {
+    LinearLayout lnDta, lnNDta;
+    RecyclerView rcvTicket;
+    ArrayList<ticketGO> lstTicket;
+    ticketMAdapter adapter;
+    private int userID = 0;
+    SharedPreferences sp;
+    String TAG =  "ABC";
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_ticket_manage, container, false);
-        lvTicket = (ListView) v.findViewById(R.id.lvallTicket);
-        arr = new ArrayList<>();
-        arr.add("Mã vé: ABC");
-        arr.add("Mã vé: XYZ");
-        arr.add("Mã vé: GHA");
-        arr.add("Mã vé: ADM");
-        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, arr);
-        lvTicket.setAdapter(adapter);
+        rcvTicket = v.findViewById(R.id.rcvMticket);
+        lnDta = v.findViewById(R.id.haveDta);
+        lnNDta = v.findViewById(R.id.NoDta);
+        lnNDta.setVisibility(View.GONE);
+        lnNDta.setVisibility(View.GONE);
+
+//        ticketGO t = new ticketGO(0, "", "", "", "", "", "", "", "");
+        sp = requireActivity().getSharedPreferences("MyApp", Context.MODE_PRIVATE);
+
+        System.out.println(userID);
+        try{
+            userID = Integer.parseInt(sp.getString("id", null));
+        }catch (Exception e){
+            Log.e(TAG,"userID = 0");
+        }
+        if (userID == 0){
+            Toast.makeText(getContext(), "Bạn chưa có vé nào. Vui lòng đặt vé",Toast.LENGTH_SHORT).show();
+            lnNDta.setVisibility(View.VISIBLE);
+        }else {
+            lnNDta.setVisibility(View.GONE);
+            lnDta.setVisibility(View.VISIBLE);
+            User user = new User(userID, "", "", "");
+            lstTicket = DBHelper.getAllTicketM(getContext(), user);
+            adapter = new ticketMAdapter(lstTicket);
+            adapter.setTickMCallback(this);
+            LinearLayoutManager lm = new LinearLayoutManager(getContext());
+            rcvTicket.setAdapter(adapter);
+            rcvTicket.setLayoutManager(lm);
+        }
         // Inflate the layout for this fragment
         return v;
     }
+
+    @Override
+    public void onItemClick(ticketGO t) {
+        Intent i = new Intent(getActivity(), DetailTicketActivity.class);
+        i.putExtra("tickID", t.tickID);
+        System.out.println(t.tickID);
+        startActivity(i);
+    }
+
 }

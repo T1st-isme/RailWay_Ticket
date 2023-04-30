@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -39,15 +38,16 @@ public class ticketGOAdapter extends RecyclerView.Adapter<ticketGOAdapter.ticket
     @Override
     public void onBindViewHolder(@NonNull ticketGOViewHolder holder, int position) {
         ticketGO item = lstTicket.get(position);
+        holder.trainid.getId();
         holder.trainid.setText(String.valueOf(item.getTickID()));
-//        holder.timego.setText(item.getTimeGO());
-//        holder.timego.setText(item.getTimeEnd());
+        holder.timego.setText(item.getTimeGO());
+        holder.timeend.setText(item.getTimeEnd());
         holder.dateGo.setText(item.getDateGo());
         holder.dateEnd.setText(item.getDateEnd());
         holder.statego.setText(String.valueOf(item.getStateGO()));
         holder.stateend.setText(String.valueOf(item.getStateEnd()));
         holder.price.setText(String.valueOf(item.getPrice()));
-        holder.itemView.setOnClickListener(v -> tickCallback.onItemClick(item.getTickID(), item.getPrice()));
+        holder.itemView.setOnClickListener(v -> tickCallback.onItemClick(item.getId(), item.getTickID(), item.getPrice()));
 
     }
 
@@ -57,8 +57,8 @@ public class ticketGOAdapter extends RecyclerView.Adapter<ticketGOAdapter.ticket
     }
 
     public static class ticketGOViewHolder extends RecyclerView.ViewHolder {
-        TextView trainid, timego, timeend, statego, stateend,dateGo, dateEnd, price;
-        EditText edphone,edname, edcmnd;
+        TextView trainid, timego, timeend, statego, stateend, dateGo, dateEnd, price;
+
         public ticketGOViewHolder(@NonNull View itemView) {
             super(itemView);
             trainid = itemView.findViewById(R.id.tvTrainID);
@@ -69,12 +69,10 @@ public class ticketGOAdapter extends RecyclerView.Adapter<ticketGOAdapter.ticket
             statego = itemView.findViewById(R.id.tvStateGo);
             stateend = itemView.findViewById(R.id.tvStateEnd);
             price = itemView.findViewById(R.id.tvPrice);
-            edphone = itemView.findViewById(R.id.edPhone);
-            edname = itemView.findViewById(R.id.edNameOrder);
-            edcmnd = itemView.findViewById(R.id.edCCCD);
         }
     }
-    public interface tickCallback{
-        void onItemClick(String id, String price);
+
+    public interface tickCallback {
+        void onItemClick(int id, String tckid, String price);
     }
 }

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -23,14 +24,17 @@ public class OrderDetailActivity extends AppCompatActivity {
     ImageView ivPayMethod;
     private
     int id = 0;
-    SharedPreferences sp;
+    int tckid = 0;
+    SharedPreferences sp1;
+    SharedPreferences sp2;
     SharedPreferences.Editor editor;
-    String x ="ghe";
-    String y ="DiemDi";
-    String z ="DiemDen";
+    String x = "ghe";
+    String y = "DiemDi";
+    String z = "DiemDen";
     String trainId = "tickID";
     String dGo = "NgayDi";
-    String p  = "gia";
+    String p = "gia";
+    String tckId = "id";
 
     @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
@@ -83,39 +87,39 @@ public class OrderDetailActivity extends AppCompatActivity {
     }
 
     private void XacnhanThanhtoan() {
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle("Xác nhận");
-        alert.setMessage("Xác nhận thanh toán");
-        alert.setPositiveButton("Có", (dialogInterface, i) -> {
-            String x = edname.getText().toString().trim();
-            String y = edphone.getText().toString().trim();
-            String z = edcmnd.getText().toString().trim();
-            sp = getSharedPreferences("MyApp", Context.MODE_PRIVATE);
-            id = Integer.parseInt(sp.getString("id",null));
-            Toast.makeText(OrderDetailActivity.this, "Thanh toán thành công", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, HomeActivity.class);
-            insertOrderTicket(id, trainID.getText().toString());
-            InsertUserInfo(id,x,y,z);
-            System.out.println(x+y+z);
-            startActivity(intent);
-            finish();
-        });
-        alert.setNegativeButton("Không", (dialogInterface, i) -> {
-        });
-        alert.show();
+        String x = edname.getText().toString().trim();
+        String y = edphone.getText().toString().trim();
+        String z = edcmnd.getText().toString().trim();
+        if (TextUtils.isEmpty(x) || TextUtils.isEmpty(y) || TextUtils.isEmpty(z)) {
+            Toast.makeText(this, "Vui lòng điền đẩy đủ thông tin!!!", Toast.LENGTH_SHORT).show();
+        } else {
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.setTitle("Xác nhận");
+            alert.setMessage("Xác nhận thanh toán");
+            alert.setPositiveButton("Có", (dialogInterface, i) -> {
+
+
+                sp1 = getSharedPreferences("MyApp", Context.MODE_PRIVATE);
+                id = Integer.parseInt(sp1.getString("id", null));
+                Toast.makeText(OrderDetailActivity.this, "Thanh toán thành công", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, HomeActivity.class);
+                insertOrderTicket(id, trainID.getText().toString(), Integer.parseInt(Ghe.getText().toString()), x, y, z);
+                System.out.println(x + y + z);
+                startActivity(intent);
+                finish();
+            });
+            alert.setNegativeButton("Không", (dialogInterface, i) -> {
+            });
+            alert.show();
+        }
     }
 
-    public void insertOrderTicket(int id, String tickId) {
+    public void insertOrderTicket(int id, String tickId, int seat, String name, String phone, String cmnd) {
         DBHelper db = new DBHelper(this);
         SQLiteDatabase MyDB = db.getWritableDatabase();
-        MyDB.execSQL("INSERT INTO orderTick (user_id, tickID) " +
+        MyDB.execSQL("INSERT INTO orderTick (user_id, tickID, seat, name, phone, cmnd) " +
                 "VALUES((SELECT user_id FROM user WHERE user_id = ?)," +
-                " (SELECT tickID FROM ticketGO WHERE tickID = ?))", new Object[]{id, tickId});
-    }
-    public void InsertUserInfo(int id,String name, String phone, String cmnd){
-        DBHelper db = new DBHelper(this);
-        SQLiteDatabase MyDB = db.getWritableDatabase();
-        MyDB.execSQL("INSERT INTO customer (user_id, name, phone, cmnd)" +
-                    "VALUES ((SELECT user_id FROM user WHERE user_id = ?),?,?,?)", new Object[]{id,name, phone, cmnd});
+                " (SELECT id FROM ticketGO WHERE tickID = ?)," +
+                "?,?,?,?)", new Object[]{id, tickId, seat, name, phone, cmnd});
     }
 }

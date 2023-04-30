@@ -14,7 +14,7 @@ public class Utils {
     public static final int DB_VERSION = 1 ;
     public static final String TABLE_USER = "user" ;
     public static final String TABLE_TRAIN = "train" ;
-    public static final String TABLE_TICKET = "ticket" ;
+    public static final String TABLE_TICKET = "ticketGO" ;
     public static final String COL_USER_ID = "user_id" ;
     public static final String COL_USER_NAME = "username" ;
     public static final String COL_USER_PASSWORD = "password" ;
