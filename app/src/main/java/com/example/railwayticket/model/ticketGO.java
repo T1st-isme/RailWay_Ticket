@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class ticketGO implements Serializable {
 
-    String name;
+    public String name;
 
     public String getName() {
         return name;
@@ -96,11 +96,11 @@ public class ticketGO implements Serializable {
 
     public int id;
     public String tickID;
-    String dateGo;
-    String dateEnd;
+    public String dateGo;
+    public String dateEnd;
     public String timeGO;
     public String timeEnd;
-    int seat;
+    public int seat;
     public String stateGO;
     public String stateEnd;
     public String price;
@@ -153,7 +153,7 @@ public class ticketGO implements Serializable {
         this.seat = seat;
     }
 
-    public ticketGO(int id, String tickID, String dateEnd, String dateGo, String timeGO, String timeEnd, String stateGO, String stateEnd, String price) {
+    public ticketGO(int id, String tickID, String timeGO, String timeEnd,  String stateGO, String stateEnd,String dateGo, String dateEnd,  String price) {
         this.id = id;
         this.tickID = tickID;
         this.dateEnd = dateEnd;

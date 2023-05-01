@@ -66,6 +66,9 @@ public class TicketManageFragment extends Fragment implements ticketMAdapter.tic
             LinearLayoutManager lm = new LinearLayoutManager(getContext());
             rcvTicket.setAdapter(adapter);
             rcvTicket.setLayoutManager(lm);
+            if (lstTicket.size() == 0){
+                lnNDta.setVisibility(View.VISIBLE);
+            }
         }
         // Inflate the layout for this fragment
         return v;
@@ -75,7 +78,14 @@ public class TicketManageFragment extends Fragment implements ticketMAdapter.tic
     public void onItemClick(ticketGO t) {
         Intent i = new Intent(getActivity(), DetailTicketActivity.class);
         i.putExtra("tickID", t.tickID);
-        System.out.println(t.tickID);
+        i.putExtra("ghe", t.seat);
+        i.putExtra("stateG", t.stateGO);
+        i.putExtra("stateE", t.stateEnd);
+        i.putExtra("timeGo", t.timeGO);
+        i.putExtra("DateGo", t.dateGo);
+        i.putExtra("price", t.price);
+        i.putExtra("name", t.name);
+        System.out.println("ghe:" +t.seat +"so ve: "+ t.tickID+"nơi di: "+t.stateGO+"nơi đến: "+t.stateEnd+"thời gian đi: "+t.timeGO+"ngày đi: "+t.dateGo+"giá: "+t.price + "tên: "+t.name);
         startActivity(i);
     }
 

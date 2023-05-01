@@ -17,7 +17,6 @@ import androidx.annotation.Nullable;
 
 import com.example.railwayticket.Utils.Utils;
 import com.example.railwayticket.model.User;
-import com.example.railwayticket.model.ticket;
 import com.example.railwayticket.model.ticketGO;
 
 import java.io.File;
@@ -221,20 +220,26 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     //Ticket
-    public static ArrayList<ticket> getAllTicket(Context context) {
-        ArrayList<ticket> lstTicket = new ArrayList<>();
+    public static ArrayList<ticketGO> getAllTicket(Context context) {
+        ArrayList<ticketGO> lstTicket = new ArrayList<>();
         DBHelper db = new DBHelper(context);
         db.openDB();
         SQLiteDatabase sqlite = db.getReadableDatabase();
-        Cursor cursor = sqlite.rawQuery("select * from " + Utils.TABLE_TICKET, null);
+        Cursor cursor = sqlite.rawQuery("SELECT ticketGO.id, tickID, timeGO,timeEnd,stateGO,stateEnd, dateGO,dateEnd,price " +
+                                        "from state, " + Utils.TABLE_TICKET +
+                                        " WHERE state.id = ticketGO.state ", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             int id = cursor.getInt(0);
             String tckId = cursor.getString(1);
             String timego = cursor.getString(2);
             String timeend = cursor.getString(3);
-            String price = cursor.getString(4);
-            lstTicket.add(new ticket(id, tckId, timego, timeend, price));
+            String stateGo = cursor.getString(4);
+            String stateEnd = cursor.getString(5);
+            String dateGo = cursor.getString(6);
+            String dateEnd = cursor.getString(7);
+            String price = cursor.getString(8);
+            lstTicket.add(new ticketGO(id, tckId, timego, timeend,stateGo,stateEnd,dateGo,dateEnd,price));
             cursor.moveToNext();
         }
         cursor.close();
@@ -242,14 +247,16 @@ public class DBHelper extends SQLiteOpenHelper {
         return lstTicket;
     }
 
-    public long insertTicket(ticket ticket) {
+    public long insertTicket(ticketGO ticket) {
         SQLiteDatabase MyDB = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(Utils.COL_TICKET_ID, ticket.getTicketId());
-        values.put(Utils.COL_TRAIN_TIMEGO, ticket.getTimego());
-        values.put(Utils.COL_TRAIN_TIMEEND, ticket.getTimeend());
-//        values.put(Utils.COL_TRAIN_STATEGO, ticket.getStateGo());
+        values.put(Utils.COL_TICKET_ID, ticket.getTickID());
+        values.put(Utils.COL_TRAIN_TIMEGO, ticket.getTimeGO());
+        values.put(Utils.COL_TRAIN_TIMEEND, ticket.getTimeEnd());
+//        values.put(Utils.COL_TRAIN_STATEGO, ticket.getStateGO());
 //        values.put(Utils.COL_TRAIN_STATEEND, ticket.getStateEnd());
+        values.put("dateGO", ticket.getDateGo());
+        values.put("dateEnd", ticket.getDateEnd());
         values.put(Utils.COL_TICKET_PRICE, ticket.getPrice());
         long result = MyDB.insert(TABLE_TICKET, null, values);
         if (result == -1) {
@@ -267,14 +274,16 @@ public class DBHelper extends SQLiteOpenHelper {
         return (result > 0);
     }
 
-    public static int updateTicket(Context context, ticket ticket) {
+    public static int updateTicket(Context context, ticketGO ticket) {
         DBHelper db = new DBHelper(context);
         SQLiteDatabase sqlite = db.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(Utils.COL_TICKET_ID, ticket.getTicketId());
-        values.put(Utils.COL_TRAIN_TIMEGO, ticket.getTimego());
-        values.put(Utils.COL_TRAIN_TIMEEND, ticket.getTimeend());
-        values.put(Utils.COL_TRAIN_STATEGO, ticket.getStateGo());
+        values.put(Utils.COL_TICKET_ID, ticket.getTickID());
+        values.put(Utils.COL_TRAIN_TIMEGO, ticket.getTimeGO());
+        values.put(Utils.COL_TRAIN_TIMEEND, ticket.getTimeEnd());
+        values.put("dateGO", ticket.getDateGo());
+        values.put("dateEnd", ticket.getDateEnd());
+        values.put(Utils.COL_TRAIN_STATEGO, ticket.getStateGO());
         values.put(Utils.COL_TRAIN_STATEEND, ticket.getStateEnd());
         values.put(Utils.COL_TICKET_PRICE, ticket.getPrice());
         return sqlite.update(TABLE_TICKET, values, Utils.COL_TICK_ID + " =? ", new String[]{String.valueOf(ticket.id)});
@@ -315,7 +324,7 @@ public class DBHelper extends SQLiteOpenHelper {
         ArrayList<ticketGO> lstTicket = new ArrayList<>();
         DBHelper db = new DBHelper(context);
         SQLiteDatabase sqlite = db.getReadableDatabase();
-        Cursor cursor = sqlite.rawQuery("SELECT DISTINCT ticketGO.id, ticketGO.tickID, stateGO, stateEnd, dateGO, timeGO, price, seat " +
+        Cursor cursor = sqlite.rawQuery("SELECT DISTINCT  ticketGO.tickID,stateGO, stateEnd, dateGO,dateEnd,timeGO, price, seat , name,phone,cmnd " +
                         "FROM ticketGO, orderTick, state, user " +
                         "WHERE orderTick.tickID = ticketGO.id " +
                         "and ticketGO.state = state.id " +
@@ -324,15 +333,14 @@ public class DBHelper extends SQLiteOpenHelper {
                 , new String[]{String.valueOf(u.id)});
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-//            int id = cursor.getInt(0);
-            String id = cursor.getString(1);
-            String stateG = cursor.getString(2);
-            String stateE = cursor.getString(3);
-            String dateGo = cursor.getString(4);
+            String tckid = cursor.getString(0);
+            String stateG = cursor.getString(1);
+            String stateE = cursor.getString(2);
+            String dateGo = cursor.getString(3);
             String timeGO = cursor.getString(5);
             String price = cursor.getString(6);
             int seat = cursor.getInt(7);
-            lstTicket.add(new ticketGO(id, stateG, stateE, dateGo, timeGO, price, seat));
+            lstTicket.add(new ticketGO(tckid, stateG, stateE, dateGo, timeGO, price, seat));
             cursor.moveToNext();
         }
         cursor.close();

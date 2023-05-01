@@ -10,5 +10,13 @@
        android:id="@+id/rcvDetail"
        android:layout_width="match_parent"
        android:layout_height="match_parent"/>
+   <ImageView
+       android:id="@+id/QRCode"
+       android:layout_width="300dp"
+       android:layout_height="300dp"
+       android:layout_marginTop="200dp"
+       android:background="@drawable/ic_launcher_background"
+       android:layout_gravity="center"
+       tools:ignore="ContentDescription" />
 
 </LinearLayout>

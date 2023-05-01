@@ -11,16 +11,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.railwayticket.R;
-import com.example.railwayticket.model.ticket;
+import com.example.railwayticket.model.ticketGO;
 
 import java.util.ArrayList;
 
 public class trainTicketAdapter extends RecyclerView.Adapter<trainTicketAdapter.TrainTicketViewHolder> {
     Context context;
-    ArrayList<ticket> lstTicket;
+    ArrayList<ticketGO> lstTicket;
     TrainTickCallback tickCallback;
 
-    public trainTicketAdapter(ArrayList<ticket> lstTicket) {
+    public trainTicketAdapter(ArrayList<ticketGO> lstTicket) {
         this.lstTicket = lstTicket;
     }
 
@@ -40,12 +40,14 @@ public class trainTicketAdapter extends RecyclerView.Adapter<trainTicketAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull TrainTicketViewHolder holder, int position) {
-        ticket item = lstTicket.get(position);
-        holder.trainid.setText(item.getTrainID());
-        holder.timego.setText(item.getTimego());
-        holder.timeend.setText(item.getTimeend());
-//        holder.statego.setText(item.getStateGo());
-//        holder.stateend.setText(item.getStateEnd());
+        ticketGO item = lstTicket.get(position);
+        holder.trainid.setText(item.getTickID());
+        holder.timego.setText(item.getTimeGO());
+        holder.timeend.setText(item.getTimeEnd());
+        holder.dateGo.setText(item.getDateGo());
+        holder.dateEnd.setText(item.getDateEnd());
+        holder.statego.setText(item.getStateGO());
+        holder.stateend.setText(item.getStateEnd());
         holder.price.setText(item.getPrice());
         holder.delete.setOnClickListener(v -> tickCallback.onItemDeleteClicked(item, position));
         holder.update.setOnClickListener(v -> tickCallback.onItemEditClicked(item, position));
@@ -58,7 +60,7 @@ public class trainTicketAdapter extends RecyclerView.Adapter<trainTicketAdapter.
 
 
     static class TrainTicketViewHolder extends RecyclerView.ViewHolder {
-        TextView trainid, timego, timeend, statego, stateend, price;
+        TextView trainid, timego, timeend, dateGo,dateEnd,statego, stateend, price;
         ImageView delete, update;
 
         public TrainTicketViewHolder(@NonNull View itemView) {
@@ -66,6 +68,8 @@ public class trainTicketAdapter extends RecyclerView.Adapter<trainTicketAdapter.
             trainid = itemView.findViewById(R.id.tvTicketID);
             timego = itemView.findViewById(R.id.tvTimeGo);
             timeend = itemView.findViewById(R.id.tvTimeEnd);
+            dateGo = itemView.findViewById(R.id.tvDateGo);
+            dateEnd = itemView.findViewById(R.id.tvDateEnd);
             statego = itemView.findViewById(R.id.tvStateGo);
             stateend = itemView.findViewById(R.id.tvStateEnd);
             price = itemView.findViewById(R.id.tvPrice);
@@ -75,8 +79,9 @@ public class trainTicketAdapter extends RecyclerView.Adapter<trainTicketAdapter.
     }
 
     public interface TrainTickCallback {
-        void onItemDeleteClicked(ticket ticket, int position);
+        void onItemDeleteClicked(ticketGO ticket, int position);
 
-        void onItemEditClicked(ticket ticket, int position);
+        void onItemEditClicked(ticketGO ticket, int position);
+
     }
 }

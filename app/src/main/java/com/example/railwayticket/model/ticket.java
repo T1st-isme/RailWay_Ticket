@@ -26,14 +26,13 @@ public class ticket {
         this.price = price;
     }
 
-    public ticket(int id, String tckId, String timego, String timeend, String price) {
-        this.id = id;
-        this.TicketId = tckId;
-        this.timego = timego;
-        this.timeend = timeend;
-        this.price = price;
-
-    }
+//    public ticket(int id, String tckId, String timego, String timeend, String price) {
+//        this.id = id;
+//        this.TicketId = tckId;
+//        this.timego = timego;
+//        this.timeend = timeend;
+//        this.price = price;
+//    }
 
     public int getId() {
         return id;

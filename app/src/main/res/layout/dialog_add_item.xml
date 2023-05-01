@@ -11,8 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Nhập mã vé"
-        tools:ignore="Autofill,HardcodedText,TextFields"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        tools:ignore="Autofill,HardcodedText,TextFields" />
+
     <EditText
         android:id="@+id/edTimego"
         android:layout_width="match_parent"
@@ -21,6 +22,7 @@
         android:inputType="datetime"
         android:textSize="20sp"
         tools:ignore="Autofill,HardcodedText,TextFields" />
+
     <EditText
         android:id="@+id/edTimeend"
         android:layout_width="match_parent"
@@ -29,6 +31,25 @@
         android:inputType="datetime"
         android:textSize="20sp"
         tools:ignore="Autofill,HardcodedText,TextFields" />
+
+    <EditText
+        android:id="@+id/eddatego"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nhập ngày đi"
+        android:inputType="datetime"
+        android:textSize="20sp"
+        tools:ignore="Autofill,HardcodedText,TextFields" />
+
+    <EditText
+        android:id="@+id/eddateend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nhập ngày đến"
+        android:inputType="datetime"
+        android:textSize="20sp"
+        tools:ignore="Autofill,HardcodedText,TextFields" />
+
     <EditText
         android:id="@+id/edNoiden"
         android:layout_width="match_parent"
@@ -36,6 +57,7 @@
         android:hint="Nhập nơi đến"
         android:textSize="20sp"
         tools:ignore="Autofill,HardcodedText,TextFields" />
+
     <EditText
         android:id="@+id/edNoidi"
         android:layout_width="match_parent"
@@ -43,12 +65,13 @@
         android:hint="Nhập nơi đi"
         android:textSize="20sp"
         tools:ignore="Autofill,HardcodedText,TextFields" />
+
     <EditText
         android:id="@+id/edPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="number"
         android:hint="Nhập giá"
+        android:inputType="number"
         android:textSize="20sp"
         tools:ignore="Autofill,HardcodedText,TextFields" />
 

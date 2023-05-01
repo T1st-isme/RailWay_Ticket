@@ -21,11 +21,11 @@ public class Utils {
     public static final String COL_TRAIN_ID = "train_id";
 
     public static final String COL_TICK_ID = "id";
-    public static final String COL_TICKET_ID = "ticket_id";
-    public static final String COL_TRAIN_TIMEGO = "train_time_go";
-    public static final String COL_TRAIN_TIMEEND = "train_time_end";
-    public static final String COL_TRAIN_STATEGO = "train_state_go";
-    public static final String COL_TRAIN_STATEEND = "train_state_end";
+    public static final String COL_TICKET_ID = "tickID";
+    public static final String COL_TRAIN_TIMEGO = "timeGO";
+    public static final String COL_TRAIN_TIMEEND = "timeEnd";
+    public static final String COL_TRAIN_STATEGO = "stateGO";
+    public static final String COL_TRAIN_STATEEND = "stateEnd";
     public static final String COL_TICKET_PRICE = "price";
 
     public static final String COL_USER_AVATAR = "avatar";

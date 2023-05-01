@@ -53,7 +53,11 @@ public class ticketMAdapter extends RecyclerView.Adapter<ticketMAdapter.ticketMV
 
     @Override
     public int getItemCount() {
-        return lstTicket.size();
+        if (lstTicket == null){
+            return 0;
+        }else {
+            return lstTicket.size();
+        }
     }
 
     public static class ticketMViewHolder extends RecyclerView.ViewHolder {

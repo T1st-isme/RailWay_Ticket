@@ -35,7 +35,7 @@ public class ChonTauDiActivity extends AppCompatActivity implements ticketGOAdap
         String x = getIntent().getStringExtra("stateG");
         String y = getIntent().getStringExtra("stateE");
         String z = getIntent().getStringExtra("dateGo");
-        ticketGO t = new ticketGO(0, "", "", z, "", "", x, y, "");
+        ticketGO t = new ticketGO(0, "", "", "", x, y, z, "", "");
         lstTicket = DBHelper.getAllTicketGO(this, t);
         adapter = new ticketGOAdapter(lstTicket, this);
         LinearLayoutManager lm = new LinearLayoutManager(this);
