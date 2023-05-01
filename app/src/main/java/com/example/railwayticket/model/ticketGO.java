@@ -6,6 +6,7 @@ public class ticketGO implements Serializable {
 
     public String name;
 
+
     public String getName() {
         return name;
     }

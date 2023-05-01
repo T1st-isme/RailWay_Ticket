@@ -225,9 +225,8 @@ public class DBHelper extends SQLiteOpenHelper {
         DBHelper db = new DBHelper(context);
         db.openDB();
         SQLiteDatabase sqlite = db.getReadableDatabase();
-        Cursor cursor = sqlite.rawQuery("SELECT ticketGO.id, tickID, timeGO,timeEnd,stateGO,stateEnd, dateGO,dateEnd,price " +
-                                        "from state, " + Utils.TABLE_TICKET +
-                                        " WHERE state.id = ticketGO.state ", null);
+        Cursor cursor = sqlite.rawQuery("SELECT * " +
+                                        "from " + Utils.TABLE_TICKET , null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             int id = cursor.getInt(0);
@@ -253,8 +252,8 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(Utils.COL_TICKET_ID, ticket.getTickID());
         values.put(Utils.COL_TRAIN_TIMEGO, ticket.getTimeGO());
         values.put(Utils.COL_TRAIN_TIMEEND, ticket.getTimeEnd());
-//        values.put(Utils.COL_TRAIN_STATEGO, ticket.getStateGO());
-//        values.put(Utils.COL_TRAIN_STATEEND, ticket.getStateEnd());
+        values.put(Utils.COL_TRAIN_STATEGO, ticket.getStateGO());
+        values.put(Utils.COL_TRAIN_STATEEND, ticket.getStateEnd());
         values.put("dateGO", ticket.getDateGo());
         values.put("dateEnd", ticket.getDateEnd());
         values.put(Utils.COL_TICKET_PRICE, ticket.getPrice());
@@ -296,7 +295,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.openDB();
         SQLiteDatabase sqlite = db.getReadableDatabase();
         Cursor cursor = sqlite.rawQuery("select ticketGO.id,tickID, stateGO, stateEnd , dateGO, dateEnd,timeGO,timeEnd,price " +
-                        "from state, ticketGO " +
+                        "from ticketGO " +
                         "where stateGO =? and stateEnd =? and dateGO =? order by tickID"
                 , new String[]{String.valueOf(ticket.getStateGO()),
                         String.valueOf(ticket.getStateEnd()),
@@ -325,9 +324,8 @@ public class DBHelper extends SQLiteOpenHelper {
         DBHelper db = new DBHelper(context);
         SQLiteDatabase sqlite = db.getReadableDatabase();
         Cursor cursor = sqlite.rawQuery("SELECT DISTINCT  ticketGO.tickID,stateGO, stateEnd, dateGO,dateEnd,timeGO, price, seat , name,phone,cmnd " +
-                        "FROM ticketGO, orderTick, state, user " +
+                        "FROM ticketGO, orderTick, user " +
                         "WHERE orderTick.tickID = ticketGO.id " +
-                        "and ticketGO.state = state.id " +
                         "and user.user_id = orderTick.user_id " +
                         "and orderTick.user_id = ? "
                 , new String[]{String.valueOf(u.id)});
@@ -353,9 +351,8 @@ public class DBHelper extends SQLiteOpenHelper {
         DBHelper db = new DBHelper(context);
         SQLiteDatabase sqlite = db.getReadableDatabase();
         Cursor cursor = sqlite.rawQuery("SELECT DISTINCT ticketGO.id, ticketGO.tickID, name, phone, stateGO, stateEnd, dateGO,dateEnd, timeGO, price, seat " +
-                        "FROM ticketGO, orderTick, state, user " +
+                        "FROM ticketGO, orderTick, user " +
                         "WHERE orderTick.tickID = ticketGO.id  " +
-                        "and ticketGO.state = state.id " +
                         "and ticketGO.tickID = ? " +
                         "and orderTick.user_id = ? " +
                         "GROUP by orderTick.tickID "

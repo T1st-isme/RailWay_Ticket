@@ -45,9 +45,14 @@ public class DetailTicketActivity extends AppCompatActivity {
         }
         rcvDetails = findViewById(R.id.rcvDetail);
         String tickID = getIntent().getStringExtra("tickID");
-        ticketGO t = new ticketGO(0, tickID, "", "", "", "", "", "", "", "", 0);
+        String stateG = getIntent().getStringExtra("stateG");
+        String stateE = getIntent().getStringExtra("stateE");
+        String timeGo = getIntent().getStringExtra("timeGo");
+        String DateGo = getIntent().getStringExtra("DateGo");
+        int ghe = getIntent().getIntExtra("ghe",0);
+        String price = getIntent().getStringExtra("price");
+        ticketGO t = new ticketGO(0, tickID, "", "", stateG, stateE, DateGo, "", timeGo, price, ghe);
         User user = new User(userID, "", "", "");
-
         lstDetails = DBHelper.getDetailTicket(this, user, t);
         adapter = new DetailAdapter(lstDetails);
         LinearLayoutManager lm = new LinearLayoutManager(this);
@@ -55,10 +60,14 @@ public class DetailTicketActivity extends AppCompatActivity {
         rcvDetails.setLayoutManager(lm);
 
 
-
         MultiFormatWriter writer = new MultiFormatWriter();
         try {
-            BitMatrix matrix = writer.encode(t.tickID, BarcodeFormat.QR_CODE, 250,250);
+            BitMatrix matrix = writer.encode("Ticket ID: " +tickID + "\n" +
+                                                        "Trip: " +stateG  + " - " +stateE + "\n" +
+                                                        "Time: " +timeGo + "\n" +
+                                                        "Day: "+DateGo + "\n" +
+                                                        "Seat ID: "+ghe + "\n" +
+                                                        "Price: "+price, BarcodeFormat.QR_CODE, 250,250);
             BarcodeEncoder encoder = new BarcodeEncoder();
             Bitmap bitmap = encoder.createBitmap(matrix);
             qrImage.setImageBitmap(bitmap);

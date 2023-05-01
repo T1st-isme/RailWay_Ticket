@@ -8,20 +8,23 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.Objects;
+
 public class OrderDetailActivity extends AppCompatActivity {
 
-    TextView tvpayMethod, Ghe, trainID, ngayDi, timeGo, stateGo, stateEnd, price, tongtien;
-    EditText edname, edcmnd, edphone;
+    TextView Ghe, trainID, ngayDi, timeGo, stateGo, stateEnd, price, tongtien;
+    TextInputEditText edname, edcmnd, edphone;
     Button btPay;
-    ImageView ivPayMethod;
+    LinearLayout pay;
     private
     int id = 0;
     int tckid = 0;
@@ -57,13 +60,8 @@ public class OrderDetailActivity extends AppCompatActivity {
         ngayDi.setText(dateGo);
         tongtien.setText(gia);
         System.out.println(ghe + di + den + gia);
-        tvpayMethod = findViewById(R.id.tvpay);
-        ivPayMethod = findViewById(R.id.ivpay);
-        ivPayMethod.setOnClickListener(view -> {
-            Intent intent = new Intent(OrderDetailActivity.this, PaymentMethodActivity.class);
-            startActivity(intent);
-        });
-        tvpayMethod.setOnClickListener(view -> {
+        pay = findViewById(R.id.payment);
+        pay.setOnClickListener(view -> {
             Intent intent = new Intent(OrderDetailActivity.this, PaymentMethodActivity.class);
             startActivity(intent);
         });
@@ -87,9 +85,9 @@ public class OrderDetailActivity extends AppCompatActivity {
     }
 
     private void XacnhanThanhtoan() {
-        String x = edname.getText().toString().trim();
-        String y = edphone.getText().toString().trim();
-        String z = edcmnd.getText().toString().trim();
+        String x = Objects.requireNonNull(edname.getText()).toString().trim();
+        String y = Objects.requireNonNull(edphone.getText()).toString().trim();
+        String z = Objects.requireNonNull(edcmnd.getText()).toString().trim();
         if (TextUtils.isEmpty(x) || TextUtils.isEmpty(y) || TextUtils.isEmpty(z)) {
             Toast.makeText(this, "Vui lòng điền đẩy đủ thông tin!!!", Toast.LENGTH_SHORT).show();
         } else {
@@ -97,7 +95,6 @@ public class OrderDetailActivity extends AppCompatActivity {
             alert.setTitle("Xác nhận");
             alert.setMessage("Xác nhận thanh toán");
             alert.setPositiveButton("Có", (dialogInterface, i) -> {
-
 
                 sp1 = getSharedPreferences("MyApp", Context.MODE_PRIVATE);
                 id = Integer.parseInt(sp1.getString("id", null));
