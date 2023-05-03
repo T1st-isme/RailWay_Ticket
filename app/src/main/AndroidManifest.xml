@@ -21,7 +21,7 @@
             android:name=".ui.crudPasActivity"
             android:exported="true"/>
         <activity
-            android:name=".ui.crudTrainActivity"
+            android:name=".ui.ManageOrderActivity"
             android:exported="false" />
         <activity
             android:name=".ui.AdminActivity"

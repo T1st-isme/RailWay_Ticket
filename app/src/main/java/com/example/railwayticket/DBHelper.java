@@ -226,7 +226,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.openDB();
         SQLiteDatabase sqlite = db.getReadableDatabase();
         Cursor cursor = sqlite.rawQuery("SELECT * " +
-                                        "from " + Utils.TABLE_TICKET , null);
+                "from " + Utils.TABLE_TICKET, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             int id = cursor.getInt(0);
@@ -238,7 +238,7 @@ public class DBHelper extends SQLiteOpenHelper {
             String dateGo = cursor.getString(6);
             String dateEnd = cursor.getString(7);
             String price = cursor.getString(8);
-            lstTicket.add(new ticketGO(id, tckId, timego, timeend,stateGo,stateEnd,dateGo,dateEnd,price));
+            lstTicket.add(new ticketGO(id, tckId, timego, timeend, stateGo, stateEnd, dateGo, dateEnd, price));
             cursor.moveToNext();
         }
         cursor.close();
@@ -324,9 +324,8 @@ public class DBHelper extends SQLiteOpenHelper {
         DBHelper db = new DBHelper(context);
         SQLiteDatabase sqlite = db.getReadableDatabase();
         Cursor cursor = sqlite.rawQuery("SELECT DISTINCT  ticketGO.tickID,stateGO, stateEnd, dateGO,dateEnd,timeGO, price, seat , name,phone,cmnd " +
-                        "FROM ticketGO, orderTick, user " +
+                        "FROM ticketGO, orderTick " +
                         "WHERE orderTick.tickID = ticketGO.id " +
-                        "and user.user_id = orderTick.user_id " +
                         "and orderTick.user_id = ? "
                 , new String[]{String.valueOf(u.id)});
         cursor.moveToFirst();
@@ -335,10 +334,14 @@ public class DBHelper extends SQLiteOpenHelper {
             String stateG = cursor.getString(1);
             String stateE = cursor.getString(2);
             String dateGo = cursor.getString(3);
+            String dateEnd = cursor.getString(4);
             String timeGO = cursor.getString(5);
             String price = cursor.getString(6);
             int seat = cursor.getInt(7);
-            lstTicket.add(new ticketGO(tckid, stateG, stateE, dateGo, timeGO, price, seat));
+            String name = cursor.getString(8);
+            String phone = cursor.getString(9);
+            String cccd = cursor.getString(10);
+            lstTicket.add(new ticketGO(tckid, stateG, stateE, dateGo,dateEnd, timeGO, price, seat, name, phone, cccd));
             cursor.moveToNext();
         }
         cursor.close();
@@ -356,7 +359,7 @@ public class DBHelper extends SQLiteOpenHelper {
                         "and ticketGO.tickID = ? " +
                         "and orderTick.user_id = ? " +
                         "GROUP by orderTick.tickID "
-                , new String[]{t.getTickID(),String.valueOf(u.id)});
+                , new String[]{t.getTickID(), String.valueOf(u.id)});
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             int id = cursor.getInt(0);
@@ -370,7 +373,37 @@ public class DBHelper extends SQLiteOpenHelper {
             String timeGO = cursor.getString(8);
             String price = cursor.getString(9);
             int seat = cursor.getInt(10);
-            lstTicket.add(new ticketGO(id, tckid, name,phone,stateG, stateE, dateGo,dateEnd, timeGO, price, seat));
+            lstTicket.add(new ticketGO(id, tckid, name, phone, stateG, stateE, dateGo, dateEnd, timeGO, price, seat));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        db.closeDB();
+        return lstTicket;
+    }
+
+    public static ArrayList<ticketGO> getAllOrder(Context context) {
+        ArrayList<ticketGO> lstTicket = new ArrayList<>();
+        DBHelper db = new DBHelper(context);
+        SQLiteDatabase sqlite = db.getReadableDatabase();
+        Cursor cursor = sqlite.rawQuery("SELECT DISTINCT  orderID,ticketGO.tickID,stateGO, stateEnd, dateGO,dateEnd,timeGO, price, seat , name,phone,cmnd " +
+                        "FROM ticketGO, orderTick, user " +
+                        "WHERE orderTick.tickID = ticketGO.id "
+                , null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            int orderID = cursor.getInt(0);
+            String tckid = cursor.getString(1);
+            String stateG = cursor.getString(2);
+            String stateE = cursor.getString(3);
+            String dateGo = cursor.getString(4);
+            String dateEnd = cursor.getString(5);
+            String timeGO = cursor.getString(6);
+            String price = cursor.getString(7);
+            int seat = cursor.getInt(8);
+            String name = cursor.getString(9);
+            String phone = cursor.getString(10);
+            String cccd = cursor.getString(11);
+            lstTicket.add(new ticketGO(orderID, tckid, stateG, stateE, dateGo, dateEnd, timeGO, price, seat, name, phone, cccd));
             cursor.moveToNext();
         }
         cursor.close();

@@ -49,8 +49,12 @@ public class DetailTicketActivity extends AppCompatActivity {
         String stateE = getIntent().getStringExtra("stateE");
         String timeGo = getIntent().getStringExtra("timeGo");
         String DateGo = getIntent().getStringExtra("DateGo");
-        int ghe = getIntent().getIntExtra("ghe",0);
+        String DateEnd = getIntent().getStringExtra("DateEnd");
+        int ghe = getIntent().getIntExtra("ghe", 0);
         String price = getIntent().getStringExtra("price");
+        String name = getIntent().getStringExtra("name");
+        String phone = getIntent().getStringExtra("phone");
+        String cccd = getIntent().getStringExtra("cccd");
         ticketGO t = new ticketGO(0, tickID, "", "", stateG, stateE, DateGo, "", timeGo, price, ghe);
         User user = new User(userID, "", "", "");
         lstDetails = DBHelper.getDetailTicket(this, user, t);
@@ -59,15 +63,17 @@ public class DetailTicketActivity extends AppCompatActivity {
         rcvDetails.setAdapter(adapter);
         rcvDetails.setLayoutManager(lm);
 
-
+//      QR
         MultiFormatWriter writer = new MultiFormatWriter();
         try {
-            BitMatrix matrix = writer.encode("Ticket ID: " +tickID + "\n" +
-                                                        "Trip: " +stateG  + " - " +stateE + "\n" +
-                                                        "Time: " +timeGo + "\n" +
-                                                        "Day: "+DateGo + "\n" +
-                                                        "Seat ID: "+ghe + "\n" +
-                                                        "Price: "+price, BarcodeFormat.QR_CODE, 250,250);
+            BitMatrix matrix = writer.encode("Ticket ID: " + tickID + "\n" +
+                                                        "Tên: " + name + " - " + "SDT: " + phone + "\n" +
+                                                        "CCCD: " + cccd + "\n" +
+                                                        "Trip: " + stateG + " - " + stateE + "\n" +
+                                                        "Time: " + timeGo + "\n" +
+                                                        "Day: " + DateGo + " - " + DateEnd + "\n" +
+                                                        "Seat ID: " + ghe + "\n" +
+                                                        "Price: " + price, BarcodeFormat.QR_CODE, 250, 250);
             BarcodeEncoder encoder = new BarcodeEncoder();
             Bitmap bitmap = encoder.createBitmap(matrix);
             qrImage.setImageBitmap(bitmap);

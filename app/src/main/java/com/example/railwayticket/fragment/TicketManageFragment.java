@@ -83,9 +83,13 @@ public class TicketManageFragment extends Fragment implements ticketMAdapter.tic
         i.putExtra("stateE", t.stateEnd);
         i.putExtra("timeGo", t.timeGO);
         i.putExtra("DateGo", t.dateGo);
+        i.putExtra("DateEnd", t.dateEnd);
         i.putExtra("price", t.price);
+        i.putExtra("name", t.name);
+        i.putExtra("phone", t.phone);
+        i.putExtra("cccd", t.cccd);
 //        i.putExtra("name", t.name);
-        System.out.println("ghe:" +t.seat +"so ve: "+ t.tickID+"nơi di: "+t.stateGO+"nơi đến: "+t.stateEnd+"thời gian đi: "+t.timeGO+"ngày đi: "+t.dateGo+"giá: "+t.price);
+        System.out.println("ghe:" +t.seat +"so ve: "+ t.tickID+"nơi di: "+t.stateGO+"nơi đến: "+t.stateEnd+"thời gian đi: "+t.timeGO+"ngày đi: "+t.dateGo+"giá: "+t.price+"tên: "+t.name);
         startActivity(i);
     }
 

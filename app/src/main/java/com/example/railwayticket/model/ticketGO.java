@@ -3,8 +3,40 @@ package com.example.railwayticket.model;
 import java.io.Serializable;
 
 public class ticketGO implements Serializable {
+    public int getOrderID() {
+        return orderID;
+    }
 
+    public void setOrderID(int orderID) {
+        this.orderID = orderID;
+    }
+
+    public String getCccd() {
+        return cccd;
+    }
+
+    public void setCccd(String cccd) {
+        this.cccd = cccd;
+    }
+
+    public int orderID;
+    public String cccd;
     public String name;
+
+    public ticketGO(int orderID, String tckid, String stateG, String stateE, String dateGo, String dateEnd, String timeGO, String price, int seat, String name, String phone, String cccd) {
+        this.orderID = orderID;
+        this.tickID = tckid;
+        this.stateGO = stateG;
+        this.stateEnd = stateE;
+        this.dateGo = dateGo;
+        this.dateEnd = dateEnd;
+        this.timeGO = timeGO;
+        this.price = price + ".000đ";
+        this.seat = seat;
+        this.name = name;
+        this.phone = phone;
+        this.cccd = cccd;
+    }
 
 
     public String getName() {
@@ -23,16 +55,20 @@ public class ticketGO implements Serializable {
         this.phone = phone;
     }
 
-    String phone;
+    public String phone;
 
-    public ticketGO(String tickID, String stateG, String stateEnd, String dateGo, String timeGO, String price, int seat) {
+    public ticketGO(String tickID, String stateG, String stateEnd, String dateGo,String dateEnd, String timeGO, String price, int seat, String name, String phone, String cccd) {
         this.tickID = tickID;
         this.stateGO = stateG;
         this.stateEnd = stateEnd;
         this.dateGo = dateGo;
+        this.dateEnd = dateEnd;
         this.timeGO = timeGO;
         this.price = price + ".000đ";
         this.seat = seat;
+        this.name = name;
+        this.phone = phone;
+        this.cccd= cccd;
     }
 
     public ticketGO(int id, String tckid, String name, String phone, String stateG, String stateE, String dateGo, String dateEnd, String timeGO, String price, int seat) {
@@ -154,7 +190,7 @@ public class ticketGO implements Serializable {
         this.seat = seat;
     }
 
-    public ticketGO(int id, String tickID, String timeGO, String timeEnd,  String stateGO, String stateEnd,String dateGo, String dateEnd,  String price) {
+    public ticketGO(int id, String tickID, String timeGO, String timeEnd, String stateGO, String stateEnd, String dateGo, String dateEnd, String price) {
         this.id = id;
         this.tickID = tickID;
         this.dateEnd = dateEnd;
