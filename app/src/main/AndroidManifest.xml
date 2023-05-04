@@ -47,6 +47,15 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ui.HuongDan"
+            android:exported="true" />
+        <activity
+            android:name=".ui.LienHe"
+            android:exported="true" />
+        <activity
+            android:name=".ui.QuyDinh"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true" />
         <activity

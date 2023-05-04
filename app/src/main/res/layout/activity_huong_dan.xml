@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    tools:context=".ui.HuongDan">
+    <TextView
+        android:id="@+id/texthd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Cách đặt vé trực tuyến trên điện thoại"
+        android:textColor="#F44336"
+        android:textSize="30dp"
+        android:padding="8dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText,SpUsage" />
+
+    <TextView
+        android:id="@+id/Texthuongdan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:padding="8dp"
+        android:text="- Mở ứng dụng, Nhập ga đi - đến > Lựa chon loại vé, thời gian > Nhấn chon tìm chuyến tàu > Lựa chon tuyến tàu phù hợp > Lựa chọn khoang ghế và ghế ngồi trên tàu > Nhấn chon tiếp tục."
+        android:textSize="18sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.416"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/texthd"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/textHD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="- Điền thông tin khách hàng > Điền thông tin người đặt vé > Lựa chọn thanh toán > Xác nhận đòng ý mua vé > Nhấn chon Tiếp tục > Kiểm tra thông tin đặt vé tàu."
+        android:layout_marginTop="0dp"
+        android:textSize="18sp"
+        android:textStyle="normal"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.56"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Texthuongdan"
+        tools:ignore="HardcodedText" />
+
+
+    <TextView
+        android:id="@+id/chuy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#CCFFFF"
+        android:padding="16dp"
+        android:text="Chú ý quy định đổi vé (Áp dụng với các tàu chạy từ ngày 01/04/2023 đến hết ngày 30/08/2023)"
+        android:textSize="20sp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textHD"
+        app:layout_constraintVertical_bias="0.964"
+        tools:ignore="HardcodedText" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

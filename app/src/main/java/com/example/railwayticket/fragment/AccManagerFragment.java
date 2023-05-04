@@ -16,12 +16,15 @@ import androidx.fragment.app.Fragment;
 import com.example.railwayticket.HomeActivity;
 import com.example.railwayticket.R;
 import com.example.railwayticket.ui.AccInfoActivity;
+import com.example.railwayticket.ui.HuongDan;
+import com.example.railwayticket.ui.LienHe;
 import com.example.railwayticket.ui.LoginActivity;
+import com.example.railwayticket.ui.QuyDinh;
 
 
 public class AccManagerFragment extends Fragment {
     TextView Account;
-    Button btLogout;
+    Button btLogout, btHuongdan, btlienhe, btquydinh;
     private String username = "";
     SharedPreferences sp;
     SharedPreferences.Editor editor;
@@ -38,8 +41,22 @@ public class AccManagerFragment extends Fragment {
         username = sp.getString("username", null);
         Account.setText(username);
 
+        btquydinh = v.findViewById(R.id.btnquydinh);
+        btHuongdan = v.findViewById(R.id.btnHuongdan);
+        btlienhe = v.findViewById(R.id.btnLienhe);
 
-
+        btHuongdan.setOnClickListener(view -> {
+            Intent i = new Intent(getActivity(), HuongDan.class);
+            startActivity(i);
+        });
+        btlienhe.setOnClickListener(view -> {
+            Intent i = new Intent(getActivity(), LienHe.class);
+            startActivity(i);
+        });
+        btquydinh.setOnClickListener(view -> {
+            Intent i = new Intent(getActivity(), QuyDinh.class);
+            startActivity(i);
+        });
 
         Account.setOnClickListener(view -> {
             if (username == null) {
@@ -54,13 +71,11 @@ public class AccManagerFragment extends Fragment {
         btLogout = v.findViewById(R.id.btnLogout);
         sp = requireActivity().getSharedPreferences("MyApp", Context.MODE_PRIVATE);
         editor = sp.edit();
-        if (username == null){
+        if (username == null) {
             btLogout.setVisibility(View.GONE);
         } else {
             btLogout.setVisibility(View.VISIBLE);
-            btLogout.setOnClickListener(view -> {
-                logout();
-            });
+            btLogout.setOnClickListener(view -> logout());
         }
         return v;
     }
