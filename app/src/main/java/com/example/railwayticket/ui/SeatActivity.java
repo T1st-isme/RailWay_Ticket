@@ -249,9 +249,9 @@ public class SeatActivity extends AppCompatActivity implements View.OnClickListe
                 System.out.println(id);
             }
         } else if ((int) view.getTag() == STATUS_BOOKED) {
-            Toast.makeText(this, "Seat " + view.getId() + " is Booked", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Seat " + view.getId() + " đã đặt", Toast.LENGTH_SHORT).show();
         } else if ((int) view.getTag() == STATUS_RESERVED) {
-            Toast.makeText(this, "Seat " + view.getId() + " is Reserved", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Seat " + view.getId() + " đã được đặt trước", Toast.LENGTH_SHORT).show();
         }
     }
 }
