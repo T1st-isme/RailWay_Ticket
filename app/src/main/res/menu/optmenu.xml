@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/mnMuaVe" android:title="Mua vé"
         android:icon="@drawable/baseline_train_24" android:tooltipText="MuaVe" />
     <item android:id="@+id/mnDonMuaVe" android:title="Đơn mua vé"

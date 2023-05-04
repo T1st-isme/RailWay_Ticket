@@ -8,7 +8,6 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,98 +25,97 @@ public class SeatActivity extends AppCompatActivity implements View.OnClickListe
 
     String seats =
             "___/"
-                    + "U_A/"
-                    + "R_A/"
-                    + "U_U/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
+                    + "__U_A/"
+                    + "__R_A/"
+                    + "__U_U/"
+                    + "__R_A/"
+                    + "__R_A/"
+                    + "__R_A/"
                     + "___/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
+                    + "__R_A/"
+                    + "__A_A/"
+                    + "__A_A/"
+                    + "__U_A/"
+                    + "__R_U/"
+                    + "__U_U/"
                     + "___/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
+                    + "__R_A/"
+                    + "__U_R/"
+                    + "__U_A/"
+                    + "__A_A/"
+                    + "__A_A/"
+                    + "__R_R/"
                     + "___/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
+                    + "__U_A/"
+                    + "__R_A/"
+                    + "__R_A/"
+                    + "__R_A/"
+                    + "__U_A/"
+                    + "__R_R/"
                     + "___/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
+                    + "__R_A/"
+                    + "__R_U/"
+                    + "__R_U/"
+                    + "__R_U/"
+                    + "__R_A/"
+                    + "__U_A/"
                     + "___/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
+                    + "__R_A/"
+                    + "__R_A/"
+                    + "__R_A/"
+                    + "__R_U/"
+                    + "__R_A/"
+                    + "__U_A/"
                     + "___/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
+                    + "__U_A/"
+                    + "__R_A/"
+                    + "__R_A/"
+                    + "__U_U/"
+                    + "__A_U/"
+                    + "__R_A/"
                     + "___/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
+                    + "__U_A/"
+                    + "__R_A/"
+                    + "__R_A/"
+                    + "__R_U/"
+                    + "__R_A/"
+                    + "__R_A/"
                     + "___/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
+                    + "__R_A/"
+                    + "__R_A/"
+                    + "__R_A/"
+                    + "__R_A/"
+                    + "__R_A/"
+                    + "__R_A/"
                     + "___/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
+                    + "__R_A/"
+                    + "__R_A/"
+                    + "__R_A/"
+                    + "__R_A/"
+                    + "__R_A/"
+                    + "__R_A/"
                     + "___/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
+                    + "__R_A/"
+                    + "__R_A/"
+                    + "__R_A/"
+                    + "__R_A/"
+                    + "__R_A/"
+                    + "__R_A/"
                     + "___/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
+                    + "__R_A/"
+                    + "__R_A/"
+                    + "__R_A/"
+                    + "__R_A/"
+                    + "__R_A/"
+                    + "__R_A/"
                     + "___/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
-                    + "R_A/"
+                    + "__R_A/"
+                    + "__R_A/"
+                    + "__R_A/"
+                    + "__R_A/"
+                    + "__R_A/"
+                    + "__R_A/"
                     + "___/";
-    Button btContinue;
 
     List<TextView> seatViewList = new ArrayList<>();
     int seatSize = 100;
@@ -133,8 +131,6 @@ public class SeatActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.seat_layout);
-        btContinue = findViewById(R.id.btTiep);
-        btContinue.setOnClickListener(v -> continu());
 
         layout = findViewById(R.id.layoutSeat);
 
@@ -249,6 +245,7 @@ public class SeatActivity extends AppCompatActivity implements View.OnClickListe
                 i.putExtra("tickID", String.valueOf(tckid));
                 i.putExtra("NgayDi", String.valueOf(dGO));
                 i.putExtra("id", String.valueOf(id));
+                startActivity(i);
                 System.out.println(id);
             }
         } else if ((int) view.getTag() == STATUS_BOOKED) {
@@ -256,10 +253,6 @@ public class SeatActivity extends AppCompatActivity implements View.OnClickListe
         } else if ((int) view.getTag() == STATUS_RESERVED) {
             Toast.makeText(this, "Seat " + view.getId() + " is Reserved", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    public void continu() {
-        startActivity(i);
     }
 }
 

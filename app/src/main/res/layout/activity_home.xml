@@ -5,6 +5,7 @@
     android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fontFamily="@font/prompt"
     tools:context=".HomeActivity">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -12,6 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/purple"
+        android:backgroundTint="@color/white"
+        android:foregroundTint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
