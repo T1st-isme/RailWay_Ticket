@@ -41,7 +41,7 @@
            android:layout_margin="10dp"
            android:background="@drawable/rounded_corner"
            android:padding="10dp"
-           android:text="Khách hàng"
+           android:text="Người dùng"
            android:textAlignment="center"
            android:textSize="25sp"
            tools:ignore="HardcodedText" />
