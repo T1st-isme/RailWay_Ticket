@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.RailWayTicket" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/light_gray</item>
+        <item name="colorPrimary">@color/teal_200</item>
         <item name="colorPrimaryVariant">@color/light_gray</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
@@ -14,4 +14,5 @@
         <!-- Customize your theme here. -->
         <item name="android:fontFamily">@font/prompt</item>
     </style>
+
 </resources>

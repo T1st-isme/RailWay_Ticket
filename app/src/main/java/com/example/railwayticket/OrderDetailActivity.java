@@ -27,10 +27,7 @@ public class OrderDetailActivity extends AppCompatActivity {
     LinearLayout pay;
     private
     int id = 0;
-    int tckid = 0;
     SharedPreferences sp1;
-    SharedPreferences sp2;
-    SharedPreferences.Editor editor;
     String x = "ghe";
     String y = "DiemDi";
     String z = "DiemDen";
@@ -51,6 +48,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         String gia = getIntent().getStringExtra(p);
         String dateGo = getIntent().getStringExtra(dGo);
         String trainid = getIntent().getStringExtra(trainId);
+        String giodi = getIntent().getStringExtra("GioDi");
 //        ticketGO t = new ticketGO(x, y, z);
         Ghe.setText(ghe);
         stateGo.setText(di);
@@ -58,8 +56,8 @@ public class OrderDetailActivity extends AppCompatActivity {
         price.setText(gia);
         trainID.setText(trainid);
         ngayDi.setText(dateGo);
+        timeGo.setText(giodi);
         tongtien.setText(gia);
-        System.out.println(ghe + di + den + gia);
         pay = findViewById(R.id.payment);
         pay.setOnClickListener(view -> {
             Intent intent = new Intent(OrderDetailActivity.this, PaymentMethodActivity.class);

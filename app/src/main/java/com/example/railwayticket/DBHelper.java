@@ -311,7 +311,7 @@ public class DBHelper extends SQLiteOpenHelper {
             String timeGO = cursor.getString(6);
             String timeEnd = cursor.getString(7);
             String price = cursor.getString(8);
-            lstTicket.add(new ticketGO(id, tckid, stateG, stateE, dateGo, dateEnd, timeGO, timeEnd, price));
+            lstTicket.add(new ticketGO(id, tckid, timeGO, timeEnd, stateG, stateE, dateGo, dateEnd,  price));
             cursor.moveToNext();
         }
         cursor.close();

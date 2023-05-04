@@ -47,7 +47,7 @@ public class ticketGOAdapter extends RecyclerView.Adapter<ticketGOAdapter.ticket
         holder.statego.setText(String.valueOf(item.getStateGO()));
         holder.stateend.setText(String.valueOf(item.getStateEnd()));
         holder.price.setText(String.valueOf(item.getPrice()));
-        holder.itemView.setOnClickListener(v -> tickCallback.onItemClick(item.getId(), item.getTickID(), item.getPrice()));
+        holder.itemView.setOnClickListener(v -> tickCallback.onItemClick(item));
 
     }
 
@@ -73,6 +73,6 @@ public class ticketGOAdapter extends RecyclerView.Adapter<ticketGOAdapter.ticket
     }
 
     public interface tickCallback {
-        void onItemClick(int id, String tckid, String price);
+        void onItemClick(ticketGO t);
     }
 }

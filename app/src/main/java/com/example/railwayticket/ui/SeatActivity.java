@@ -237,6 +237,7 @@ public class SeatActivity extends AppCompatActivity implements View.OnClickListe
                 String tckid = getIntent().getStringExtra("tickID");
                 String dGO = getIntent().getStringExtra("NgayDi");
                 String id = getIntent().getStringExtra("id");
+                String giodi = getIntent().getStringExtra("GioDi");
                 i = new Intent(this, OrderDetailActivity.class);
                 i.putExtra("ghe", String.valueOf(view.getId()));
                 i.putExtra("DiemDi", String.valueOf(x));
@@ -245,6 +246,7 @@ public class SeatActivity extends AppCompatActivity implements View.OnClickListe
                 i.putExtra("tickID", String.valueOf(tckid));
                 i.putExtra("NgayDi", String.valueOf(dGO));
                 i.putExtra("id", String.valueOf(id));
+                i.putExtra("GioDi", giodi);
                 startActivity(i);
                 System.out.println(id);
             }

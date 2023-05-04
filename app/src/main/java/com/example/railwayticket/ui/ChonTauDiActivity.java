@@ -51,18 +51,19 @@ public class ChonTauDiActivity extends AppCompatActivity implements ticketGOAdap
     }
 
     @Override
-    public void onItemClick(int id, String tckid, String gia) {
+    public void onItemClick(ticketGO t) {
         String x = getIntent().getStringExtra("stateG");
         String y = getIntent().getStringExtra("stateE");
         String z = getIntent().getStringExtra("dateGo");
         i = new Intent(ChonTauDiActivity.this, SeatActivity.class);
-        i.putExtra("tickID", tckid);
+        i.putExtra("tickID", t.tickID);
         i.putExtra("NoiDi", x);
         i.putExtra("NoiDen", y);
         i.putExtra("NgayDi", z);
-        i.putExtra("gia", String.valueOf(gia));
-        i.putExtra("id", String.valueOf(id));
-        System.out.println(id);
+        i.putExtra("GioDi", t.timeGO);
+        i.putExtra("gia", String.valueOf(t.price));
+        i.putExtra("id", String.valueOf(t.id));
+        System.out.println(t.tickID +x+y+z+ t.timeGO + t.price+t.id);
         startActivity(i);
     }
 
