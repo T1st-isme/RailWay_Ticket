@@ -1,32 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="10dp"
     tools:context=".ui.DetailTicketActivity">
-   <androidx.recyclerview.widget.RecyclerView
-       android:id="@+id/rcvDetail"
+   <LinearLayout
        android:layout_width="match_parent"
-       android:layout_height="match_parent"/>
-   <TextView
-       android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:text="Vui lòng đưa mã này cho nhân viên soát vé"
-       android:textColor="#FF0000"
-       android:textStyle="bold"
-       android:textSize="20sp"
-       android:layout_marginTop="75dp"
-       android:textAlignment="center"
-       tools:ignore="HardcodedText" />
-   <ImageView
-       android:id="@+id/QRCode"
-       android:layout_width="300dp"
-       android:layout_height="300dp"
-       android:layout_marginTop="50dp"
-       android:background="@drawable/ic_launcher_background"
-       android:layout_gravity="center"
-       tools:ignore="ContentDescription" />
+       android:orientation="vertical">
+      <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/rcvDetail"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"/>
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Vui lòng đưa mã này cho nhân viên soát vé"
+          android:textColor="#FF0000"
+          android:textStyle="bold"
+          android:textSize="20sp"
+          android:layout_marginTop="75dp"
+          android:textAlignment="center"
+          tools:ignore="HardcodedText" />
+      <ImageView
+          android:id="@+id/QRCode"
+          android:layout_width="300dp"
+          android:layout_height="300dp"
+          android:layout_marginTop="50dp"
+          android:background="@drawable/ic_launcher_background"
+          android:layout_gravity="center"
+          tools:ignore="ContentDescription" />
+   </LinearLayout>
 
-</LinearLayout>
+
+</ScrollView>
