@@ -385,7 +385,7 @@ public class DBHelper extends SQLiteOpenHelper {
         ArrayList<ticketGO> lstTicket = new ArrayList<>();
         DBHelper db = new DBHelper(context);
         SQLiteDatabase sqlite = db.getReadableDatabase();
-        Cursor cursor = sqlite.rawQuery("SELECT DISTINCT  orderID,ticketGO.tickID,stateGO, stateEnd, dateGO,dateEnd,timeGO, price, seat , name,phone,cmnd " +
+        Cursor cursor = sqlite.rawQuery("SELECT DISTINCT  orderID,ticketGO.tickID,stateGO, stateEnd, dateGO,dateEnd,timeGO,timeEnd, price, seat , name,phone,cmnd " +
                         "FROM ticketGO, orderTick, user " +
                         "WHERE orderTick.tickID = ticketGO.id "
                 , null);
@@ -398,12 +398,13 @@ public class DBHelper extends SQLiteOpenHelper {
             String dateGo = cursor.getString(4);
             String dateEnd = cursor.getString(5);
             String timeGO = cursor.getString(6);
-            String price = cursor.getString(7);
-            int seat = cursor.getInt(8);
-            String name = cursor.getString(9);
-            String phone = cursor.getString(10);
-            String cccd = cursor.getString(11);
-            lstTicket.add(new ticketGO(orderID, tckid, stateG, stateE, dateGo, dateEnd, timeGO, price, seat, name, phone, cccd));
+            String timeEnd = cursor.getString(7);
+            String price = cursor.getString(8);
+            int seat = cursor.getInt(9);
+            String name = cursor.getString(10);
+            String phone = cursor.getString(11);
+            String cccd = cursor.getString(12);
+            lstTicket.add(new ticketGO(orderID, tckid, stateG, stateE, dateGo, dateEnd, timeGO,timeEnd, price, seat, name, phone, cccd));
             cursor.moveToNext();
         }
         cursor.close();

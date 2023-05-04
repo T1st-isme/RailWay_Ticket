@@ -23,7 +23,7 @@ public class ticketGO implements Serializable {
     public String cccd;
     public String name;
 
-    public ticketGO(int orderID, String tckid, String stateG, String stateE, String dateGo, String dateEnd, String timeGO, String price, int seat, String name, String phone, String cccd) {
+    public ticketGO(int orderID, String tckid, String stateG, String stateE, String dateGo, String dateEnd, String timeGO,String timeEnd,String price, int seat, String name, String phone, String cccd) {
         this.orderID = orderID;
         this.tickID = tckid;
         this.stateGO = stateG;
@@ -31,6 +31,7 @@ public class ticketGO implements Serializable {
         this.dateGo = dateGo;
         this.dateEnd = dateEnd;
         this.timeGO = timeGO;
+        this.timeEnd = timeEnd;
         this.price = price + ".000đ";
         this.seat = seat;
         this.name = name;
