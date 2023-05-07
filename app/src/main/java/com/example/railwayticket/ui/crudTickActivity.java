@@ -160,8 +160,6 @@ public class crudTickActivity extends AppCompatActivity implements trainTicketAd
 
     @Override
     public void onItemDeleteClicked(ticketGO ticket, int position) {
-        DBHelper db = new DBHelper(this);
-        db.openDB();
         boolean result = DBHelper.deleteTicket(this, ticket.id);
         if (result) {
             Toast.makeText(this,

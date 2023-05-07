@@ -1,10 +1,5 @@
 package com.example.railwayticket;
 
-import static com.example.railwayticket.Utils.Utils.DB_NAME;
-import static com.example.railwayticket.Utils.Utils.DB_VERSION;
-import static com.example.railwayticket.Utils.Utils.TABLE_TICKET;
-import static com.example.railwayticket.Utils.Utils.TABLE_USER;
-
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
@@ -12,9 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
-
 import com.example.railwayticket.Utils.Utils;
 import com.example.railwayticket.model.User;
 import com.example.railwayticket.model.ticketGO;
@@ -26,6 +19,8 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+
+import static com.example.railwayticket.Utils.Utils.*;
 
 public class DBHelper extends SQLiteOpenHelper {
     String DB_PATH;
@@ -311,7 +306,7 @@ public class DBHelper extends SQLiteOpenHelper {
             String timeGO = cursor.getString(6);
             String timeEnd = cursor.getString(7);
             String price = cursor.getString(8);
-            lstTicket.add(new ticketGO(id, tckid, timeGO, timeEnd, stateG, stateE, dateGo, dateEnd,  price));
+            lstTicket.add(new ticketGO(id, tckid, timeGO, timeEnd, stateG, stateE, dateGo, dateEnd, price));
             cursor.moveToNext();
         }
         cursor.close();
@@ -341,7 +336,7 @@ public class DBHelper extends SQLiteOpenHelper {
             String name = cursor.getString(8);
             String phone = cursor.getString(9);
             String cccd = cursor.getString(10);
-            lstTicket.add(new ticketGO(tckid, stateG, stateE, dateGo,dateEnd, timeGO, price, seat, name, phone, cccd));
+            lstTicket.add(new ticketGO(tckid, stateG, stateE, dateGo, dateEnd, timeGO, price, seat, name, phone, cccd));
             cursor.moveToNext();
         }
         cursor.close();
@@ -381,6 +376,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return lstTicket;
     }
 
+    //OrderTick
     public static ArrayList<ticketGO> getAllOrder(Context context) {
         ArrayList<ticketGO> lstTicket = new ArrayList<>();
         DBHelper db = new DBHelper(context);
@@ -404,12 +400,19 @@ public class DBHelper extends SQLiteOpenHelper {
             String name = cursor.getString(10);
             String phone = cursor.getString(11);
             String cccd = cursor.getString(12);
-            lstTicket.add(new ticketGO(orderID, tckid, stateG, stateE, dateGo, dateEnd, timeGO,timeEnd, price, seat, name, phone, cccd));
+            lstTicket.add(new ticketGO(orderID, tckid, stateG, stateE, dateGo, dateEnd, timeGO, timeEnd, price, seat, name, phone, cccd));
             cursor.moveToNext();
         }
         cursor.close();
         db.closeDB();
         return lstTicket;
+    }
+
+    public static boolean deleteOrder(Context context, int id) {
+        DBHelper db = new DBHelper(context);
+        SQLiteDatabase sqlite = db.getWritableDatabase();
+        long result = sqlite.delete("orderTick", "orderID =? ", new String[]{String.valueOf(id)});
+        return (result > 0);
     }
 
 }

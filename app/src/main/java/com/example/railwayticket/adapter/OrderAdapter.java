@@ -5,11 +5,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.railwayticket.R;
 import com.example.railwayticket.model.ticketGO;
 
@@ -18,9 +17,11 @@ import java.util.ArrayList;
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHolder> {
     Context context;
     ArrayList<ticketGO> lstOrders;
+    OrderCallback OrderCallback;
 
-    public OrderAdapter(ArrayList<ticketGO> lstOrders) {
+    public OrderAdapter(ArrayList<ticketGO> lstOrders, OrderCallback OrderCallback) {
         this.lstOrders = lstOrders;
+        this.OrderCallback = OrderCallback;
     }
 
     @NonNull
@@ -49,7 +50,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         holder.timeend.setText(item.getTimeEnd());
         holder.price.setText(String.valueOf(item.getPrice()));
         holder.ghe.setText(String.valueOf(item.getSeat()));
-
+        holder.delete.setOnClickListener(v -> OrderCallback.onItemDeleteClicked(item, position));
     }
 
     @Override
@@ -59,6 +60,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
     public static class OrderViewHolder extends RecyclerView.ViewHolder {
         TextView orderID, name, phone, cccd, tickid, timego, timeend, statego, stateend, dateGo, dateEnd, price, ghe;
+        ImageView delete;
 
         @SuppressLint("CutPasteId")
         public OrderViewHolder(@NonNull View itemView) {
@@ -76,6 +78,11 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             statego = itemView.findViewById(R.id.tvStateGo);
             stateend = itemView.findViewById(R.id.tvStateEnd);
             price = itemView.findViewById(R.id.tvPrice);
+            delete = itemView.findViewById(R.id.ivDelete);
         }
+    }
+
+    public interface OrderCallback {
+        void onItemDeleteClicked(ticketGO ticket, int position);
     }
 }

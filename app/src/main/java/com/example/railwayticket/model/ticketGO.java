@@ -19,7 +19,7 @@ public class ticketGO implements Serializable {
         this.cccd = cccd;
     }
 
-    public int orderID;
+    public static int orderID;
     public String cccd;
     public String name;
 
@@ -203,10 +203,12 @@ public class ticketGO implements Serializable {
         this.price = price + ".000đ";
     }
 
-//    public ticketGO(String seat, String stateGO, String stateEnd) {
-//        this.seat = seat;
-//        this.stateGO = stateGO;
-//        this.stateEnd = stateEnd;
-//    }
+/*
+    public ticketGO(String seat, String stateGO, String stateEnd) {
+        this.seat = seat;
+        this.stateGO = stateGO;
+        this.stateEnd = stateEnd;
+    }
+*/
 
 }
