@@ -42,7 +42,7 @@ public class ManageOrderActivity extends AppCompatActivity implements OrderAdapt
     }
     @Override
     public void onItemDeleteClicked(ticketGO ticket, int position) {
-        boolean result = DBHelper.deleteOrder(this, ticketGO.orderID);
+        boolean result = DBHelper.deleteOrder(this, ticket.orderID);
         if (result) {
             Toast.makeText(this,
                     "Xóa thành công",

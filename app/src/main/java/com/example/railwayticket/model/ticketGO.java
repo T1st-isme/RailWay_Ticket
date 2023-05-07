@@ -19,7 +19,7 @@ public class ticketGO implements Serializable {
         this.cccd = cccd;
     }
 
-    public static int orderID;
+    public int orderID;
     public String cccd;
     public String name;
 
