@@ -1,5 +1,6 @@
 package com.example.railwayticket.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -10,21 +11,18 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
-
+import android.widget.*;
 import androidx.fragment.app.Fragment;
-
 import com.example.railwayticket.DBHelper;
 import com.example.railwayticket.R;
 import com.example.railwayticket.ui.ChonTauDiActivity;
 import com.example.railwayticket.ui.LoginActivity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class HomeFragment extends Fragment {
     TextView tvdateGO, tvdateEnd;
@@ -58,10 +56,12 @@ public class HomeFragment extends Fragment {
                 startActivity(new Intent(getActivity(), LoginActivity.class));
                 Toast.makeText(getContext(), "Vui lòng đăng nhập", Toast.LENGTH_SHORT).show();
                 requireActivity().finish();
-            } else if (txtDateGo.equals("Ngày đi") || txtDateEnd.equals("Ngày đến")) {
-                Toast.makeText(getContext(), "Vui lòng chọn ngày đi và ngày đến!", Toast.LENGTH_SHORT).show();
+            }else if (!compareDate(txtDateGo, txtDateEnd)){
+                Toast.makeText(getContext(), "Ngày đi phải trước ngày đến!", Toast.LENGTH_SHORT).show();
             } else if (txtGO.equals(txtEnd)) {
                 Toast.makeText(getContext(), "Nơi đi và nơi đến không được trùng!", Toast.LENGTH_SHORT).show();
+            } else if (txtDateGo.equals("Ngày đi") || txtDateEnd.equals("Ngày đến")) {
+                Toast.makeText(getContext(), "Vui lòng chọn ngày đi và ngày đến!", Toast.LENGTH_SHORT).show();
             } else if (txtDateGo.equals(txtDateEnd)) {
                 Toast.makeText(getContext(), "Ngày đi và ngày đến không được trùng!", Toast.LENGTH_SHORT).show();
             } else {
@@ -77,6 +77,25 @@ public class HomeFragment extends Fragment {
         spinnerEnd();
         // Inflate the layout for this fragment
         return v;
+    }
+
+
+    //validate datepicker
+    @SuppressLint("SimpleDateFormat")
+    private Boolean compareDate(String Date1, String Date2) {
+      String pattern =  "dd/MM/yyyy";
+      SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+        try{
+            Date date1 = sdf.parse(Date1);
+            Date date2 = sdf.parse(Date2);
+            if (date1.before(date2)) System.out.println("Ngày 1 trước ngày 2");
+            else {
+                System.out.println("Ngày 1 sau ngày 2");
+                return false;
+            }
+        } catch (ParseException e) {
+        }
+        return true;
     }
 
     private void spinnerEnd() {
@@ -97,7 +116,6 @@ public class HomeFragment extends Fragment {
         ArrayList<String> lstTicket = new ArrayList<>();
         DBHelper db = new DBHelper(context);
         SQLiteDatabase sqlite = db.getReadableDatabase();
-//        Cursor cursor = sqlite.rawQuery("select * from state group by stateGO", null);
         Cursor cursor = sqlite.rawQuery("select stateGO from ticketGO group by stateGO", null);
         cursor.moveToFirst();
         if (cursor.getCount() == 0) {
