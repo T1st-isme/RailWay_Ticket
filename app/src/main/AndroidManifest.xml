@@ -43,9 +43,6 @@
             android:name=".ui.AccInfoActivity"
             android:exported="false" />
         <activity
-            android:name=".PaymentMethodActivity"
-            android:exported="false" />
-        <activity
             android:name=".OrderDetailActivity"
             android:exported="true" />
         <activity

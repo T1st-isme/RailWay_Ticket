@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
@@ -22,7 +21,6 @@ public class OrderDetailActivity extends AppCompatActivity {
     TextView Ghe, trainID, ngayDi, timeGo, stateGo, stateEnd, price, tongtien;
     TextInputEditText edname, edcmnd, edphone;
     Button btPay;
-    LinearLayout pay;
     private
     int id = 0;
     SharedPreferences sp1;
@@ -56,10 +54,6 @@ public class OrderDetailActivity extends AppCompatActivity {
         timeGo.setText(giodi);
         tongtien.setText(gia);
 
-        pay.setOnClickListener(view -> {
-            Intent intent = new Intent(OrderDetailActivity.this, PaymentMethodActivity.class);
-            startActivity(intent);
-        });
         btPay.setOnClickListener(view -> XacnhanThanhtoan());
     }
 
@@ -77,7 +71,6 @@ public class OrderDetailActivity extends AppCompatActivity {
         edcmnd = findViewById(R.id.edCCCD);
         price = findViewById(R.id.Gia);
         tongtien = findViewById(R.id.TongTien);
-        pay = findViewById(R.id.payment);
     }
 
     private void XacnhanThanhtoan() {
