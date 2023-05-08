@@ -23,7 +23,7 @@ public class AccManagerFragment extends Fragment {
     ImageView avt;
     Button btLogout, btHuongdan, btlienhe, btquydinh;
     private String username = "";
-    private String avatar = "";
+    private String avtar = "";
     SharedPreferences sp;
     SharedPreferences.Editor editor;
 
@@ -37,10 +37,15 @@ public class AccManagerFragment extends Fragment {
 
         sp = requireActivity().getSharedPreferences("MyApp", Context.MODE_PRIVATE);
         username = sp.getString("username", null);
-        avatar = sp.getString("avt", null);
-
+        avtar = sp.getString("avt", null);
         Account.setText(username);
-        avt.setImageBitmap(Utils.convertToBitmapFromAssets(getContext(), avatar));
+
+
+        if (avtar != null) {
+            avt.setImageBitmap(Utils.convertToBitmapFromAssets(getContext(), avtar));
+        } else {
+            avt.setImageBitmap(Utils.convertToBitmapFromAssets(getContext(), "male.png"));
+        }
 
         btHuongdan.setOnClickListener(view -> {
             Intent i = new Intent(getActivity(), HuongDan.class);
@@ -83,6 +88,7 @@ public class AccManagerFragment extends Fragment {
         btquydinh = v.findViewById(R.id.btnquydinh);
         btHuongdan = v.findViewById(R.id.btnHuongdan);
         btlienhe = v.findViewById(R.id.btnLienhe);
+
     }
 
     private void logout() {
@@ -91,13 +97,15 @@ public class AccManagerFragment extends Fragment {
         startActivity(new Intent(getActivity(), HomeActivity.class));
         getActivity().finish();
     }
+
     private boolean shouldRefreshOnResume = false;
+
     // Reload current fragment
     @Override
     public void onResume() {
         super.onResume();
         // Check should we need to refresh the fragment
-        if(shouldRefreshOnResume){
+        if (shouldRefreshOnResume) {
             // refresh fragment
             getActivity().recreate();
         }

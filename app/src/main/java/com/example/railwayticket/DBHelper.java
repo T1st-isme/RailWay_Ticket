@@ -151,6 +151,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 user.setId(cursor.getInt(0));
                 user.setName(cursor.getString(1));
                 user.setPassword(cursor.getString(2));
+                user.setAvatar(cursor.getString(3));
             }
         } catch (Exception e) {
             user = null;
@@ -181,6 +182,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.closeDB();
         return lstUsers;
     }
+
 
 
     public static boolean deleteUser(Context context, int id) {

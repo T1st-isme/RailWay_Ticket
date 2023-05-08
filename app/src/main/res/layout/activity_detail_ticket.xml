@@ -2,9 +2,10 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp"
+    android:background="@drawable/detail_bg"
     tools:context=".ui.DetailTicketActivity">
    <LinearLayout
        android:layout_width="match_parent"
@@ -14,25 +15,27 @@
           android:id="@+id/rcvDetail"
           android:layout_width="match_parent"
           android:layout_height="match_parent"/>
+
       <TextView
-          android:layout_width="wrap_content"
+          android:layout_width="290dp"
           android:layout_height="wrap_content"
+          android:layout_marginTop="60dp"
+          android:layout_gravity="center_horizontal"
           android:text="Vui lòng đưa mã này cho nhân viên soát vé"
-          android:textColor="#FF0000"
-          android:textStyle="bold"
-          android:textSize="20sp"
-          android:layout_marginTop="75dp"
           android:textAlignment="center"
+          android:textColor="#FF0000"
+          android:textSize="20sp"
+          android:textStyle="bold"
           tools:ignore="HardcodedText" />
+
       <ImageView
           android:id="@+id/QRCode"
-          android:layout_width="300dp"
-          android:layout_height="300dp"
-          android:layout_marginTop="50dp"
+          android:layout_width="250dp"
+          android:layout_height="250dp"
+          android:layout_marginTop="30dp"
           android:background="@drawable/ic_launcher_background"
           android:layout_gravity="center"
           tools:ignore="ContentDescription" />
    </LinearLayout>
-
 
 </ScrollView>
