@@ -44,7 +44,6 @@ public class TicketManageFragment extends Fragment implements ticketMAdapter.tic
         lnNDta.setVisibility(View.GONE);
         lnNDta.setVisibility(View.GONE);
 
-//        ticketGO t = new ticketGO(0, "", "", "", "", "", "", "", "");
         sp = requireActivity().getSharedPreferences("MyApp", Context.MODE_PRIVATE);
 
         System.out.println(userID);
@@ -66,7 +65,7 @@ public class TicketManageFragment extends Fragment implements ticketMAdapter.tic
             LinearLayoutManager lm = new LinearLayoutManager(getContext());
             rcvTicket.setAdapter(adapter);
             rcvTicket.setLayoutManager(lm);
-            if (lstTicket.size() == 0){
+            if (lstTicket.isEmpty()){
                 lnNDta.setVisibility(View.VISIBLE);
             }
         }
@@ -88,7 +87,6 @@ public class TicketManageFragment extends Fragment implements ticketMAdapter.tic
         i.putExtra("name", t.name);
         i.putExtra("phone", t.phone);
         i.putExtra("cccd", t.cccd);
-//        i.putExtra("name", t.name);
         System.out.println("ghe:" +t.seat +"so ve: "+ t.tickID+"nơi di: "+t.stateGO+"nơi đến: "+t.stateEnd+"thời gian đi: "+t.timeGO+"ngày đi: "+t.dateGo+"giá: "+t.price+"tên: "+t.name);
         startActivity(i);
     }

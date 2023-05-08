@@ -74,11 +74,14 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                 DBHelper.getAllUsers(this);
                 int id = user.getId();
+                String avatar = user.getAvatar();
+                System.out.println("Avatar: " + avatar);
                 sp = getSharedPreferences("MyApp", MODE_PRIVATE);
                 editor.putString("id", String.valueOf(id));
                 editor.putString("username", name);
                 editor.putString("password", password);
                 editor.putBoolean("IsLoggedin", true);
+                editor.putString("avt", avatar);
                 editor.apply();
                 Intent i = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivity(i);

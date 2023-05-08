@@ -22,7 +22,7 @@
             android:id="@+id/tvNoiDi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="80dp"
+            android:layout_marginEnd="70dp"
             android:text="Sài Gòn"
             android:textColor="@color/black"
             android:textSize="18sp"
@@ -82,13 +82,14 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
+            android:layout_marginEnd="60dp"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tên"
+                android:layout_gravity="center_horizontal"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -98,7 +99,7 @@
                 android:id="@+id/tvNameKH"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="abc"
+                android:text="Hà Trung Trển"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 tools:ignore="HardcodedText" />
@@ -107,7 +108,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="200dp"
+            android:layout_marginStart="85dp"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -141,7 +142,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginStart="10dp"
+            android:layout_marginEnd="40dp"
             android:orientation="vertical">
 
             <TextView
@@ -168,7 +169,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginStart="160dp"
+            android:layout_marginStart="110dp"
             android:orientation="vertical">
 
             <TextView

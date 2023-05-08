@@ -10,4 +10,5 @@
     <!--    Custom color-->
     <color name="light_gray">#E8EBEC</color>
     <color name="purple">#8692f7</color>
+    <color name="colorBackground">#1FE71844</color>
 </resources>
