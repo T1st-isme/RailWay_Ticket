@@ -94,6 +94,7 @@
                 android:drawableLeft="@drawable/baseline_password_24"
                 android:drawablePadding="8dp"
                 android:hint="Confirm password"
+                android:inputType="textPassword"
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/cardview_dark_background"

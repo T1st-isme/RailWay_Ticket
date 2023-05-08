@@ -225,5 +225,11 @@
         android:text="Tìm chuyến tàu"
         app:cornerRadius="20dp"
         tools:ignore="HardcodedText" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:src="@drawable/taulua"
+        />
+
 
 </LinearLayout>
