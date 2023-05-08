@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
+    android:id="@+id/acc_manager"
     tools:context=".fragment.AccManagerFragment">
 
     <LinearLayout
@@ -41,6 +42,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
         <ImageView
+            android:id="@+id/IvAvt"
             android:layout_width="180dp"
             android:layout_height="180dp"
             android:src="@drawable/avatar"

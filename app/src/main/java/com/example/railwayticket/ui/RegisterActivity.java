@@ -75,7 +75,7 @@ public class RegisterActivity extends AppCompatActivity {
         user.setName(edUsername.getText().toString().trim());
         user.setPassword(edPassword.getText().toString().trim());
         user.setPassword(edCPassword.getText().toString().trim());
-        user.setAvatar(edEmail.getText().toString().trim());
+        user.setEmail(edEmail.getText().toString().trim());
         User temp = DB.checkUsername(edUsername.getText().toString());
         if (temp == null) {
             Toast.makeText(this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();

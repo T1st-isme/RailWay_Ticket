@@ -9,41 +9,38 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.fragment.app.Fragment;
-
 import com.example.railwayticket.HomeActivity;
 import com.example.railwayticket.R;
-import com.example.railwayticket.ui.AccInfoActivity;
-import com.example.railwayticket.ui.HuongDan;
-import com.example.railwayticket.ui.LienHe;
-import com.example.railwayticket.ui.LoginActivity;
-import com.example.railwayticket.ui.QuyDinh;
+import com.example.railwayticket.Utils.Utils;
+import com.example.railwayticket.ui.*;
 
 
 public class AccManagerFragment extends Fragment {
     TextView Account;
+    ImageView avt;
     Button btLogout, btHuongdan, btlienhe, btquydinh;
     private String username = "";
+    private String avatar = "";
     SharedPreferences sp;
     SharedPreferences.Editor editor;
 
-    //    private final Gson gson = new Gson();
     @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View v = inflater.inflate(R.layout.fragment_acc_manager, container, false);
-        Account = v.findViewById(R.id.Account);
+
+        anhxa(v);
+
         sp = requireActivity().getSharedPreferences("MyApp", Context.MODE_PRIVATE);
         username = sp.getString("username", null);
-        Account.setText(username);
+        avatar = sp.getString("avt", null);
 
-        btquydinh = v.findViewById(R.id.btnquydinh);
-        btHuongdan = v.findViewById(R.id.btnHuongdan);
-        btlienhe = v.findViewById(R.id.btnLienhe);
+        Account.setText(username);
+        avt.setImageBitmap(Utils.convertToBitmapFromAssets(getContext(), avatar));
 
         btHuongdan.setOnClickListener(view -> {
             Intent i = new Intent(getActivity(), HuongDan.class);
@@ -80,10 +77,36 @@ public class AccManagerFragment extends Fragment {
         return v;
     }
 
+    private void anhxa(View v) {
+        Account = v.findViewById(R.id.Account);
+        avt = v.findViewById(R.id.IvAvt);
+        btquydinh = v.findViewById(R.id.btnquydinh);
+        btHuongdan = v.findViewById(R.id.btnHuongdan);
+        btlienhe = v.findViewById(R.id.btnLienhe);
+    }
+
     private void logout() {
         editor.clear();
         editor.apply();
         startActivity(new Intent(getActivity(), HomeActivity.class));
         getActivity().finish();
     }
+    private boolean shouldRefreshOnResume = false;
+    // Reload current fragment
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Check should we need to refresh the fragment
+        if(shouldRefreshOnResume){
+            // refresh fragment
+            getActivity().recreate();
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        shouldRefreshOnResume = true;
+    }
+
 }

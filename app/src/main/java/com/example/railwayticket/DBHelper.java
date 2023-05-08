@@ -37,7 +37,7 @@ public class DBHelper extends SQLiteOpenHelper {
         DB_PATH = "/data/data/" + context.getPackageName() + "/databases/";
     }
 
-
+//DB import func
     public void checkDB() {
         //check if the database exists
         boolean databaseExist = checkDataBase();
@@ -92,26 +92,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase MyDB) {
-//        MyDB.execSQL("CREATE TABLE " + TABLE_USER + " ( " +
-//                Utils.COL_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , " +
-//                Utils.COL_USER_NAME + " TEXT, " +
-//                Utils.COL_USER_PASSWORD + " TEXT, " +
-//                Utils.COL_USER_AVATAR + " TEXT ) ");
-//        MyDB.execSQL("CREATE TABLE " + TABLE_TICKET + " ( " +
-//                Utils.COL_TICK_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , " +
-//                Utils.COL_TICKET_ID + "  TEXT, " +
-//                Utils.COL_TRAIN_TIMEGO + " DATETIME, " +
-//                Utils.COL_TRAIN_TIMEEND + " DATETIME, " +
-//                Utils.COL_TRAIN_STATEGO + "  TEXT, " +
-//                Utils.COL_TRAIN_STATEEND + "  TEXT, " +
-//                Utils.COL_TICKET_PRICE + " FLOAT ) ");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase MyDB, int i, int i1) {
-//        MyDB.execSQL("drop Table if exists " + TABLE_USER);
-//        MyDB.execSQL("drop Table if exists " + TABLE_TICKET);
-//        onCreate(MyDB);
         copyDatabase();
     }
 
@@ -210,7 +194,9 @@ public class DBHelper extends SQLiteOpenHelper {
         DBHelper db = new DBHelper(context);
         SQLiteDatabase sqlite = db.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(Utils.COL_USER_NAME, user.getName());
+        values.put(COL_USER_NAME, user.getName());
+        values.put(COL_USER_PASSWORD, user.getPassword());
+        values.put(COL_USER_AVATAR, user.getAvatar());
         return sqlite.update(TABLE_USER, values, Utils.COL_USER_ID + " =? ", new String[]{String.valueOf(user.id)});
     }
 
