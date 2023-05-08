@@ -11,10 +11,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Objects;
@@ -49,7 +47,6 @@ public class OrderDetailActivity extends AppCompatActivity {
         String dateGo = getIntent().getStringExtra(dGo);
         String trainid = getIntent().getStringExtra(trainId);
         String giodi = getIntent().getStringExtra("GioDi");
-//        ticketGO t = new ticketGO(x, y, z);
         Ghe.setText(ghe);
         stateGo.setText(di);
         stateEnd.setText(den);
@@ -58,7 +55,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         ngayDi.setText(dateGo);
         timeGo.setText(giodi);
         tongtien.setText(gia);
-        pay = findViewById(R.id.payment);
+
         pay.setOnClickListener(view -> {
             Intent intent = new Intent(OrderDetailActivity.this, PaymentMethodActivity.class);
             startActivity(intent);
@@ -80,6 +77,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         edcmnd = findViewById(R.id.edCCCD);
         price = findViewById(R.id.Gia);
         tongtien = findViewById(R.id.TongTien);
+        pay = findViewById(R.id.payment);
     }
 
     private void XacnhanThanhtoan() {

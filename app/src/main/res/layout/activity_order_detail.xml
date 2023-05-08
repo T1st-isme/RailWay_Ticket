@@ -401,29 +401,32 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.65"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.623"
+        app:layout_constraintVertical_bias="0.694"
         tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:id="@+id/ivpay"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:src="@drawable/credit_card"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/tvpay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chọn phương thức thanh toán"
+            android:layout_marginStart="20dp"
+            android:text="VISA / CREDIT CARD"
             android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintTop_toTopOf="@+id/linearLayout"
             tools:ignore="HardcodedText" />
 
-        <ImageView
-            android:id="@+id/ivpay"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="20dp"
-            android:src="@drawable/baseline_arrow_forward_24"
-            tools:ignore="ContentDescription" />
+
     </LinearLayout>
 
     <TextView
@@ -436,8 +439,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.892"
+        app:layout_constraintTop_toBottomOf="@+id/payment"
         tools:ignore="HardcodedText" />
 
     <TextView
@@ -445,15 +447,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="990.000đ"
-        android:textStyle="bold"
         android:textColor="@color/black"
         android:textSize="25sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/textView7"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.89"
+        app:layout_constraintTop_toBottomOf="@+id/payment"
         tools:ignore="HardcodedText" />
 
     <Button

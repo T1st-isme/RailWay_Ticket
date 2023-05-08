@@ -8,16 +8,15 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.util.List;
-
 import com.example.railwayticket.R;
 import com.example.railwayticket.model.PaymentMethod;
 
+import java.util.List;
+
 public class PayMethodAdapter extends BaseAdapter {
-    private Context context;
-    private int layout;
-    private List<PaymentMethod> MethodLst;
+    private final Context context;
+    private final int layout;
+    private final List<PaymentMethod> MethodLst;
 
     public PayMethodAdapter(Context context, int layout, List<PaymentMethod> methodLst) {
         this.context = context;
@@ -47,8 +46,8 @@ public class PayMethodAdapter extends BaseAdapter {
 
         view = inflater.inflate(layout,null);
 
-        TextView tv = (TextView) view.findViewById(R.id.tvpayMethod);
-        ImageView iv = (ImageView) view.findViewById(R.id.ivImg);
+        TextView tv = view.findViewById(R.id.tvpayMethod);
+        ImageView iv = view.findViewById(R.id.ivImg);
 
          PaymentMethod payMethod = MethodLst.get(i);
 
