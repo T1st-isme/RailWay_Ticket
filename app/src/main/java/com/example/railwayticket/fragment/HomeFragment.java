@@ -53,17 +53,17 @@ public class HomeFragment extends Fragment {
             String txtEnd = snEND.getSelectedItem().toString();
             String txtDateGo = tvdateGO.getText().toString();
             String txtDateEnd = tvdateEnd.getText().toString();
-            System.out.println(txtDateGo);
-            if (txtGO.equals(txtEnd)) {
-                Toast.makeText(getContext(), "Nơi đi và nơi đến không được trùng!", Toast.LENGTH_SHORT).show();
-            } else if (tvdateGO.getText().toString().equals("Ngày đi")) {
-                Toast.makeText(getContext(), "Vui lòng chọn ngày đi", Toast.LENGTH_LONG).show();
-            } else if (tvdateEnd.getText().toString().equals("Ngày về")) {
-                Toast.makeText(getContext(), "Vui lòng chọn ngày về", Toast.LENGTH_LONG).show();
-            } else if (!login) {
+
+            if (!login) {
                 startActivity(new Intent(getActivity(), LoginActivity.class));
                 Toast.makeText(getContext(), "Vui lòng đăng nhập", Toast.LENGTH_SHORT).show();
                 requireActivity().finish();
+            } else if (txtDateGo.equals("Ngày đi") || txtDateEnd.equals("Ngày đến")) {
+                Toast.makeText(getContext(), "Vui lòng chọn ngày đi và ngày đến!", Toast.LENGTH_SHORT).show();
+            } else if (txtGO.equals(txtEnd)) {
+                Toast.makeText(getContext(), "Nơi đi và nơi đến không được trùng!", Toast.LENGTH_SHORT).show();
+            } else if (txtDateGo.equals(txtDateEnd)) {
+                Toast.makeText(getContext(), "Ngày đi và ngày đến không được trùng!", Toast.LENGTH_SHORT).show();
             } else {
                 i = new Intent(getContext(), ChonTauDiActivity.class);
                 i.putExtra("stateG", txtGO);
