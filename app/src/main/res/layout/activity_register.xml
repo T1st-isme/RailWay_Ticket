@@ -95,6 +95,7 @@
                 android:drawablePadding="8dp"
                 android:hint="Xác nhận mật khẩu"
                 android:padding="8dp"
+                android:inputType="textPassword"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/cardview_dark_background"
                 tools:ignore="Autofill,HardcodedText,RtlHardcoded,TextFields" />
